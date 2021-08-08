@@ -28,7 +28,6 @@ if (empty($_GET['id'])) {
                     </li>
                 </ul>
             <?php endif; ?>
-            <br>
             <div class="post-description">
                 <?php echo $row['description']; ?>
             </div>
