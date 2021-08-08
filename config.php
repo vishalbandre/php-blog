@@ -1,9 +1,24 @@
 <?php
 
-$server = 'localhost';
-$username = 'php_blog_user';
-$password = 'php_blog_password';
-$db = 'php_blog';
+// $server = 'localhost';
+// $username = 'php_blog_user';
+// $password = 'php_blog_password';
+// $db = 'php_blog';
+
+// $server = $url["host"];
+// $username = $url["user"];
+// $password = $url["pass"];
+// $db = substr($url["path"], 1);
+
+// $conn = new mysqli($server, $username, $password, $db);
+
+
+$url = parse_url("mysql://b163fa55b0d8b4:85afc349@us-cdbr-east-04.cleardb.com/heroku_cabf8a48af4b019?reconnect=true");
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
 
 $conn = new mysqli($server, $username, $password, $db);
 
