@@ -12,11 +12,12 @@ if (empty($_GET['id'])) {
     if ($result->num_rows > 0) {
     ?>
         <?php while ($row = $result->fetch_array()) : ?>
-            <h2><?php echo $row['title']; ?></h2>
+            <h2 class="post-title"><?php echo $row['title']; ?></h2>
             <div class="author">
                 <strong>Author: </strong>
                 <a href="/accounts/view.php?user=<?php echo $row['user']; ?>"><?php echo $row['user']; ?></a>
             </div>
+            <br>
             <?php if (isset($_COOKIE['blog_user']) && $_COOKIE['blog_user'] == $row['user']) : ?>
                 <ul class="actions">
                     <li class="edit">
@@ -27,6 +28,7 @@ if (empty($_GET['id'])) {
                     </li>
                 </ul>
             <?php endif; ?>
+            <br>
             <div class="post-description">
                 <?php echo $row['description']; ?>
             </div>

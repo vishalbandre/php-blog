@@ -82,6 +82,25 @@ a:hover {
   margin-bottom: 10px;
 }
 
+/* article */
+#article {
+  padding-bottom: 25px;
+}
+#article .post-title {
+  font-size: 52px;
+}
+#article .post-description {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  border-bottom: solid 1px whitesmoke;
+  font-size: 24px;
+  color: gray;
+  font-style: italic;
+}
+#article .post-body {
+  font-size: 16px;
+}
+
 /* actions */
 .actions {
   margin: 0;
