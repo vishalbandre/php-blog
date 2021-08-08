@@ -68,6 +68,9 @@ a:hover {
   float: left;
   width: 70%;
 }
+#feed {
+  margin-top: 25px;
+}
 #feed .item {
   margin-bottom: 25px;
   padding-bottom: 25px;
