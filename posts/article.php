@@ -3,8 +3,9 @@ if (empty($_GET['id'])) {
     header('Location: /index.php');
 }
 ?>
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
+
+<?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
 <div id="article">
     <?php
     $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
@@ -39,5 +40,8 @@ if (empty($_GET['id'])) {
     }
     ?>
 </div>
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>
+
+</body>
+</html>

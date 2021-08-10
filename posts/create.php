@@ -1,5 +1,10 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php
+    if (empty($_COOKIE['blog_user'])) {
+        header('Location: /index.php');
+    }
+?>
 <div id="content">
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') :
@@ -105,5 +110,8 @@
     ?>
 </div>
 
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>

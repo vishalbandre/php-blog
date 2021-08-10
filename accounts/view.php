@@ -1,10 +1,11 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
 <?php
 if (empty($_GET['user'])) {
     header('Location: /index.php');
 }
 ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+
 <div id="feed">
     <?php
     $user = $_GET['user'];
@@ -35,5 +36,8 @@ if (empty($_GET['user'])) {
     ?>
 </div>
 
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>

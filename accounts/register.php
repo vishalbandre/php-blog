@@ -1,10 +1,10 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
 <?php
-if (isset($_COOKIE['blog_user'])) {
+if (!empty($_COOKIE['blog_user'])) {
     header('Location: /index.php');
 }
 ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <div id="content">
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') :
@@ -127,4 +127,9 @@ if (isset($_COOKIE['blog_user'])) {
     <?php endif; ?>
 </div>
 
-<?php include("../footer.php") ?>
+
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>

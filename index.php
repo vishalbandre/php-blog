@@ -1,5 +1,5 @@
-<?php include("../blog/config.php") ?>
-<?php include("../blog/header.php") ?>
+<?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
 <div id="feed">
     <?php
     $sql = "SELECT * FROM posts ORDER BY updated_at DESC";
@@ -8,7 +8,7 @@
         $dataArray = array();
         while ($row = $result->fetch_array()) {
     ?>
-            <?php include('../blog/posts/item.php') ?>
+            <?php include('./posts/item.php') ?>
     <?php
         }
     } else {
@@ -17,5 +17,8 @@
     ?>
 </div>
 
-<?php include("../blog/sidebar.php") ?>
-<?php include("../blog/footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>
+
+</body>
+</html>

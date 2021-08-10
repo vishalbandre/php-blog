@@ -1,8 +1,9 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+
 <div id="content">
     <?php
-    if (isset($_COOKIE['blog_user'])) {
+    if (!empty($_COOKIE['blog_user'])) {
         header('Location: /index.php');
     }
     if (!empty($_GET['welcome'])) {
@@ -95,5 +96,9 @@
         </form>
     <?php } ?>
 </div>
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>

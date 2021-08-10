@@ -1,11 +1,13 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
+<?php
+if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
+    header('Location: /index.php');
+}
+?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+
 <div id="content">
     <?php
-    if (empty($_GET['id'])) {
-        header('Location: /index.php');
-    }
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         if (!empty($_POST['id'])) {
             $id = htmlspecialchars($_POST['id']);
@@ -40,8 +42,6 @@
                     <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
                     <p>
                         <button type="submit" name="submit" value="yes" class="button button-ok">Yes</button>
-                    </p>
-                    <p>
                         <button type="submit" name="submit" value="no" class="button button-ok">No</button>
                     </p>
                 </form>
@@ -55,5 +55,8 @@
     <?php endif; ?>
 </div>
 
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>

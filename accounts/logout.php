@@ -1,5 +1,10 @@
-<?php include("../config.php") ?>
-<?php include("../header.php") ?>
+<?php
+if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
+    header('Location: /index.php');
+}
+?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <div id="content">
 <?php 
 if(isset($_COOKIE['blog_user'])) {
@@ -9,5 +14,8 @@ if(isset($_COOKIE['blog_user'])) {
 <a href="/accounts/login.php">Login Again</a>
 </div>
 
-<?php include("../sidebar.php") ?>
-<?php include("../footer.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+</body>
+
+</html>
