@@ -6,7 +6,7 @@ if (empty($_GET['id'])) {
 
 <?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
-<div id="article">
+<main class="single-post">
     <?php
     $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
     $result = $conn->query($check);
@@ -29,17 +29,17 @@ if (empty($_GET['id'])) {
                     </li>
                 </ul>
             <?php endif; ?>
-            <div class="post-description">
+            <summary class="post-description">
                 <?php echo $row['description']; ?>
-            </div>
-            <div class="post-body">
+            </summary>
+            <article class="post-body">
                 <?php echo $row['body']; ?>
-            </div>
+            </article>
         <?php endwhile; ?>
     <?php
     }
     ?>
-</div>
+</main>
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>
 

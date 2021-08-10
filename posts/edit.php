@@ -6,7 +6,7 @@ if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
-<div id="content">
+<main class="content">
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         if (!empty($_POST['user'])) {
@@ -127,8 +127,7 @@ if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
         }
         ?>
     <?php endif; ?>
-
-</div>
+</main>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>

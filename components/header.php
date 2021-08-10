@@ -1,23 +1,13 @@
-<div id="nav">
-    <a href="/" id="branding">PHP Blog</a>
-    <ul id="topnav">
-        <li>
-            <a href="/">Home</a>
-        </li>
+<header>
+    <a href="/" class="branding">PHP Blog</a>
+    <nav>
+        <a href="/">Home</a>
         <?php if (isset($_COOKIE['blog_user'])) : ?>
-            <li>
-                <a href="/posts/create.php">Add New Article</a>
-            </li>
-            <li>
-                <a href="/accounts/logout.php">Logout</a>
-            </li>
+            <a href="/posts/create.php">Add New Article</a>
+            <a href="/accounts/logout.php">Logout</a>
         <?php else : ?>
-            <li>
-                <a href="/accounts/register.php">Register</a>
-            </li>
-            <li>
-                <a href="/accounts/login.php">Login</a>
-            </li>
+            <a href="/accounts/register.php">Register</a>
+            <a href="/accounts/login.php">Login</a>
         <?php endif; ?>
-    </ul>
-</div>
+    </nav>
+</header>

@@ -1,7 +1,7 @@
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
-<div id="content">
+<main class="content">
     <?php
     if (!empty($_COOKIE['blog_user'])) {
         header('Location: /index.php');
@@ -45,8 +45,6 @@
             $errors['check_credentials'] = 'Please check your credentials and try again.';
         }
 
-        // echo "<br />We encounted (" . count($errors) . ") errors.<br />";
-
         if (count($errors) > 0) {
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
@@ -78,7 +76,6 @@
             // echo $_COOKIE["blog_user"];
             header('Location: /accounts/view.php?user=' . $value['username']);
         }
-
     } else { ?>
         <h3 class="form-caption">Login</h3>
         <form action="/accounts/login.php" method="POST" class="accounts-forms">
@@ -95,7 +92,7 @@
             </p>
         </form>
     <?php } ?>
-</div>
+</main>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>

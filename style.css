@@ -16,10 +16,10 @@ a:hover {
 }
 
 /* navigation */
-#nav {
+header {
   border-bottom: solid 2px whitesmoke;
 }
-#nav #branding {
+header .branding {
   display: inline-block;
   margin-top: 10px;
   padding: 1em;
@@ -29,9 +29,7 @@ a:hover {
   font-weight: 700;
   color: rgb(37, 150, 190);
 }
-#nav #branding:hover {
-}
-#nav #topnav {
+header nav {
   float: right;
   margin: 0;
   padding: 0;
@@ -40,11 +38,7 @@ a:hover {
   border-bottom-right-radius: 6px;
   overflow: hidden;
 }
-#nav #topnav li {
-  display: inline;
-  margin: 0;
-}
-#nav #topnav li a {
+header nav a {
   display: inline-block;
   margin: 0;
   padding: 15px;
@@ -55,44 +49,42 @@ a:hover {
   color: #8a8a8a;
   transition: all 0.3s ease;
 }
-#nav #topnav li a:hover {
+header nav a:hover {
   background-color: silver;
 }
-#content-area {
-  clear: both;
-  background-color: aqua;
-}
-#feed,
-#content,
-#article {
+
+/* feed */
+.feed,
+.content,
+.single-post {
   float: left;
   width: 70%;
 }
-#feed {
+.feed {
   margin-top: 25px;
 }
-#feed .item {
+.feed .item {
   margin-bottom: 25px;
   padding-bottom: 25px;
   border-bottom: solid 1px silver;
   width: 95%;
 }
-#feed .item a {
+.feed .item a {
   text-decoration: none;
 }
-#feed .item .title {
+.feed .item .title {
   margin: 0;
   margin-bottom: 10px;
 }
 
 /* article */
-#article {
+.single-post {
   padding-bottom: 25px;
 }
-#article .post-title {
+.single-post .post-title {
   font-size: 52px;
 }
-#article .post-description {
+.single-post .post-description {
   margin-top: 25px;
   margin-bottom: 25px;
   border-bottom: solid 1px whitesmoke;
@@ -100,7 +92,7 @@ a:hover {
   color: gray;
   font-style: italic;
 }
-#article .post-body {
+.single-post .post-body {
   font-size: 16px;
 }
 
@@ -165,39 +157,39 @@ form button {
   border-bottom: solid 4px #454545;
 }
 /* sidebar */
-#sidebar {
+.sidebar {
   float: right;
   width: 30%;
   background-color: #2e2e2e;
   border-radius: 6px;
   overflow: hidden;
 }
-#sidebar h3.caption {
+.sidebar .caption {
   margin: 0;
   padding: 20px;
   font-size: 38px;
   color: #737373;
   border-bottom: solid 1px #454545;
 }
-#editor-list {
+.editor-list {
   margin: 0;
   padding: 10px;
   padding-bottom: 20px;
   list-style-type: none;
 }
-#editor-list li a {
+.editor-list li a {
   display: block;
   padding: 20px;
   padding-bottom: 5px;
   text-decoration: none;
   color: #737373;
 }
-#editor-list li a:hover {
+.editor-list li a:hover {
   color: #8a8a8a;
 }
 
 /* footer */
-#footer {
+footer {
   clear: both;
   margin-top: 25px;
   margin-bottom: 25px;

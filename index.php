@@ -1,6 +1,6 @@
 <?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
-<div id="feed">
+<main class="feed">
     <?php
     $sql = "SELECT * FROM posts ORDER BY updated_at DESC";
     $result = $conn->query($sql);
@@ -15,7 +15,7 @@
         $error = "No Data Found!";
     }
     ?>
-</div>
+</main>
 
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>

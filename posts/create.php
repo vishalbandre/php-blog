@@ -5,7 +5,7 @@
         header('Location: /index.php');
     }
 ?>
-<div id="content">
+<main class="content">
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') :
         if (!empty($_POST['user'])) {
@@ -108,7 +108,7 @@
     <?php endif; ?>
     <?php // include("footer.php"); 
     ?>
-</div>
+</main>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>

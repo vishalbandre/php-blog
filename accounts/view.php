@@ -6,7 +6,7 @@ if (empty($_GET['user'])) {
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
-<div id="feed">
+<main class="feed">
     <?php
     $user = $_GET['user'];
     ?>
@@ -34,7 +34,7 @@ if (empty($_GET['user'])) {
     <?php
     }
     ?>
-</div>
+</main>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
