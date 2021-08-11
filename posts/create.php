@@ -1,5 +1,5 @@
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <?php
     if (empty($_COOKIE['blog_user'])) {
         header('Location: /index.php');
@@ -106,12 +106,12 @@
             </p>
         </form>
     <?php endif; ?>
-    <?php // include("footer.php"); 
+    <?php // include_once("footer.php"); 
     ?>
 </main>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 </body>
 
 </html>

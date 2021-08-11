@@ -4,8 +4,8 @@ if (empty($_GET['id'])) {
 }
 ?>
 
-<?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
 <main class="single-post">
     <?php
     $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
@@ -40,8 +40,8 @@ if (empty($_GET['id'])) {
     }
     ?>
 </main>
-<?php include($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/components/sidebar.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT']."/components/footer.php") ?>
 
 </body>
 </html>

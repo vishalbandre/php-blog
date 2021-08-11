@@ -3,8 +3,8 @@ if (empty($_GET['user'])) {
     header('Location: /index.php');
 }
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
 <main class="feed">
     <?php
@@ -20,7 +20,7 @@ if (empty($_GET['user'])) {
         $dataArray = array();
         while ($row = $result->fetch_array()) {
     ?>
-            <?php include('../posts/item.php') ?>
+            <?php include_once('../posts/item.php') ?>
         <?php
         }
     } else {
@@ -36,8 +36,8 @@ if (empty($_GET['user'])) {
     ?>
 </main>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 </body>
 
 </html>

@@ -3,8 +3,8 @@ if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
     header('Location: /index.php');
 }
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
 <main class="content">
     <?php
@@ -129,8 +129,8 @@ if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
     <?php endif; ?>
 </main>
 
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 </body>
 
 </html>
