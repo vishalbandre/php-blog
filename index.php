@@ -1,5 +1,5 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
-<?php include_once($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
+<?php require($_SERVER['DOCUMENT_ROOT']."/components/head.php") ?>
+<?php include($_SERVER['DOCUMENT_ROOT']."/components/header.php") ?>
 <main class="feed">
     <?php
     $sql = "SELECT * FROM posts ORDER BY updated_at DESC";
@@ -8,11 +8,11 @@
         $dataArray = array();
         while ($row = $result->fetch_array()) {
     ?>
-            <?php include_once('./posts/item.php') ?>
+            <?php include('./posts/item.php') ?>
     <?php
         }
     } else {
-        $error = "No Data Found!";
+        $error = "There are no posts added yet!";
     }
     ?>
 </main>

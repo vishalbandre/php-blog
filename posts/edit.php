@@ -53,8 +53,6 @@ if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
             $errors['body'] = 'Article body is required.';
         }
 
-        // echo "<br />We encounted (" . count($errors) . ") errors.<br />";
-
         if (count($errors) > 0) {
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
