@@ -1,5 +1,7 @@
 <?php
-if (empty($_GET['id']) || empty($_COOKIE['blog_user'])) {
+session_start();
+
+if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 ?>

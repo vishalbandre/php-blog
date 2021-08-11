@@ -28,3 +28,9 @@ insert into users(username, password, name) values('vishal', md5('admin'), 'Edit
 insert into posts(user, title, description, body) values('admin', 'First Post', 'First Post Description', 'First Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Second Post', 'Second Post Description', 'Second Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Third Post', 'Third Post Description', 'Third Post Body');
+
+-- New features
+-- 1. Added user role field to users table
+alter table users add role varchar(10) not null default 'editor';
+-- 2. Updated first registered user with admin role
+update users set role='admin' where id=1;

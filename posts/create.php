@@ -1,7 +1,8 @@
+<?php session_start(); ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <?php
-    if (empty($_COOKIE['blog_user'])) {
+    if (!$_SESSION['logged_in']) {
         header('Location: /index.php');
     }
 ?>

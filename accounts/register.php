@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <?php
 if (!empty($_COOKIE['blog_user'])) {
     header('Location: /index.php');
@@ -91,6 +93,8 @@ if (!empty($_COOKIE['blog_user'])) {
 
         if ($conn->query($sql) === TRUE) {
             setcookie("blog_user", $username, time() + (86400 * 30), '/');
+            $_SESSION['user'] = $username;
+            $_SESSION['logged_in'] = true;
             header("Location: /accounts/view.php?user=$username");
         } else {
             $error = "Something went wrong. " . $conn->error;

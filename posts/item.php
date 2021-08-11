@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <article class="item">
     <a href="/posts/article.php?id=<?php echo $row['id']; ?>">
         <h2 class="title">
@@ -11,7 +13,7 @@
     <summary class="description">
         <?php echo $row['description']; ?>
     </summary>
-    <?php if (isset($_COOKIE['blog_user']) && $_COOKIE['blog_user'] == $row['user']) : ?>
+    <?php if($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']): ?>
         <ul class="actions">
             <li class="edit">
                 <a href="/posts/edit.php?id=<?php echo $row['id']; ?>">Edit</a>

@@ -1,9 +1,11 @@
+<?php session_start(); ?>
 <header>
     <a href="/" class="branding">PHP Blog</a>
     <nav>
         <a href="/">Home</a>
-        <?php if (isset($_COOKIE['blog_user'])) : ?>
+        <?php if ($_SESSION['logged_in']) : ?>
             <a href="/posts/create.php">Add New Article</a>
+            <a href="/accounts/view.php?user=<?php echo $_SESSION['user']; ?>">My Posts</a>
             <a href="/accounts/logout.php">Logout</a>
         <?php else : ?>
             <a href="/accounts/register.php">Register</a>

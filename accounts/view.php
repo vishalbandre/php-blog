@@ -1,5 +1,6 @@
 <?php
-if (empty($_GET['user'])) {
+session_start();
+if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 ?>
@@ -20,7 +21,7 @@ if (empty($_GET['user'])) {
         $dataArray = array();
         while ($row = $result->fetch_array()) {
     ?>
-            <?php include_once('../posts/item.php') ?>
+            <?php include('../posts/item.php') ?>
         <?php
         }
     } else {
