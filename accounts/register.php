@@ -90,19 +90,12 @@ if (!empty($_COOKIE['blog_user'])) {
         $sql = "INSERT INTO users (username, password) VALUES('" . $username . "', '" . $password_hash . "')";
 
         if ($conn->query($sql) === TRUE) {
-            header("Location: /accounts/login.php?welcome=$username");
-            // echo "Done.";
+            setcookie("blog_user", $username, time() + (86400 * 30), '/');
+            header("Location: /accounts/view.php?user=$username");
         } else {
-            // $error = "Something went wrong. " . $conn->error;
-            echo $conn->error;
-            echo "Error";
+            $error = "Something went wrong. " . $conn->error;
         }
 
-        // var_dump($conn->error);
-
-        // if (isset($error) && $error !== "") {
-        //     echo $error;
-        // }
         $conn->close();
     else : ?>
         <h3 class="form-caption">Register</h3>

@@ -65,7 +65,6 @@
                 </p>
             </form>
         <?php
-            // return null;
         }
 
         $check = "SELECT username FROM users WHERE username='" . $username . "' and password='" . $password_hash . "' LIMIT 1";
@@ -73,7 +72,6 @@
         if ($result->num_rows > 0) {
             foreach ($result as $key => $value)
                 setcookie("blog_user", $value['username'], time() + (86400 * 30), '/');
-            // echo $_COOKIE["blog_user"];
             header('Location: /accounts/view.php?user=' . $value['username']);
         }
     } else { ?>
