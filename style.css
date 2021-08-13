@@ -17,6 +17,10 @@ a:hover {
 
 /* navigation */
 header {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
   border-bottom: solid 2px whitesmoke;
 }
 header .branding {
@@ -28,6 +32,17 @@ header .branding {
   font-size: 3rem;
   font-weight: 700;
   color: rgb(37, 150, 190);
+}
+.top-search-form {
+  display: flex;
+  flex-direction: row;
+  width: 250px;
+}
+.top-search-form .search-btn {
+  width: 75px;
+}
+.search-form {
+  margin-bottom: 25px;
 }
 header nav {
   float: right;
@@ -42,8 +57,8 @@ header nav a {
   display: inline-block;
   margin: 0;
   padding: 15px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
   text-decoration: none;
   font-size: 15px;
   color: #8a8a8a;
@@ -138,6 +153,7 @@ textarea {
   margin-top: 15px;
   padding: 5px;
   width: 90%;
+  outline: none;
 }
 form button {
   padding: 15px;
@@ -153,9 +169,21 @@ form button {
   padding-left: 0;
   font-size: 38px;
   color: #454545;
-  width: 225px;
+  width: 300px;
   border-bottom: solid 4px #454545;
 }
+.form-error {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 1em;
+  color: red;
+  background-color: rgba(220, 20, 60, 0.144);
+}
+.input-error {
+  border-color: red;
+}
+
 /* sidebar */
 .sidebar {
   float: right;
@@ -193,9 +221,27 @@ footer {
   clear: both;
   margin-top: 25px;
   margin-bottom: 25px;
-  padding-top: 25px;
-  background-color: whitesmoke;
-  border-top: solid 1px lavender;
+  padding: 25px;
+  background-color: beige;
   font-size: 15px;
   color: #454545;
+}
+
+/* Messages */
+.success {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 1em;
+  color: rgba(0, 128, 0, 0.808);
+  background-color: rgba(0, 128, 0, 0.199);
+}
+
+/*  */
+.button-link {
+  text-decoration: none;
+  color: gray;
+}
+.button-link:hover {
+  color: crimson;
 }

@@ -35,7 +35,7 @@ if (empty($_GET['id'])) {
                 <?php echo $row['description']; ?>
             </summary>
             <article class="post-body">
-                <?php echo $row['body']; ?>
+                <?php echo nl2br($row['body']); ?>
             </article>
         <?php endwhile; ?>
     <?php

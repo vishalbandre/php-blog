@@ -11,6 +11,18 @@ if (!$_SESSION['logged_in']) {
     <?php
     $user = $_GET['user'];
     ?>
+    <?php
+        if($_SESSION['welcome-back']) {
+            echo $_SESSION['welcome-back'];
+            unset($_SESSION["welcome-back"]);
+        }
+    ?>
+    <?php
+        if($_SESSION['welcome']) {
+            echo $_SESSION['welcome'];
+            unset($_SESSION["welcome"]);
+        }
+    ?>
     <h3>All Articles by <?php echo $user; ?></h3>
     <?php
     $user = $_GET['user'];
@@ -26,12 +38,12 @@ if (!$_SESSION['logged_in']) {
         }
     } else {
         ?>
-        <div class="message">
+        <p class="message">
             Sorry! There are no posts yet.
-        </div>
-        <div>
-            <?php if (isset($_COOKIE['blog_user']) && $_COOKIE['blog_user'] == $_GET['user']) : ?> <a href="/posts/create.php">Add New Post</a><?php endif; ?>
-        </div>
+        </p>
+        <p>
+            <?php if($_SESSION['logged_in'] && $_SESSION['user'] == $_GET['user']) : ?> <a href="/posts/create.php">Add New Post</a><?php endif; ?>
+        </p>
     <?php
     }
     ?>

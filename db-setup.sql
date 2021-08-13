@@ -9,7 +9,8 @@ create table users (
     id int not null auto_increment primary key,
     username varchar(25) not null unique,
     password varchar(100) not null,
-    name varchar(200)
+    name varchar(200),
+    role varchar(10) not null default 'editor' -- new
 );
 
 create table posts (
@@ -30,7 +31,15 @@ insert into posts(user, title, description, body) values('vishal', 'Second Post'
 insert into posts(user, title, description, body) values('vishal', 'Third Post', 'Third Post Description', 'Third Post Body');
 
 -- New features
--- 1. Added user role field to users table
+-- 1. Adding new field for managing the user roles
+-- 1.1 Added user role field to users table
 alter table users add role varchar(10) not null default 'editor';
--- 2. Updated first registered user with admin role
+-- 1.2 Updated first registered user with admin role
 update users set role='admin' where id=1;
+
+
+-- 2. Forgot Password
+-- 2.1. Adding email field to users table
+alter table users add email varchar(200);
+alter table users add reset_link_token varchar(200);
+alter table users add exp_date datetime;

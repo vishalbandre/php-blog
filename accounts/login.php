@@ -8,11 +8,6 @@
     if ($_SESSION['logged_in']) {
         header('Location: /index.php');
     }
-    if (!empty($_GET['welcome'])) {
-    ?>
-        <div id="welcome">Welcome <?php echo $_GET['welcome']; ?>! Thanks for the registration. Now you can login and start contributing to this blog.</div>
-    <?php
-    }
     ?>
 
     <?php
@@ -52,20 +47,7 @@
                 echo '<div class="form-error">' . $value . '</div>';
             }
     ?>
-            <h3 class="form-caption">Login</h3>
-            <form action="/accounts/login.php" method="POST" class="accounts-forms">
-                <p>
-                    <label for="username">Username: </label><br>
-                    <input type="text" name="username" id="username" value="<?php echo $username; ?>" />
-                </p>
-                <p>
-                    <label for="password">Password: </label><br>
-                    <input type="password" name="password" id="password" value="" />
-                </p>
-                <p>
-                    <button type="submit" name="submit" value="login" class="button button-ok">Login</button>
-                </p>
-            </form>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-login.php") ?>
         <?php
         }
 
@@ -73,7 +55,7 @@
         $result = $conn->query($check);
         if ($result->num_rows > 0) {
             foreach ($result as $key => $value) {
-                setcookie("blog_user", $value['username'], time() + (86400 * 30), '/');
+                $_SESSION['welcome-back'] = '<div class="success">Welcome back ' . $username . "</div>";
                 $_SESSION['user'] = $value['username'];
                 $_SESSION['logged_in'] = true;
                 if($value['role'] == 'admin')
@@ -82,20 +64,7 @@
             header('Location: /accounts/view.php?user=' . $value['username']);
         }
     } else { ?>
-        <h3 class="form-caption">Login</h3>
-        <form action="/accounts/login.php" method="POST" class="accounts-forms">
-            <p>
-                <label for="username">Username: </label><br>
-                <input type="text" name="username" id="username" />
-            </p>
-            <p>
-                <label for="password">Password: </label><br>
-                <input type="password" name="password" id="password" />
-            </p>
-            <p>
-                <button type="submit" name="submit" value="login" class="button button-ok">Login</button>
-            </p>
-        </form>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-login.php") ?>
     <?php } ?>
 </main>
 

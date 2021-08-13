@@ -5,7 +5,6 @@
     $sql = "SELECT * FROM posts ORDER BY updated_at DESC";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $dataArray = array();
         while ($row = $result->fetch_array()) {
     ?>
             <?php include('./posts/item.php') ?>

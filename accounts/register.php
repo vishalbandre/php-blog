@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 
 <?php
-if (!empty($_COOKIE['blog_user'])) {
+if ($_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 ?>
@@ -58,31 +58,12 @@ if (!empty($_COOKIE['blog_user'])) {
             }
         }
 
-        // echo "<br />We encounted (" . count($errors) . ") errors.<br />";
-
         if (count($errors) > 0) {
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
             }
     ?>
-            <h3 class="form-caption">Register</h3>
-            <form action="/accounts/register.php" method="POST" class="accounts-forms">
-                <p>
-                    <label for="username">Username: </label><br>
-                    <input type="text" name="username" id="username" value="<?php echo $username; ?>" />
-                </p>
-                <p>
-                    <label for="password">Password: </label><br>
-                    <input type="password" name="password" id="password" value="<?php echo $password; ?>" />
-                </p>
-                <p>
-                    <label for="password2">Confirm Password: </label><br>
-                    <input type="password" name="password2" id="password2" value="" />
-                </p>
-                <p>
-                    <button type="submit" name="submit" value="register" class="button button-ok">Register</button>
-                </p>
-            </form>
+            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-registration.php") ?>
         <?php
             return null;
         }
@@ -92,7 +73,7 @@ if (!empty($_COOKIE['blog_user'])) {
         $sql = "INSERT INTO users (username, password) VALUES('" . $username . "', '" . $password_hash . "')";
 
         if ($conn->query($sql) === TRUE) {
-            setcookie("blog_user", $username, time() + (86400 * 30), '/');
+            $_SESSION['welcome'] = '<div class="success">Welcome ' . $username . " You've successfully registered on PHP Blog.</div>";
             $_SESSION['user'] = $username;
             $_SESSION['logged_in'] = true;
             header("Location: /accounts/view.php?user=$username");
@@ -102,25 +83,7 @@ if (!empty($_COOKIE['blog_user'])) {
 
         $conn->close();
     else : ?>
-        <h3 class="form-caption">Register</h3>
-
-        <form action="/accounts/register.php" method="POST" class="accounts-forms">
-            <p>
-                <label for="username">Username: </label><br>
-                <input type="text" name="username" id="username" />
-            </p>
-            <p>
-                <label for="password">Password: </label><br>
-                <input type="password" name="password" id="password" />
-            </p>
-            <p>
-                <label for="password2">Confirm Password: </label><br>
-                <input type="password" name="password2" id="password2" />
-            </p>
-            <p>
-                <button type="submit" name="submit" value="register" class="button button-ok">Register</button>
-            </p>
-        </form>
+        <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-registration.php") ?>
     <?php endif; ?>
 </main>
 

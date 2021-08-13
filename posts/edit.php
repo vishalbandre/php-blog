@@ -59,39 +59,19 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
             }
-    ?>
-            <form action="/posts/edit.php" method="POST">
-                <input name="id" type="hidden" value="<?php echo $id; ?>" />
-                <input name="user" type="hidden" value="<?php echo $_COOKIE['blog_user']; ?>" />
-                <p>
-                    <label for="title">Title: </label><br>
-                    <input type="text" name="title" id="title" value="<?php echo $title; ?>" />
-                </p>
-                <p>
-                    <label for="description">Description: </label><br>
-                    <textarea name="description" id="description" cols="30" rows="10"><?php echo $description; ?></textarea>
-                </p>
-                <p>
-                    <label for="body">Body: </label><br>
-                    <textarea name="body" id="body" cols="30" rows="10"><?php echo $body; ?></textarea>
-                </p>
-                <p>
-                    <button type="submit" name="submit" value="create" class="button button-ok">Save Post</button>
-                </p>
-            </form>
+    ?>    
+            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-edit.php") ?>
         <?php
-            return null;
-        }
+        } else {
 
         $sql = "UPDATE posts SET title='$title', description='$description', body='$body' WHERE id=$id";
 
         if ($conn->query($sql) === TRUE) {
             header('Location: /posts/article.php?id=' . $id);
         } else {
-            echo $conn->error;
-            echo "Error";
+            $error = $conn->error;
         }
-        $conn->close();
+    }
     else : ?>
 
         <?php
@@ -100,7 +80,7 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
         if ($result->num_rows > 0) {
         ?>
             <?php foreach ($result as $key => $value) : ?>
-                <form action="/posts/edit.php" method="POST">
+                <form action="" method="POST">
                     <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
                     <input name="user" type="hidden" value="<?php echo $value['user']; ?>" />
                     <p>
@@ -129,8 +109,9 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     <?php endif; ?>
 </main>
 
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
-<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php");
+$conn->close();
+include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 </body>
 
 </html>
