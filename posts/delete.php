@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');

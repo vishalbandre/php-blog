@@ -8,7 +8,10 @@
             $dataArray = array();
             while ($row = $result->fetch_array()) {
         ?>
-                <li><a href="/accounts/view.php?user=<?php echo $row['username']; ?>"><?php echo $row['username']; ?><?php if($row['role'] == 'admin'){ echo " *" ;} ?></a></li>
+                <li>
+                    <a href="/accounts/view.php?user=<?php echo $row['username']; ?>">
+                        <?php echo $row['username']; ?></a>
+                </li>
         <?php
             }
         }

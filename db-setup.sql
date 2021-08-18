@@ -10,7 +10,10 @@ create table users (
     username varchar(25) not null unique,
     password varchar(100) not null,
     name varchar(200),
-    role varchar(10) not null default 'editor' -- new
+    role varchar(10) not null default 'editor',
+    email varchar(200),
+    reset_link_token varchar(200),
+    exp_date datetime
 );
 
 create table posts (

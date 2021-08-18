@@ -1,10 +1,14 @@
-<?php session_start(); ?>
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <?php
-    if (!$_SESSION['logged_in']) {
-        header('Location: /index.php');
-    }
+if (!$_SESSION['logged_in']) {
+    header('Location: /index.php');
+}
 ?>
 <main class="content">
     <?php
@@ -53,20 +57,20 @@
             }
     ?>
             <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-create.php") ?>
-        <?php
+            <?php
             return null;
         } else {
 
-        $sql = "INSERT INTO posts (title, user, description, body) VALUES('" . $title . "', '" . $user  . "', '" . $description . "', '" . $body . "')";
+            $sql = "INSERT INTO posts (title, user, description, body) VALUES('" . $title . "', '" . $user  . "', '" . $description . "', '" . $body . "')";
 
-        if ($conn->query($sql) === TRUE) {
-            header('Location: /index.php');
-        } else {
-            $error = $conn->error;
+            if ($conn->query($sql) === TRUE) {
+                header('Location: /index.php');
+            } else {
+                $error = $conn->error;
             ?>
-            <p class="unknown-error">Something went wrong. Please try again later.</p>
-            <?php
-        }
+                <p class="unknown-error">Something went wrong. Please try again later.</p>
+        <?php
+            }
         }
     else : ?>
         <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-create.php") ?>

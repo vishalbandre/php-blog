@@ -1,4 +1,8 @@
-<?php session_start(); ?>
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
@@ -12,13 +16,13 @@
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (!empty($_POST['username'])) {
+        if (!empty(trim($_POST['username']))) {
             $username = htmlspecialchars($_POST['username']);
         } else {
             $username = null;
         }
 
-        if (!empty($_POST['password'])) {
+        if (!empty(trim($_POST['password']))) {
             $password = htmlspecialchars($_POST['password']);
         } else {
             $password = null;
@@ -46,26 +50,36 @@
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
             }
-    ?>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-login.php") ?>
-        <?php
         }
 
         $check = "SELECT username, role FROM users WHERE username='" . $username . "' and password='" . $password_hash . "' LIMIT 1";
         $result = $conn->query($check);
         if ($result->num_rows > 0) {
             foreach ($result as $key => $value) {
-                $_SESSION['welcome-back'] = '<div class="success">Welcome back ' . $username . "</div>";
+                $_SESSION['message'] = '<div class="success">Welcome back ' . $username . "</div>";
                 $_SESSION['user'] = $value['username'];
                 $_SESSION['logged_in'] = true;
-                if($value['role'] == 'admin')
+                if ($value['role'] == 'admin')
                     $_SESSION['is_admin'] = true;
             }
             header('Location: /accounts/view.php?user=' . $value['username']);
         }
-    } else { ?>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/user-login.php") ?>
-    <?php } ?>
+    }
+    ?>
+    <h3 class="form-caption">Login</h3>
+    <form action="/accounts/login.php" method="POST" class="accounts-forms">
+        <p>
+            <label for="username">Username: </label><br>
+            <input type="text" name="username" class="<?php if (isset($errors['username']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="<?php echo $username; ?>" />
+        </p>
+        <p>
+            <label for="password">Password: </label><br>
+            <input type="password" name="password" class="<?php if (isset($errors['password']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="<?php echo $password; ?>" />
+        </p>
+        <p>
+            <a class="button-link" href="/accounts/forgot-password.php">Forgot Password?</a> <button type="submit" name="submit" value="login" class="button button-ok">Login</button>
+        </p>
+    </form>
 </main>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>

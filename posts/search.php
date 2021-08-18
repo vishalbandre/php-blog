@@ -6,7 +6,7 @@
     ?>
     <h3 class="caption">Search results for: <?php echo $q; ?></h3>
     <form action="/posts/search.php" class="top-search-form search-form" method="get">
-        <input type="text" placeholder="Search" name="q" value="<?php echo $q; ?>" /><br />
+        <input type="text" placeholder="Search" name="q" value="<?php echo $q; ?>" />
         <input type="submit" value="Submit" class="search-btn" />
     </form>
     

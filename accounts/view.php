@@ -1,7 +1,6 @@
 <?php
-session_start();
-if (!$_SESSION['logged_in']) {
-    header('Location: /index.php');
+if (!isset($_SESSION)) {
+    session_start();
 }
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -12,18 +11,16 @@ if (!$_SESSION['logged_in']) {
     $user = $_GET['user'];
     ?>
     <?php
-        if($_SESSION['welcome-back']) {
-            echo $_SESSION['welcome-back'];
-            unset($_SESSION["welcome-back"]);
-        }
+    if ($_SESSION['message']) {
+        echo $_SESSION['message'];
+        unset($_SESSION["message"]);
+    }
     ?>
-    <?php
-        if($_SESSION['welcome']) {
-            echo $_SESSION['welcome'];
-            unset($_SESSION["welcome"]);
-        }
-    ?>
-    <h3>All Articles by <?php echo $user; ?></h3>
+    <?php if ($_SESSION['logged_in'] && $_SESSION['is_admin'] || !$_SESSION['user'] == 'admin') : ?>
+        <a href="/accounts/edit.php?user=<?php echo $_GET['user']; ?>">Edit This Profile*</a>
+    <?php endif; ?>
+    <br>
+    <h3 class="caption">All Articles by <?php echo $user; ?></h3>
     <?php
     $user = $_GET['user'];
     $sql = "SELECT * FROM posts WHERE user='$user' ORDER BY updated_at DESC";
@@ -42,7 +39,7 @@ if (!$_SESSION['logged_in']) {
             Sorry! There are no posts yet.
         </p>
         <p>
-            <?php if($_SESSION['logged_in'] && $_SESSION['user'] == $_GET['user']) : ?> <a href="/posts/create.php">Add New Post</a><?php endif; ?>
+            <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $_GET['user']) : ?> <a href="/posts/create.php">Add New Post</a><?php endif; ?>
         </p>
     <?php
     }

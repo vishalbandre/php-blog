@@ -1,18 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
 * {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 body {
   margin: auto;
   padding: 0;
-  width: 960px;
+  width: 1000px;
+  font-size: 14px;
 }
 a {
   color: #2e2e2e;
+  text-decoration: none;
 }
 a:hover {
-  color: #737373;
+  color: crimson;
 }
 
 /* navigation */
@@ -32,20 +34,35 @@ header .branding {
   font-size: 3rem;
   font-weight: 700;
   color: rgb(37, 150, 190);
+  color: crimson;
 }
 .top-search-form {
   display: flex;
   flex-direction: row;
-  width: 250px;
+  width: 225px;
 }
 .top-search-form .search-btn {
   width: 75px;
+}
+.top-search-form input {
+  margin-top: 10px;
+  margin-right: 0;
+}
+.top-search-form .search-btn {
+  margin-left: 10px;
+  cursor: pointer;
+  color: silver;
+  background-color: #2e2e2e;
+  border-radius: 6px;
+}
+.top-search-form .search-btn:hover {
+  color: gray;
 }
 .search-form {
   margin-bottom: 25px;
 }
 header nav {
-  float: right;
+  display: flex;
   margin: 0;
   padding: 0;
   background-color: #2e2e2e;
@@ -60,12 +77,17 @@ header nav a {
   padding-left: 15px;
   padding-right: 15px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
   color: #8a8a8a;
   transition: all 0.3s ease;
 }
 header nav a:hover {
   background-color: silver;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* feed */
@@ -91,6 +113,42 @@ header nav a:hover {
   margin: 0;
   margin-bottom: 10px;
 }
+.feed .item .author {
+  margin-bottom: 10px;
+}
+.feed .item .author .label {
+  color: #0a0a0aa2;
+}
+.feed .item .post-description {
+  margin-bottom: 10px;
+  color: #454545;
+}
+
+/* pagination */
+.pagination {
+  margin: 0;
+  padding: 5px;
+  list-style-type: none;
+  display: inline-flex;
+  justify-content: space-between;
+  border: solid 1px silver;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.pagination li {
+  margin: 10px;
+}
+.pagination li:first-child {
+  margin-left: 0;
+}
+.pagination li:last-child {
+  margin-right: 0;
+}
+.pagination li a{
+  padding: 10px;
+  font-weight: 700;
+  background-color: whitesmoke;
+}
 
 /* article */
 .single-post {
@@ -105,7 +163,6 @@ header nav a:hover {
   border-bottom: solid 1px whitesmoke;
   font-size: 24px;
   color: gray;
-  font-style: italic;
 }
 .single-post .post-body {
   font-size: 16px;
@@ -126,22 +183,25 @@ header nav a:hover {
   padding: 20px;
   padding-top: 6px;
   padding-bottom: 6px;
-  border-radius: 6px;
-  color: whitesmoke;
+  color: #0a0a0aa6;
   text-decoration: none;
+  font-size: small;
+  border-radius: 3px;
+  box-shadow: 0px 2px 1px silver;
   transition: all 0.3s ease;
 }
 .actions li a:hover {
+  box-shadow: 0px 3px 2px #0a0a0a;
+}
+.actions li a:hover {
   display: inline-block;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 .actions li.edit a {
-  background-color: #4c85cf;
+  background-color: #4c85cf63;
 }
 .actions li.delete a {
-  background-color: rgba(244, 0, 0, 255);
-  /* color: rgba(165,243,0,255); */
-  /* color: rgb(37, 150, 190); */
+  background-color: rgba(220, 20, 60, 0.418);
 }
 
 /* forms */
@@ -181,7 +241,7 @@ form button {
   background-color: rgba(220, 20, 60, 0.144);
 }
 .input-error {
-  border-color: red;
+  border: solid 1px red;
 }
 
 /* sidebar */
@@ -196,7 +256,7 @@ form button {
   margin: 0;
   padding: 20px;
   font-size: 38px;
-  color: #737373;
+  color: rgba(192, 192, 192, 0.562);
   border-bottom: solid 1px #454545;
 }
 .editor-list {
@@ -234,14 +294,52 @@ footer {
   margin-right: 10px;
   padding: 1em;
   color: rgba(0, 128, 0, 0.808);
-  background-color: rgba(0, 128, 0, 0.199);
+  background-color: rgba(0, 128, 0, 0.178);
 }
 
 /*  */
+.caption {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2e2e2e;
+  border-bottom: solid 3px #2e2e2e;
+}
 .button-link {
   text-decoration: none;
   color: gray;
 }
 .button-link:hover {
   color: crimson;
+}
+.disabled a {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: gray;
+}
+
+/* Responsive */
+/* Extra Small Devices, Phones */
+@media (max-width: 576px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    border-bottom: solid 2px whitesmoke;
+  }
+  .top-search-form {
+    width: 46%;
+  }
+  header nav {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 25px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -1,9 +1,14 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-if (empty($_GET['id']) || !$_SESSION['logged_in']) {
+if (!isset($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
+
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
@@ -59,19 +64,20 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
             foreach ($errors as $key => $value) {
                 echo '<div class="form-error">' . $value . '</div>';
             }
-    ?>    
+    ?>
             <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-edit.php") ?>
         <?php
         } else {
 
-        $sql = "UPDATE posts SET title='$title', description='$description', body='$body' WHERE id=$id";
+            $sql = "UPDATE posts SET title=\"$title\", description=\"$description\", body=\"$body\" WHERE id=$id";
 
-        if ($conn->query($sql) === TRUE) {
-            header('Location: /posts/article.php?id=' . $id);
-        } else {
-            $error = $conn->error;
+            if ($conn->query($sql) === TRUE) {
+                $_SESSION['message'] = '<div class="success">Saved successfully.</div>';
+                header('Location: /posts/article.php?id=' . $id);
+            } else {
+                $error = $conn->error;
+            }
         }
-    }
     else : ?>
 
         <?php
