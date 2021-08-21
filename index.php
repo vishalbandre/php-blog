@@ -9,7 +9,7 @@ if ($page <= 0) {
     $page = 1;
 }
 
-$per_page = 2;
+$per_page = 4;
 $offset = ($page - 1) * $per_page;
 ?>
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -27,39 +27,37 @@ $offset = ($page - 1) * $per_page;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_array()) {
-        ?>
-                <?php include('./posts/item.php') ?>
-            <?php
+                require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");
             }
-            ?>
-            <ul class="pagination">
-                <li><a href="?page=1">First</a></li>
-                <li class="<?php if ($page <= 1) {
-                                echo 'disabled';
-                            } ?>">
-                    <a href="<?php if ($page <= 1) {
-                                    echo '#';
-                                } else {
-                                    echo "?page=" . ($page - 1);
-                                } ?>">Prev</a>
-                </li>
-                <li class="<?php if ($page >= $pages) {
-                                echo 'disabled';
-                            } ?>">
-                    <a href="<?php if ($page >= $pages) {
-                                    echo '#';
-                                } else {
-                                    echo "?page=" . ($page + 1);
-                                } ?>">Next</a>
-                </li>
-                <li><a href="?page=<?php echo $pages; ?>">Last</a></li>
-            </ul>
-        <?php
         } else {
             $error = "There are no posts added yet!";
         }
         ?>
     </section>
+    <?php if ($result->num_rows > 0) { ?>
+        <ul class="pagination">
+            <li><a href="?page=1">First</a></li>
+            <li class="<?php if ($page <= 1) {
+                            echo 'disabled';
+                        } ?>">
+                <a href="<?php if ($page <= 1) {
+                                echo '#';
+                            } else {
+                                echo "?page=" . ($page - 1);
+                            } ?>">Prev</a>
+            </li>
+            <li class="<?php if ($page >= $pages) {
+                            echo 'disabled';
+                        } ?>">
+                <a href="<?php if ($page >= $pages) {
+                                echo '#';
+                            } else {
+                                echo "?page=" . ($page + 1);
+                            } ?>">Next</a>
+            </li>
+            <li><a href="?page=<?php echo $pages; ?>">Last</a></li>
+        </ul>
+    <?php } ?>
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>

@@ -55,7 +55,6 @@ if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSI
         }
     endif; ?>
 
-    <h3 class="form-caption">Edit Profile</h3>
     <?php
     $check = "SELECT * FROM users WHERE username='" . $_GET['user'] . "'";
     $result = $conn->query($check);
@@ -63,18 +62,21 @@ if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSI
     ?>
         <?php while ($row = $result->fetch_array()) : ?>
             <form action="" method="POST" class="accounts-forms">
-                <p>
-                    <label for="username">Username: </label><br>
-                    <input type="text" name="username" class="<?php if (isset($errors['username'])) : ?>input-error<?php endif; ?>" value="<?php echo $row['username']; ?>" readonly />
-                    <small>(Usernames can't be changed.)</small>
-                </p>
-                <p>
-                    <label for="email">Email: </label><br>
-                    <input type="text" name="email" class="<?php if (isset($errors['email'])) : ?>input-error<?php endif; ?>" value="<?php echo $row['email']; ?>" />
-                </p>
-                <p>
-                    <button type="submit" name="submit" value="save" class="button button-ok">Save Profile</button>
-                </p>
+                <h3 class="form-caption">Edit Profile</h3>
+                <div class="form-inner">
+                    <fieldset>
+                        <label for="username">Username: </label><br>
+                        <input type="text" name="username" class="<?php if (isset($errors['username'])) : ?>input-error<?php endif; ?>" value="<?php echo $row['username']; ?>" readonly />
+                        <small>(Usernames can't be changed.)</small>
+                    </fieldset>
+                    <fieldset>
+                        <label for="email">Email: </label><br>
+                        <input type="text" name="email" class="<?php if (isset($errors['email'])) : ?>input-error<?php endif; ?>" value="<?php echo $row['email']; ?>" />
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit" name="submit" value="save" class="button button-ok">Save Profile</button>
+                    </fieldset>
+                </div>
             </form>
     <?php endwhile;
     }

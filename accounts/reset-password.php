@@ -51,15 +51,21 @@
                     <form action="" method="post" class="accounts-forms">
                         <input type="hidden" name="email" value="<?php echo $email; ?>">
                         <input type="hidden" name="reset_link_token" value="<?php echo $token; ?>">
-                        <p>
-                            <label>Password</label>
-                            <input type="password" value="<?php echo $password; ?>" name='password'>
-                        </p>
-                        <p>
-                            <label>Confirm Password</label>
-                            <input type="password" class="<?php if (isset($errors['password2'])) : ?>input-error<?php endif; ?>" value="<?php echo $password2; ?>" name='password2'>
-                        </p>
-                        <button type="submit" name="new-password" class="button button-ok">Save New Password</button>
+                        <h3 class="form-caption">Reset Password</h3>
+                        <div class="form-inner">
+                            <fieldset>
+                                <label>Password</label>
+                                <input type="password" placeholder="Enter Password" class="<?php if (isset($errors['password'])) : ?>input-error<?php endif; ?>" value="<?php echo $password; ?>" name='password'>
+                                <span class="rule">(Username must be in between 6 to 15 characters.)</span>
+                            </fieldset>
+                            <fieldset>
+                                <label>Confirm Password</label>
+                                <input type="password" placeholder="Enter Confirm Password" class="<?php if (isset($errors['password2'])) : ?>input-error<?php endif; ?>" value="<?php echo $password2; ?>" name='password2'>
+                            </fieldset>
+                            <fieldset>
+                                <button type="submit" name="new-password" class="button button-ok">Save New Password</button>
+                            </fieldset>
+                        </div>
                     </form>
                 <?php }
             } else { ?>
@@ -105,15 +111,21 @@
                 <form action="" method="post" class="accounts-forms">
                     <input type="hidden" name="email" value="<?php echo $email; ?>">
                     <input type="hidden" name="reset_link_token" value="<?php echo $token; ?>">
-                    <p>
-                        <label>Password</label>
-                        <input type="password" class="<?php if (isset($errors['password'])) : ?>input-error<?php endif; ?>" value="<?php echo $password; ?>" name='password'>
-                    </p>
-                    <p>
-                        <label>Confirm Password</label>
-                        <input type="password" class="<?php if (isset($errors['password2'])) : ?>input-error<?php endif; ?>" value="<?php echo $password2; ?>" name='password2'>
-                    </p>
-                    <button type="submit" name="new-password" class="button button-ok">Save New Password</button>
+                    <h3 class="form-caption">Reset Password</h3>
+                    <div class="form-inner">
+                        <fieldset>
+                            <label>Password</label>
+                            <input type="password" placeholder="Enter Password" class="<?php if (isset($errors['password'])) : ?>input-error<?php endif; ?>" value="<?php echo $password; ?>" name='password'>
+                            <span class="rule">(Username must be in between 6 to 15 characters.)</span>
+                        </fieldset>
+                        <fieldset>
+                            <label>Confirm Password</label>
+                            <input type="password" placeholder="Enter Confirm Password" class="<?php if (isset($errors['password2'])) : ?>input-error<?php endif; ?>" value="<?php echo $password2; ?>" name='password2'>
+                        </fieldset>
+                        <fieldset>
+                            <button type="submit" name="new-password" class="button button-ok">Save New Password</button>
+                        </fieldset>
+                    </div>
                 </form>
             <?php }
         } else { ?>

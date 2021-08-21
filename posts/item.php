@@ -10,10 +10,12 @@ if (!isset($_SESSION)) {
             <?php echo $row["title"]; ?>
         </h2>
     </a>
-    <div class="author">
-        <strong class="label">Author: </strong>
+    <section class="author">
+        <strong>Posted by: </strong>
         <a href="/accounts/view.php?user=<?php echo $row['user']; ?>"><?php echo $row['user']; ?></a>
-    </div>
+        <strong> on:</strong>
+        <?php echo date("l, M j, Y", strtotime($row['created_at'])); ?>
+    </section>
     <summary class="post-description">
         <?php echo $row['description']; ?>
     </summary>

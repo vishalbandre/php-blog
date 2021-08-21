@@ -10,7 +10,7 @@ if (empty($_GET['id'])) {
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
-<main class="single-post">
+<article class="single-post">
     <?php
     if ($_SESSION['message']) {
         echo $_SESSION['message'];
@@ -24,12 +24,12 @@ if (empty($_GET['id'])) {
     ?>
         <?php while ($row = $result->fetch_array()) : ?>
             <h2 class="post-title"><?php echo $row['title']; ?></h2>
-            <div class="author">
+            <section class="author">
                 <strong>Posted by: </strong>
                 <a href="/accounts/view.php?user=<?php echo $row['user']; ?>"><?php echo $row['user']; ?></a>
                 <strong> on:</strong>
                 <?php echo date("l, M j, Y", strtotime($row['created_at'])); ?>
-            </div>
+            </section>
             <br>
             <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
                 <ul class="actions">
@@ -44,14 +44,14 @@ if (empty($_GET['id'])) {
             <summary class="post-description">
                 <?php echo $row['description']; ?>
             </summary>
-            <article class="post-body">
+            <section class="post-body">
                 <?php echo nl2br($row['body']); ?>
-            </article>
+            </section>
         <?php endwhile; ?>
     <?php
     }
     ?>
-</main>
+</article>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 

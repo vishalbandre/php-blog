@@ -15,7 +15,8 @@ use PHPMailer\PHPMailer\Exception;
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <main class="content">
     <?php
-    if (isset($_POST['password-reset-token']) && $_POST['email']) {
+    if (isset($_POST['password-reset-token']) && $_POST['email']) {          
+
         require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
 
         $emailId = $_POST['email'];
@@ -56,7 +57,7 @@ use PHPMailer\PHPMailer\Exception;
             // GMAIL username
             $mail->Username = "beststatusonline@gmail.com";
             // GMAIL password
-            $mail->Password = "@temporarypassword";
+            $mail->Password = "@newtempo";
             $mail->SMTPSecure = "ssl";
             // sets GMAIL as the SMTP server
             $mail->Host = "smtp.gmail.com";
@@ -64,7 +65,7 @@ use PHPMailer\PHPMailer\Exception;
             $mail->Port = "465";
             $mail->From = 'beststatusonline@gmail.com';
             $mail->FromName = 'PHP Blog';
-            $mail->AddAddress('beststatusonline@gmail.com', 'Temp User');
+            $mail->AddAddress($emailId, 'Reset User');
             $mail->Subject  =  'Reset Password';
             $mail->IsHTML(true);
             $mail->Body    = 'Click On This Link to Reset Password ' . $link . '';

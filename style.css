@@ -41,9 +41,6 @@ header .branding {
   flex-direction: row;
   width: 225px;
 }
-.top-search-form .search-btn {
-  width: 75px;
-}
 .top-search-form input {
   margin-top: 10px;
   margin-right: 0;
@@ -52,6 +49,7 @@ header .branding {
   margin-left: 10px;
   cursor: pointer;
   color: silver;
+  width: 100px;
   background-color: #2e2e2e;
   border-radius: 6px;
 }
@@ -103,7 +101,7 @@ header nav a:hover {
 .feed .item {
   margin-bottom: 25px;
   padding-bottom: 25px;
-  border-bottom: solid 1px silver;
+  border-bottom: solid 1px whitesmoke;
   width: 95%;
 }
 .feed .item a {
@@ -144,7 +142,7 @@ header nav a:hover {
 .pagination li:last-child {
   margin-right: 0;
 }
-.pagination li a{
+.pagination li a {
   padding: 10px;
   font-weight: 700;
   background-color: whitesmoke;
@@ -208,6 +206,14 @@ header nav a:hover {
 form {
   width: 100%;
 }
+.posts-forms .form-inner fieldset {
+  margin-bottom: 25px;
+  padding: 0;
+  border: none;
+}
+.posts-forms .form-caption {
+  margin-bottom: 25px;
+}
 form input,
 textarea {
   margin-top: 15px;
@@ -220,8 +226,47 @@ form button {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+.posts-forms fieldset input {
+  padding: 0;
+}
+.accounts-forms,
+.posts-forms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 25px;
+  width: 100%;
+}
+.accounts-forms .form-inner,
+.posts-forms .form-inner {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.accounts-forms .form-inner {
+  padding: 10px;
+}
+.accounts-forms .form-caption,
+.posts-forms .form-caption {
+  padding: 0;
+}
+.accounts-forms .form-inner fieldset,
+.posts-forms .form-inner fieldset {
+  border: none;
+}
+.accounts-forms .form-inner fieldset .rule {
+  color: #2e2e2e;
+}
+.accounts-forms .form-inner fieldset input {
+  padding: 10px;
+}
 .accounts-forms {
-  width: 200px;
+  width: 50%;
+  background-color: whitesmoke;
+}
+.accounts-forms .form-caption {
+  padding: 10px;
+  padding-left: 20px;
 }
 .form-caption {
   margin: 0;
@@ -229,7 +274,6 @@ form button {
   padding-left: 0;
   font-size: 38px;
   color: #454545;
-  width: 300px;
   border-bottom: solid 4px #454545;
 }
 .form-error {
@@ -252,7 +296,7 @@ form button {
   border-radius: 6px;
   overflow: hidden;
 }
-.sidebar .caption {
+.sidebar-caption {
   margin: 0;
   padding: 20px;
   font-size: 38px;
@@ -322,24 +366,263 @@ footer {
 /* Responsive */
 /* Extra Small Devices, Phones */
 @media (max-width: 576px) {
+  body {
+    margin: auto;
+    padding: 0;
+    width: 95%;
+    font-size: 14px;
+  }
   header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     margin-bottom: 25px;
     border-bottom: solid 2px whitesmoke;
   }
   .top-search-form {
     width: 46%;
   }
+  header .branding {
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+  }
+  .top-search-form {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+  }
   header nav {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 25px;
+    background-color: #2e2e2e;
+    border-radius: 6px;
+    width: 100%;
+  }
+  header nav a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.75rem;
   }
   .container {
     display: flex;
     flex-direction: column;
+  }
+  .feed,
+  .content,
+  .single-post {
+    width: 100%;
+  }
+  .caption {
+    margin-top: 0;
+    width: 100%;
+  }
+  .feed {
+    margin-top: 25px;
+  }
+  .feed .item {
+    margin-bottom: 25px;
+    width: 100%;
+    border-bottom: solid 1px lavender;
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .posts-forms fieldset input {
+    padding: 0;
+  }
+  .accounts-forms,
+  .posts-forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .accounts-forms .form-inner,
+  .posts-forms .form-inner {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  .accounts-forms .form-caption,
+  .posts-forms .form-caption {
+    width: 100%;
+  }
+  .accounts-forms .form-inner fieldset,
+  .posts-forms .form-inner fieldset {
+    border: none;
+  }
+  .accounts-forms .form-inner fieldset .rule {
+    color: #2e2e2e;
+  }
+  .accounts-forms .form-inner fieldset input {
+    padding: 10px;
+  }
+  .posts-forms .form-inner fieldset input,
+  .posts-forms .form-inner fieldset textarea {
+    padding: 2px;
+    width: 98%;
+  }
+  .accounts-forms .button-link {
+    margin-right: 10px;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .form-error {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red;
+    background-color: rgba(220, 20, 60, 0.144);
+  }
+  .input-error {
+    outline: none;
+    border: solid 1px red;
+  }
+  footer {
+    margin-bottom: 0;
+  }
+}
+
+/* Tablets */
+@media (max-width: 768px) and (min-width: 576px) {
+  body {
+    margin: auto;
+    padding: 0;
+    width: 95%;
+    font-size: 14px;
+  }
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: solid 2px whitesmoke;
+  }
+  .top-search-form {
+    width: 46%;
+  }
+  header .branding {
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+  }
+  .top-search-form {
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+  }
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 25px;
+    background-color: #2e2e2e;
+    border-radius: 6px;
+    width: 100%;
+  }
+  header nav a {
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.75rem;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .feed,
+  .content,
+  .single-post {
+    margin: auto;
+    width: 96%;
+  }
+  .caption {
+    margin-top: 0;
+    width: 100%;
+  }
+  .feed {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+  .feed .item {
+    flex: 50%;
+  }
+  .pagination {
+    display: inline-flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+  }
+  .posts-forms fieldset input {
+    padding: 0;
+  }
+  .accounts-forms,
+  .posts-forms {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-bottom: 25px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .accounts-forms {
+    margin: auto;
+    width: 75%;
+  }
+  .accounts-forms .form-inner,
+  .posts-forms .form-inner {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+  }
+  .accounts-forms .form-caption,
+  .posts-forms .form-caption {
+    width: 100%;
+  }
+  .accounts-forms .form-inner fieldset,
+  .posts-forms .form-inner fieldset {
+    border: none;
+  }
+  .accounts-forms .form-inner fieldset .rule {
+    color: #2e2e2e;
+  }
+  .accounts-forms .form-inner fieldset input {
+    padding: 10px;
+  }
+  .posts-forms .form-inner fieldset input,
+  .posts-forms .form-inner fieldset textarea {
+    padding: 2px;
+    width: 98%;
+  }
+  .accounts-forms .button-link {
+    margin-right: 10px;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .form-error {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red;
+    background-color: rgba(220, 20, 60, 0.144);
+  }
+  .input-error {
+    outline: none;
+    border: solid 1px red;
+  }
+  footer {
+    margin-bottom: 0;
   }
 }

@@ -1,5 +1,5 @@
 <aside class="sidebar">
-    <h3 class="caption">Editors:</h3>
+    <h3 class="sidebar-caption">Editors:</h3>
     <ul class="editor-list">
         <?php
         $sql = "SELECT * FROM users";
