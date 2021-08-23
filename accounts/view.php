@@ -4,20 +4,6 @@ if (!isset($_SESSION)) {
 }
 ?>
 
-<?php
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-} else {
-    $page = 1;
-}
-
-if ($page <= 0) {
-    $page = 1;
-}
-
-$per_page = 3;
-$offset = ($page - 1) * $per_page;
-?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
@@ -58,32 +44,7 @@ $offset = ($page - 1) * $per_page;
         <?php
         }
         ?>
-
     </section>
-    <?php if ($result->num_rows > 0) { ?>
-        <ul class="pagination">
-            <li><a href="?page=1">First</a></li>
-            <li class="<?php if ($page <= 1) {
-                            echo 'disabled';
-                        } ?>">
-                <a href="<?php if ($page <= 1) {
-                                echo '#';
-                            } else {
-                                echo "?page=" . ($page - 1);
-                            } ?>">Prev</a>
-            </li>
-            <li class="<?php if ($page >= $pages) {
-                            echo 'disabled';
-                        } ?>">
-                <a href="<?php if ($page >= $pages) {
-                                echo '#';
-                            } else {
-                                echo "?page=" . ($page + 1);
-                            } ?>">Next</a>
-            </li>
-            <li><a href="?page=<?php echo $pages; ?>">Last</a></li>
-        </ul>
-    <?php } ?>
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>

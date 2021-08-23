@@ -12,12 +12,19 @@ if ($_SESSION['logged_in']) {
 
 <main class="container">
     <section class="content">
+        <?php
+        if ($_SESSION['message']) {
+            echo $_SESSION['message'];
+            unset($_SESSION["message"]);
+        }
+        ?>
+
         <form action="password-reset-token.php" method="post" class="accounts-forms">
             <h3 class="form-caption">Password Reset: </h3>
             <div class="form-inner">
                 <fieldset>
                     <label>Email address:</label>
-                    <input type="email" name="email">
+                    <input type="text" name="email" required>
                     <small>(Please enter an email you registered here account with.)</small>
                 </fieldset>
                 <fieldset>

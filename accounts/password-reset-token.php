@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -15,8 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <main class="content">
     <?php
-    if (isset($_POST['password-reset-token']) && $_POST['email']) {          
-
+    if (isset($_POST['password-reset-token']) && $_POST['email']) {
         require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
 
         $emailId = $_POST['email'];
@@ -42,7 +44,7 @@ use PHPMailer\PHPMailer\Exception;
 
             $expDate = date("Y-m-d H:i:s", $expFormat);
 
-            $update = mysqli_query($conn, "UPDATE users set  password='" . $password . "', reset_link_token='" . $token . "' ,exp_date='" . $expDate . "' WHERE email='" . $emailId . "'");
+            $update = mysqli_query($conn, "UPDATE users set ' reset_link_token='" . $token . "' ,exp_date='" . $expDate . "' WHERE email='" . $emailId . "'");
 
             $link = "<a href='http://blog/accounts/reset-password.php?key=" . $emailId . "&token=" . $token . "'>Click To Reset password</a>";
 
@@ -74,9 +76,9 @@ use PHPMailer\PHPMailer\Exception;
             } else {
                 echo "Mail Error - >" . $mail->ErrorInfo;
             }
-        } else {
-            echo "Invalid Email Address. Go back";
-        }
+        } else { ?>
+            Invalid Email Address. <a href="<?php echo $_SERVER['HTTP_REFERER'] ?>">Go back</a>
+    <?php }
     }
     ?>
 </main>
