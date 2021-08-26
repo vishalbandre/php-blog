@@ -1,4 +1,4 @@
-<?php require_once($_SERVER['DOCUMENT_ROOT']."/components/config.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>PHP Blog</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assets/splide/css/splide.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
 <body>

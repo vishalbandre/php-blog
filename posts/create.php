@@ -83,6 +83,7 @@ if (!$_SESSION['logged_in']) {
 
 <?php $conn->close();
 include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 </body>
 
 </html>

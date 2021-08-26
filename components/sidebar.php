@@ -1,8 +1,35 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+
 <aside class="sidebar">
+    <?php if ($_SESSION['logged_in']) : ?>
+        <h3 class="sidebar-caption">Carousels:</h3>
+        <ul class="sidebar-list">
+            <li>
+                <a href="/carousels/">All Carousels</a>
+            </li>
+            <li>
+                <a href="/carousels/create.php">Add New Carousel</a>
+            </li>
+            <?php if (isset($_SESSION['is_admin'])) : ?>
+                <li>
+                    <a href="/carousels/categories/index.php">All Categories</a>
+                </li>
+                <li>
+                    <a href="/carousels/categories/create.php">Add New Category</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+
+        <hr>
+    <?php endif; ?>
     <h3 class="sidebar-caption">Editors:</h3>
-    <ul class="editor-list">
+    <ul class="sidebar-list">
         <?php
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users LIMIT 10";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $dataArray = array();

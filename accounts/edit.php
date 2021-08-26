@@ -88,7 +88,7 @@ if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSI
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 
 <?php $conn->close(); ?>
-
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 </body>
 
 </html>

@@ -139,6 +139,7 @@ if ($_SESSION['logged_in']) {
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
 
 <?php $conn->close(); ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 
 </body>
 

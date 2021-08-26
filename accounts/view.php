@@ -7,6 +7,55 @@ if (!isset($_SESSION)) {
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
+<!-- Carousel -->
+<?php
+$sql_carousel = "SELECT * FROM carousels WHERE category_id=13 ORDER BY updated_at DESC LIMIT 1";
+$result_car = $conn->query($sql_carousel);
+$caraousel_id = null;
+if ($result_car->num_rows > 0) {
+    while ($row = $result_car->fetch_array()) {
+        $caraousel_id = $row['id'];
+    }
+}
+
+if ($caraousel_id != null) {
+
+    $q = "SELECT * FROM images LEFT OUTER JOIN carousels_images ON images.id = carousels_images.image_id AND carousels_images.carousel_id = $caraousel_id LEFT OUTER JOIN carousels ON carousels_images.carousel_id = carousels.id where carousels.id IS NOT NULL";
+    $result_images = $conn->query($q);
+
+    if ($result_images->num_rows > 0) {
+        if ($result_images->num_rows == 1) {
+            while ($row_image = $result_images->fetch_array()) {
+?>
+                <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+            <?php
+            }
+        } else {
+            ?>
+            <div class="splide">
+                <div class="splide__track">
+                    <ul class="splide__list">
+
+                        <?php
+                        while ($row_image = $result_images->fetch_array()) {
+                        ?>
+                            <li class="splide__slide">
+                                <img class="images" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                            </li>
+
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+<?php
+        }
+    }
+}
+?>
+<!-- Carousel end -->
+
 <main class="container">
     <section class="feed">
         <?php
@@ -51,6 +100,7 @@ if (!isset($_SESSION)) {
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 </body>
 
 </html>

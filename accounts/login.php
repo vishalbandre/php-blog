@@ -94,6 +94,7 @@ if (!isset($_SESSION)) {
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 </body>
 
 </html>

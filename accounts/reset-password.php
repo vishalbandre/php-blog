@@ -138,6 +138,7 @@
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer-scripts.php") ?>
 </body>
 
 </html>

@@ -22,10 +22,10 @@ if (!isset($_SESSION)) {
     <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
         <ul class="actions">
             <li class="edit">
-                <a href="/posts/edit.php?id=<?php echo $row['id']; ?>">Edit</a>
+                <a href="/posts/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Edit</a>
             </li>
             <li class="delete">
-                <a href="/posts/delete.php?id=<?php echo $row['id']; ?>">Delete</a>
+                <a href="/posts/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Delete</a>
             </li>
         </ul>
     <?php endif; ?>
