@@ -13,7 +13,7 @@ if (!$_SESSION['logged_in']) {
 <main class="container">
     <section class="content">
         <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST['user'])) {
                 $user = htmlspecialchars($_POST['user']);
             } else {
@@ -42,6 +42,13 @@ if (!$_SESSION['logged_in']) {
 
             if ($title == null) {
                 $errors['title'] = 'Title is required.';
+            } else {
+                // also check for existing title
+                $check = "SELECT title FROM posts WHERE title='" . $title . "' LIMIT 1";
+                $result = $conn->query($check);
+                if ($result->num_rows > 0) {
+                    $errors['title'] = 'Article with this title already exists.';
+                }
             }
 
             if ($description == null) {
@@ -52,30 +59,45 @@ if (!$_SESSION['logged_in']) {
                 $errors['body'] = 'Article body is required.';
             }
 
-            if (count($errors) > 0) {
-                foreach ($errors as $key => $value) {
-                    echo '<div class="form-error">' . $value . '</div>';
-                }
-        ?>
-                <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-create.php") ?>
-                <?php
-                return null;
-            } else {
+            if (count($errors) <= 0) {
 
                 $sql = "INSERT INTO posts (title, user, description, body) VALUES('" . $title . "', '" . $user  . "', '" . $description . "', '" . $body . "')";
 
                 if ($conn->query($sql) === TRUE) {
                     header('Location: /index.php');
-                } else {
-                    $error = $conn->error;
-                ?>
-                    <p class="unknown-error">Something went wrong. Please try again later.</p>
-            <?php
+                    $_SESSION['message'] = '<div class="success">Article saved successfully.</div>';
+                    die();
                 }
             }
-        else : ?>
-            <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-create.php") ?>
-        <?php endif; ?>
+        } ?>
+        <?php
+        if (count($errors) > 0) {
+            foreach ($errors as $key => $value) {
+                echo '<div class="form-error">' . $value . '</div>';
+            }
+        }
+        ?>
+        <form action="/posts/create.php" method="POST" class="posts-forms">
+            <h3 class="form-caption">New Post</h3>
+            <div class="form-inner">
+                <input name="user" type="hidden" value="<?php echo $_SESSION['user']; ?>" />
+                <fieldset>
+                    <label>Title: </label><br>
+                    <input type="text" name="title" class="<?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>" value="<?php echo $title; ?>" />
+                </fieldset>
+                <fieldset>
+                    <label>Description: </label><br>
+                    <textarea name="description" class="<?php if (isset($errors['description'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php echo $description; ?></textarea>
+                </fieldset>
+                <fieldset>
+                    <label>Body: </label><br>
+                    <textarea name="body" class="<?php if (isset($errors['body'])) : ?>input-error<?php endif; ?>" cols="30" rows="20"><?php echo $body; ?></textarea>
+                </fieldset>
+                <fieldset>
+                    <button type="submit" name="submit" value="create" class="button button-ok">Save Post</button>
+                </fieldset>
+            </div>
+        </form>
     </section>
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>

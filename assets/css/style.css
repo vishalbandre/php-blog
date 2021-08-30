@@ -6,7 +6,6 @@
 body {
     margin: auto;
     padding: 0;
-    width: 1000px;
     font-size: 14px;
 }
 
@@ -32,8 +31,8 @@ header {
 
 header .branding {
     display: inline-block;
+    margin-left: 20px;
     padding: 0;
-    padding-left: 0;
     text-decoration: none;
     font-size: 2rem;
     font-weight: 700;
@@ -110,6 +109,7 @@ header nav a:hover {
 .container {
     display: flex;
     justify-content: space-between;
+    margin-left: 10px;
 }
 
 
@@ -359,6 +359,13 @@ form button {
     border: solid 1px red;
 }
 
+.error-page {
+    display: flex;
+    justify-content: center;
+    padding: 2em;
+    width: 70%;
+}
+
 
 /* sidebar */
 
@@ -404,7 +411,6 @@ form button {
 footer {
     clear: both;
     margin-top: 25px;
-    margin-bottom: 25px;
     padding: 25px;
     background-color: beige;
     font-size: 15px;
@@ -430,7 +436,7 @@ footer {
     margin-top: 10px;
     padding: 0;
     list-style-type: none;
-    justify-content: space-between;
+    gap: 10px;
 }
 
 .thumb-gallery li {
@@ -440,12 +446,26 @@ footer {
     margin-bottom: 15px;
 }
 
-.banner {
+.banner-container {
+    display: flex;
+    justify-content: center;
+}
+
+.banner-container .banner {
     margin-top: 25px;
     margin-bottom: 25px;
     width: 1000px;
     height: 500px;
     object-fit: cover;
+    filter: brightness(65%);
+}
+
+.banner-container .overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 40%;
 }
 
 .thumb {
@@ -460,7 +480,7 @@ footer {
 }
 
 .splide .splide__list .splide__slide .images {
-    width: 1000px;
+    width: 100%;
     height: 500px;
     object-fit: cover;
     filter: brightness(65%);
@@ -475,24 +495,29 @@ footer {
     top: 30%;
 }
 
+.banner-container .overlay .caption,
+.banner-container .overlay .description,
 .splide .splide__list .splide__slide .overlay .caption,
 .splide .splide__list .splide__slide .overlay .description {
     display: flex;
     justify-content: center;
     margin: auto;
     padding: 0;
-    font-size: 64px;
+    font-size: 4rem;
     text-align: center;
     color: #fffffe;
-    width: 300px;
+    width: 400px;
 }
 
+.banner-container .overlay .caption,
 .splide .splide__list .splide__slide .overlay .caption {
     border-bottom: none;
 }
 
+.banner-container .overlay .description,
 .splide .splide__list .splide__slide .overlay .description {
     font-size: 26px;
+    line-height: 2;
     color: #b5a49e;
 }
 
@@ -556,14 +581,13 @@ footer {
         font-size: 14px;
     }
     header {
-        display: flex;
-        margin-bottom: 25px;
-        background-color: rgba(245, 245, 245, 0.692);
-        border-bottom: solid 2px whitesmoke;
-        position: absolute;
+        position: fixed;
+        width: 100%;
         top: 0;
         left: 0;
-        width: 100%;
+        border-bottom: none;
+        background-color: rgba(245, 245, 245, 0.432);
+        z-index: 10000;
     }
     .top-search-form {
         width: 46%;
@@ -686,12 +710,18 @@ footer {
     /* Carousels */
     .thumb-gallery {
         margin-top: 10px;
-        justify-content: space-between;
+        gap: 13px;
     }
     .thumb-gallery li {
         margin: 0;
     }
-    .banner {
+    .banner-container {
+        position: relative;
+    }
+    .banner-container .overlay {
+        top: 30%;
+    }
+    .banner-container .banner {
         margin: auto;
         margin-top: 25px;
         margin-bottom: 25px;
@@ -700,8 +730,8 @@ footer {
         object-fit: cover;
     }
     .thumb {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
     }
     .splide {
         margin: auto;
@@ -709,10 +739,52 @@ footer {
         margin-bottom: 50px;
         width: 98%;
     }
+    .splide .splide__list .splide__slide {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
     .splide .splide__list .splide__slide .images {
         width: 100%;
         height: 145px;
         object-fit: cover;
+    }
+    .splide .splide__list .splide__slide .overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+    }
+    .splide .splide__list .splide__slide .overlay .caption {
+        font-size: 2.75rem;
+    }
+    .banner-container .overlay .caption,
+    .banner-container .overlay .description,
+    .splide .splide__list .splide__slide .overlay .caption,
+    .splide .splide__list .splide__slide .overlay .description {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        padding: 0;
+        font-size: 15px;
+        text-align: center;
+        color: #fffffe;
+        width: 150px;
+    }
+    .banner-container .overlay .caption,
+    .splide .splide__list .splide__slide .overlay .caption {
+        border-bottom: none;
+    }
+    .banner-container .overlay .description,
+    .splide .splide__list .splide__slide .overlay .description {
+        font-size: 14px;
+        line-height: 2;
+        color: #b5a49e;
+    }
+    .banner-container .overlay .caption {
+        font-size: 38px;
+    }
+    .banner-container .overlay .description {
+        font-size: 16px;
     }
 }
 
@@ -723,14 +795,22 @@ footer {
     body {
         margin: auto;
         padding: 0;
-        padding-top: 0px;
+        padding-top: 50px;
         width: 95%;
         font-size: 14px;
+    }
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: none;
+        background-color: rgba(245, 245, 245, 0.432);
+        z-index: 10000;
     }
     header .branding {
         display: block;
         margin: 0;
-        padding: 0;
         padding-left: 10px;
         font-size: 2rem;
     }
@@ -864,13 +944,16 @@ footer {
     /* Carousels */
     .thumb-gallery {
         margin-top: 10px;
-        justify-content: space-between;
+        gap: 13px;
     }
     .thumb-gallery li {
         margin: 0;
         margin-bottom: 15px;
     }
-    .banner {
+    .banner-container .overlay {
+        top: 185px;
+    }
+    .banner-container .banner {
         margin: auto;
         margin-top: 25px;
         margin-bottom: 25px;
@@ -879,8 +962,8 @@ footer {
         object-fit: cover;
     }
     .thumb {
-        width: 100px;
-        height: 100px;
+        width: 105px;
+        height: 105px;
     }
     .splide {
         margin: auto;
@@ -888,9 +971,23 @@ footer {
         margin-bottom: 50px;
         width: 98%;
     }
+    .splide .splide__list .splide__slide {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
     .splide .splide__list .splide__slide .images {
         width: 100%;
         height: 350px;
         object-fit: cover;
+    }
+    .splide .splide__list .splide__slide .overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 25%;
+    }
+    .splide .splide__list .splide__slide .overlay .caption {
+        font-size: 2.75rem;
     }
 }

@@ -16,6 +16,7 @@ use PHPMailer\PHPMailer\Exception;
 
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require($_SERVER['DOCUMENT_ROOT'] . "/credentials.php") ?>
 <main class="content">
     <?php
     if (isset($_POST['password-reset-token']) && $_POST['email']) {
@@ -57,9 +58,9 @@ use PHPMailer\PHPMailer\Exception;
             // enable SMTP authentication
             $mail->SMTPAuth = true;
             // GMAIL username
-            $mail->Username = "beststatusonline@gmail.com";
+            $mail->Username = $cred_email;
             // GMAIL password
-            $mail->Password = "@newtempo";
+            $mail->Password = $cred_password;
             $mail->SMTPSecure = "ssl";
             // sets GMAIL as the SMTP server
             $mail->Host = "smtp.gmail.com";

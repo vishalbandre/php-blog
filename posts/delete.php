@@ -6,6 +6,30 @@ if (!isset($_SESSION)) {
 if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
+
+require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
+
+$post_id = null;
+if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'])) {
+    header('Location: /index.php');
+} else if (isset($_SESSION['is_admin']) || $_SESSION['user'] == $_GET['user']) {
+    $user = trim($_GET['user']);
+    $id = $_GET['id'];
+    $check = "SELECT * FROM posts WHERE user='$user' AND id=$id";
+    $result = $conn->query($check);
+    if ($result->num_rows > 0) {
+        $post_id = $_GET['id'];
+    } else if (isset($_SESSION['is_admin'])) {
+        $id = $_GET['id'];
+        $check = "SELECT * FROM posts WHERE id=$id";
+        $result = $conn->query($check);
+        $post_id = $_GET['id'];
+    } else {
+        header('Location: /index.php');
+    }
+} else {
+    header('Location: /index.php');
+}
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
@@ -52,8 +76,8 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
             <?php endforeach; ?>
         <?php
         } else {
-            $error = "Something went wrong. " . $conn->error;
-            echo $conn->error;
+            header('HTTP/1.0 404 Not Found', TRUE, 404);
+            die(header('location: /errors/404.php'));
         }
         ?>
     <?php endif; ?>

@@ -2,6 +2,20 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+if (empty($_GET['user'])) {
+    header('Location: /index.php');
+}
+
+require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
+
+$u = $_GET['user'];
+$sql = "SELECT * FROM users WHERE username='$u'";
+$result = $conn->query($sql);
+if ($result->num_rows <= 0) {
+    header('HTTP/1.0 404 Not Found', TRUE, 404);
+    die(header('location: /errors/404.php'));
+}
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -11,6 +25,7 @@ if (!isset($_SESSION)) {
 <?php
 $sql_carousel = "SELECT * FROM carousels WHERE category_id=13 ORDER BY updated_at DESC LIMIT 1";
 $result_car = $conn->query($sql_carousel);
+
 $caraousel_id = null;
 if ($result_car->num_rows > 0) {
     while ($row = $result_car->fetch_array()) {
@@ -27,7 +42,13 @@ if ($caraousel_id != null) {
         if ($result_images->num_rows == 1) {
             while ($row_image = $result_images->fetch_array()) {
 ?>
-                <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                <div class="banner-container">
+                    <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                    <div class="overlay">
+                        <h1 class="caption"><?php echo $row_image['title']; ?></h1>
+                        <p class="description"><?php echo $row_image['caption']; ?></p>
+                    </div>
+                </div>
             <?php
             }
         } else {
@@ -41,6 +62,10 @@ if ($caraousel_id != null) {
                         ?>
                             <li class="splide__slide">
                                 <img class="images" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                                <div class="overlay">
+                                    <h1 class="caption"><?php echo $row_image['title']; ?></h1>
+                                    <p class="description"><?php echo $row_image['caption']; ?></p>
+                                </div>
                             </li>
 
                         <?php

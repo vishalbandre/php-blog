@@ -2,8 +2,11 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-?>
-<?php
+
+if (empty($_GET['user']) || !$_SESSION['logged_in']) {
+    header('Location: /index.php');
+}
+
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 } else {

@@ -37,7 +37,7 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 <main class="container">
     <section class="content">
         <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!empty($_POST['user'])) {
                 $user = htmlspecialchars($_POST['user']);
             } else {
@@ -82,14 +82,8 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                 $errors['body'] = 'Article body is required.';
             }
 
-            if (count($errors) > 0) {
-                foreach ($errors as $key => $value) {
-                    echo '<div class="form-error">' . $value . '</div>';
-                }
-        ?>
-                <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/forms/post-edit.php") ?>
-            <?php
-            } else {
+            if (isset($errors) && count($errors) <= 0) {
+
 
                 $sql = "UPDATE posts SET title=\"$title\", description=\"$description\", body=\"$body\" WHERE id=$id";
 
@@ -98,44 +92,62 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                     header('Location: /posts/article.php?id=' . $id);
                 }
             }
-        else : ?>
+        } ?>
 
-            <?php
-            $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
-            $result = $conn->query($check);
-            if ($result->num_rows > 0) {
-            ?>
-                <?php foreach ($result as $key => $value) : ?>
-                    <form action="" method="POST" class="posts-forms">
-                        <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
-                        <input name="user" type="hidden" value="<?php echo $value['user']; ?>" />
-                        <h3 class="form-caption">Edit Article</h3>
-                        <div class="form-inner">
-                            <fieldset>
-                                <label for="title">Title: </label><br>
-                                <input type="text" name="title" id="title" value="<?php echo $value['title']; ?>" />
-                            </fieldset>
-                            <fieldset>
-                                <label for="description">Description: </label><br>
-                                <textarea name="description" id="description" cols="30" rows="10"><?php echo $value['description']; ?></textarea>
-                            </fieldset>
-                            <fieldset>
-                                <label for="body">Body: </label><br>
-                                <textarea name="body" id="body" cols="30" rows="10"><?php echo $value['body']; ?></textarea>
-                            </fieldset>
-                            <fieldset>
-                                <button type="submit" name="submit" value="create" class="button button-ok">Update Post</button>
-                            </fieldset>
-                        </div>
-                    </form>
-                <?php endforeach; ?>
-            <?php
-            } else {
-                $error = "Something went wrong. " . $conn->error;
-                echo $conn->error;
+        <?php
+        if (isset($errors) && count($errors) > 0) {
+            foreach ($errors as $key => $value) {
+                echo '<div class="form-error">' . $value . '</div>';
             }
-            ?>
-        <?php endif; ?>
+        }
+        ?>
+
+        <?php
+        $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
+        $result = $conn->query($check);
+        if ($result->num_rows > 0) {
+        ?>
+            <?php while ($row = $result->fetch_array()) : ?>
+                <form action="" method="POST" class="posts-forms">
+                    <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
+                    <input name="user" type="hidden" value="<?php echo $value['user']; ?>" />
+                    <h3 class="form-caption">Edit Article</h3>
+                    <div class="form-inner">
+                        <fieldset>
+                            <label for="title">Title: </label><br>
+                            <input type="text" name="title" id="title" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                    echo $title;
+                                                                                } else {
+                                                                                    echo $row['title'];
+                                                                                } ?>" />
+                        </fieldset>
+                        <fieldset>
+                            <label for="description">Description: </label><br>
+                            <textarea name="description" id="description" cols="30" rows="10"><?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                                    if (isset($description)) : echo $description;
+                                                                                                    endif;
+                                                                                                } else {
+                                                                                                    echo $row['description'];
+                                                                                                } ?></textarea>
+                        </fieldset>
+                        <fieldset>
+                            <label for="body">Body: </label><br>
+                            <textarea name="body" id="body" cols="30" rows="10"><?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                    if (isset($body)) : echo $body;
+                                                                                    endif;
+                                                                                } else {
+                                                                                    echo $row['body'];
+                                                                                } ?></textarea>
+                        </fieldset>
+                        <fieldset>
+                            <button type="submit" name="submit" value="create" class="button button-ok">Save Article</button>
+                        </fieldset>
+                    </div>
+                </form>
+            <?php endwhile; ?>
+        <?php
+        }
+        ?>
     </section>
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
