@@ -9,21 +9,21 @@ if (empty($_GET['id']) || !$_SESSION['logged_in']) {
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
 
-$post_id = null;
+$carousel_id = null;
 if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'])) {
     header('Location: /index.php');
 } else if (isset($_SESSION['is_admin']) || $_SESSION['user'] == $_GET['user']) {
     $user = trim($_GET['user']);
     $id = $_GET['id'];
-    $check = "SELECT * FROM posts WHERE user='$user' AND id=$id";
+    $check = "SELECT * FROM carousels WHERE user='$user' AND id=$id";
     $result = $conn->query($check);
     if ($result->num_rows > 0) {
-        $post_id = $_GET['id'];
+        $carousel_id = $_GET['id'];
     } else if (isset($_SESSION['is_admin'])) {
         $id = $_GET['id'];
-        $check = "SELECT * FROM posts WHERE id=$id";
+        $check = "SELECT * FROM carousels WHERE id=$id";
         $result = $conn->query($check);
-        $post_id = $_GET['id'];
+        $carousel_id = $_GET['id'];
     } else {
         header('Location: /index.php');
     }

@@ -36,7 +36,7 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in'])) {
                 $check = "SELECT name FROM carousels_categories WHERE name='" . $name . "' LIMIT 1";
                 $result = $conn->query($check);
                 if ($result->num_rows > 0) {
-                    $errors['name'] = 'This name already exists.';
+                    $errors['name'] = 'Category with this name already exists.';
                 }
             }
 

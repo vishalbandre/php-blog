@@ -36,7 +36,13 @@ if ($caraousel_id != null) {
         if ($result_images->num_rows == 1) {
             while ($row_image = $result_images->fetch_array()) {
 ?>
-                <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                <div class="banner-container">
+                    <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
+                    <div class="overlay">
+                        <h1 class="caption"><?php echo $row_image['title']; ?></h1>
+                        <p class="description"><?php echo $row_image['caption']; ?></p>
+                    </div>
+                </div>
             <?php
             }
         } else {

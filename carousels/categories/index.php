@@ -2,6 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSION['user'] && !$_SESSION['is_admin']) {
+    header('Location: /index.php');
+}
 ?>
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>

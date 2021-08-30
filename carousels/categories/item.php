@@ -1,4 +1,11 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && realpath(__FILE__) == realpath($_SERVER['SCRIPT_FILENAME'])) {
+    header('HTTP/1.0 403 Forbidden', TRUE, 403);
+    die(header('location: /errors/forbidden.php'));
+}
+?>
+
+<?php
 if (!isset($_SESSION)) {
     session_start();
 }
