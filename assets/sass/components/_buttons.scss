@@ -1,0 +1,17 @@
+.button-link {
+    text-decoration: none;
+    color: gray;
+}
+
+.button-link:hover {
+    color: crimson;
+}
+
+.disabled {
+    a {
+        pointer-events: none;
+        cursor: default;
+        text-decoration: none;
+        color: gray;
+    }
+}

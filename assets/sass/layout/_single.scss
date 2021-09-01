@@ -1,0 +1,20 @@
+/* article */
+
+.single-post {
+    margin: auto;
+    width: 80%;
+    padding-bottom: 25px;
+    .post-title {
+        font-size: 52px;
+    }
+    .post-description {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        border-bottom: solid 1px whitesmoke;
+        font-size: 24px;
+        color: gray;
+    }
+    .post-body {
+        font-size: 16px;
+    }
+}

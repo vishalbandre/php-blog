@@ -1,0 +1,198 @@
+/* Carousels */
+
+// .carousels-forms {
+//     width: 98%;
+// }
+.category-dropdown {
+    padding: 10px;
+    outline: none;
+}
+
+.thumb-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+    list-style-type: none;
+    gap: 10px;
+    li {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        margin-bottom: 15px;
+    }
+}
+
+.banner-container {
+    display: flex;
+    justify-content: center;
+    .banner {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        width: 1000px;
+        height: 500px;
+        object-fit: cover;
+        filter: brightness(65%);
+    }
+    .overlay {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 40%;
+        .caption,
+        .description {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            padding: 0;
+            font-size: 4rem;
+            text-align: center;
+            color: #fffffe;
+            width: 400px;
+        }
+        .caption {
+            border-bottom: none;
+        }
+        .description {
+            font-size: 26px;
+            line-height: 2;
+            color: #b5a49e;
+        }
+    }
+}
+
+.thumb {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.splide {
+    width: 95%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .splide__list {
+        .splide__slide {
+            .images {
+                width: 100%;
+                height: 500px;
+                object-fit: cover;
+                filter: brightness(65%);
+            }
+            .overlay {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: absolute;
+                width: 100%;
+                top: 30%;
+                .caption,
+                .description {
+                    display: flex;
+                    justify-content: center;
+                    margin: auto;
+                    padding: 0;
+                    font-size: 4rem;
+                    text-align: center;
+                    color: #fffffe;
+                    width: 400px;
+                }
+                .caption {
+                    border-bottom: none;
+                }
+                .description {
+                    font-size: 26px;
+                    line-height: 2;
+                    color: #b5a49e;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 576px) {
+    /* Carousels */
+    .thumb-gallery {
+        margin-top: 10px;
+        gap: 13px;
+        li {
+            margin: 0;
+        }
+    }
+    .banner-container {
+        position: relative;
+        .overlay {
+            top: 30%;
+        }
+        .banner {
+            margin: auto;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+        }
+        .caption,
+        .description {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            padding: 0;
+            font-size: 15px;
+            text-align: center;
+            color: #fffffe;
+            width: 150px;
+        }
+        .caption {
+            border-bottom: none;
+            font-size: 38px;
+        }
+        .description {
+            color: #b5a49e;
+            font-size: 16px;
+        }
+    }
+    .thumb {
+        width: 120px;
+        height: 120px;
+    }
+    .splide {
+        margin: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        width: 100%;
+        .splide__list .splide__slide {
+            margin-left: 5px;
+            margin-right: 5px;
+            .images {
+                width: 100%;
+                height: 145px;
+                object-fit: cover;
+            }
+            .overlay {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                position: absolute;
+                .caption,
+                .description {
+                    display: flex;
+                    justify-content: center;
+                    margin: auto;
+                    padding: 0;
+                    font-size: 15px;
+                    text-align: center;
+                    color: #fffffe;
+                    width: 150px;
+                }
+                .description {
+                    font-size: 14px;
+                    line-height: 2;
+                    color: #b5a49e;
+                }
+            }
+        }
+    }
+}

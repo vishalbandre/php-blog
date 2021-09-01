@@ -1,0 +1,29 @@
+.feed {
+    .caption {
+        font-size: 3rem;
+        width: 90%;
+        border-bottom: solid 5px $color-secondary;
+    }
+    .item {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: solid 1px whitesmoke;
+        width: 95%;
+        a {
+            text-decoration: none;
+        }
+        .title {
+            font-size: $font-size-large;
+        }
+        .author {
+            font-size: $font-size-small;
+            .label {
+                color: $color-secondary;
+            }
+        }
+        .post-description {
+            margin-bottom: 10px;
+            color: #454545;
+        }
+    }
+}
