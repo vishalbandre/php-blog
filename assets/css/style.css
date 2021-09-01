@@ -369,7 +369,6 @@ header nav a:hover {
     margin: auto;
     flex-direction: column;
     width: 98%;
-    background-color: cadetblue;
   }
 }
 @media (max-width: 768px) and (min-width: 576px) {
@@ -495,7 +494,7 @@ header nav a:hover {
 .banner-container .banner {
   margin-top: 25px;
   margin-bottom: 25px;
-  width: 1000px;
+  width: 100%;
   height: 500px;
   object-fit: cover;
   filter: brightness(65%);
@@ -534,7 +533,7 @@ header nav a:hover {
 }
 
 .splide {
-  width: 95%;
+  width: 100%;
   margin-top: 50px;
   margin-bottom: 50px;
 }
