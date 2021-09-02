@@ -1,8 +1,5 @@
 /* Carousels */
 
-// .carousels-forms {
-//     width: 98%;
-// }
 .category-dropdown {
     padding: 10px;
     outline: none;
@@ -49,7 +46,7 @@
             padding: 0;
             font-size: 4rem;
             text-align: center;
-            color: #fffffe;
+            color: $color-accent;
             width: 400px;
         }
         .caption {
@@ -58,7 +55,7 @@
         .description {
             font-size: 26px;
             line-height: 2;
-            color: #b5a49e;
+            color: $color-accent;
         }
     }
 }
@@ -96,7 +93,7 @@
                     padding: 0;
                     font-size: 4rem;
                     text-align: center;
-                    color: #fffffe;
+                    color: $color-accent;
                     width: 400px;
                 }
                 .caption {
@@ -105,14 +102,14 @@
                 .description {
                     font-size: 26px;
                     line-height: 2;
-                    color: #b5a49e;
+                    color: $color-accent;
                 }
             }
         }
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $mobile) {
     /* Carousels */
     .thumb-gallery {
         margin-top: 10px;
@@ -142,7 +139,7 @@
             padding: 0;
             font-size: 15px;
             text-align: center;
-            color: #fffffe;
+            color: $color-accent;
             width: 150px;
         }
         .caption {
@@ -150,7 +147,7 @@
             font-size: 38px;
         }
         .description {
-            color: #b5a49e;
+            color: $color-accent;
             font-size: 16px;
         }
     }
@@ -184,13 +181,13 @@
                     padding: 0;
                     font-size: 15px;
                     text-align: center;
-                    color: #fffffe;
+                    color: $color-accent;
                     width: 150px;
                 }
                 .description {
                     font-size: 14px;
                     line-height: 2;
-                    color: #b5a49e;
+                    color: $color-accent;
                 }
             }
         }

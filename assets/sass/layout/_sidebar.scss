@@ -30,7 +30,7 @@
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $mobile) {
     .sidebar {
         width: 100%;
     }

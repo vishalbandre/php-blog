@@ -30,8 +30,8 @@
         padding-left: 0;
         width: 90%;
         font-size: 1.75rem;
-        color: #454545;
-        border-bottom: solid 4px #454545;
+        color: $color-blakish;
+        border-bottom: solid 4px $color-blakish;
     }
     fieldset {
         border: none;
@@ -44,7 +44,7 @@
             outline: none;
         }
         .rule {
-            color: #2e2e2e;
+            color: $color-blakish;
         }
         button {
             padding: 15px;
@@ -52,7 +52,7 @@
             padding-bottom: 5px;
         }
         .input-error {
-            border: solid 1px red;
+            border: solid 1px $color-primary;
         }
     }
 }
@@ -65,11 +65,11 @@
     margin: 1em;
     padding: 1em;
     width: 90%;
-    color: red;
-    background-color: rgba(220, 20, 60, 0.144);
+    color: $color-primary;
+    background-color: $color-red-border;
 }
 
-@media (max-width: 576px) {
+@media (max-width: $mobile) {
     .form-small {
         width: 100%;
     }
@@ -77,16 +77,16 @@
         margin: auto;
         margin-top: 10px;
         margin-bottom: 10px;
-        color: red;
-        background-color: rgba(220, 20, 60, 0.144);
+        color: $color-primary;
+        background-color: $color-red-border;
     }
     .input-error {
         outline: none;
-        border: solid 1px red;
+        border: solid 1px $color-primary;
     }
 }
 
-@media (max-width: 768px) and (min-width: 576px) {
+@media (max-width: $tablet) and (min-width: $mobile) {
     .form {
         width: 100%;
         input,

@@ -11,9 +11,11 @@ $color-primary: #DC143C;
 $color-secondary: #2F323A;
 $color-accent: #F4FEC1;
 $color-jetblack: #0a0a0a;
+$color-blakish: #2e2e2e;
 $color-gray: gray;
-$color-burlywood: burlywood;
-$color-brown-light: rgba(165, 42, 42, 0.151);
-$color-text: #2f3846;
-$color-heading: #061b41;
-$color-text-fade: #798aa5;
+$color-silver: silver;
+$color-red-border: rgba(220, 20, 60, 0.144);
+$transparent: rgba(245, 245, 245, 0.432);
+// Breakpoints
+$mobile: 576px;
+$tablet: 768px;
