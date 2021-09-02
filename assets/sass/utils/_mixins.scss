@@ -1,0 +1,7 @@
+@mixin caption($font-size) {
+    margin: 25px auto;
+    font-family: $font-gothic;
+    font-size: $font-size;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

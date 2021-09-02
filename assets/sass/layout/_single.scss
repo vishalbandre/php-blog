@@ -1,0 +1,38 @@
+/* article */
+
+.single-post {
+    margin: auto;
+    width: 90%;
+    padding-bottom: 25px;
+    .post-title {
+        font-size: $font-size-large;
+    }
+    .post-description {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        border-bottom: solid 1px $color-accent;
+        font-size: $font-size-medium;
+        color: $color-gray;
+    }
+    .post-body {
+        font-size: $font-size-small;
+    }
+}
+
+@media (max-width: $mobile) {
+    .single-post {
+        margin: auto;
+        width: 98%;
+        .post-title {
+            font-size: $font-size-large;
+        }
+        .post-description {
+            font-size: $font-size-medium;
+        }
+        .post-body {
+            font-size: $font-size-small;
+        }
+    }
+}
+
+@media (max-width: $tablet) and (min-width: $mobile) {}

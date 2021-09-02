@@ -41,7 +41,7 @@ create table carousels (
     created_at datetime default now(),
     updated_at timestamp not null default current_timestamp on update current_timestamp,
     foreign key (user) references users(username),
-    foreign key (category_id) references cateogories(category_id)
+    foreign key (category_id) references carousels_categories(category_id)
 );
 
 create table images (

@@ -2,41 +2,42 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSION['user'] && !$_SESSION['is_admin']) {
+if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 ?>
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <main class="container">
-    <section class="feed">
-        <?php
-        if (isset($_SESSION['message'])) {
-            echo $_SESSION['message'];
-            unset($_SESSION["message"]);
-        }
-        ?>
-
-        <h3 class="caption">Carousel Categories</h3>
-
-        <?php
-        $sql = "SELECT * FROM carousels_categories";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_array()) {
-                require($_SERVER['DOCUMENT_ROOT'] . "/carousels/categories/item.php");
+    <div class="content-area">
+        <section class="feed">
+            <?php
+            if (isset($_SESSION['message'])) {
+                echo $_SESSION['message'];
+                unset($_SESSION["message"]);
             }
-        } else {
-        ?>
-            <p class="message">
-                Sorry! There are no categories yet.
-            </p>
-        <?php
-        }
-        ?>
-    </section>
+            ?>
 
+            <h3 class="caption">Carousel Categories</h3>
+
+            <?php
+            $sql = "SELECT * FROM carousels_categories";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_array()) {
+                    require($_SERVER['DOCUMENT_ROOT'] . "/carousels/categories/item.php");
+                }
+            } else {
+            ?>
+                <p class="message">
+                    Sorry! There are no categories yet.
+                </p>
+            <?php
+            }
+            ?>
+        </section>
+    </div>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 

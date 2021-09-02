@@ -1,0 +1,32 @@
+/* pagination */
+
+.pagination {
+    margin: 0;
+    padding: 5px;
+    list-style-type: none;
+    display: inline-flex;
+    justify-content: space-between;
+    border: solid 1px $color-accent;
+    border-radius: 6px;
+    overflow: hidden;
+    li {
+        margin: 10px;
+    }
+    li:first-child {
+        margin-left: 0;
+    }
+    li:last-child {
+        margin-right: 0;
+    }
+    li a {
+        padding: 10px;
+        font-weight: 700;
+        background-color: $color-accent;
+    }
+}
+
+@media (max-width: $mobile) {
+    .pagination {
+        display: flex;
+    }
+}

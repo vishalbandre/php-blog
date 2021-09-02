@@ -14,9 +14,10 @@ document.querySelector('.menu-toggle').addEventListener('click', () => {
 var element = document.getElementsByClassName('splide');
 if (element.length > 0) {
     new Splide('.splide', {
+        arrows: false,
         type: 'loop',
         autoplay: true,
-        interval: 3000,
+        interval: 2000,
         padding: {
             right: '5rem',
             left: '5rem',

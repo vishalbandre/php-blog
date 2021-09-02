@@ -11,29 +11,30 @@ if ($_SESSION['logged_in']) {
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
 <main class="container">
-    <section class="content">
-        <?php
-        if ($_SESSION['message']) {
-            echo $_SESSION['message'];
-            unset($_SESSION["message"]);
-        }
-        ?>
+    <div class="content-area">
+        <section class="content">
+            <?php
+            if ($_SESSION['message']) {
+                echo $_SESSION['message'];
+                unset($_SESSION["message"]);
+            }
+            ?>
 
-        <form action="password-reset-token.php" method="post" class="accounts-forms">
-            <h3 class="form-caption">Password Reset: </h3>
-            <div class="form-inner">
-                <fieldset>
-                    <label>Email address:</label>
-                    <input type="text" name="email" required>
-                    <small>(Please enter an email you registered here account with.)</small>
-                </fieldset>
-                <fieldset>
-                    <input type="submit" name="password-reset-token" value="Send Me Password Reset Mail" class="button">
-                </fieldset>
-            </div>
-        </form>
-    </section>
-
+            <form action="password-reset-token.php" method="post" class="accounts-forms">
+                <h3 class="form-caption">Password Reset: </h3>
+                <div class="form-inner">
+                    <fieldset>
+                        <label>Email address:</label>
+                        <input type="text" name="email" required>
+                        <small>(Please enter an email you registered here account with.)</small>
+                    </fieldset>
+                    <fieldset>
+                        <input type="submit" name="password-reset-token" value="Send Me Password Reset Mail" class="button">
+                    </fieldset>
+                </div>
+            </form>
+        </section>
+    </div>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 

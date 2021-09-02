@@ -1,0 +1,43 @@
+.feed {
+    .caption {
+        font-size: 3rem;
+        width: 90%;
+        border-bottom: solid 5px $color-secondary;
+    }
+    .item {
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: solid 1px $color-accent;
+        width: 95%;
+        a {
+            text-decoration: none;
+        }
+        .title {
+            margin: 0;
+            font-size: $font-size-large;
+        }
+        .author {
+            font-size: $font-size-small;
+            .label {
+                color: $color-secondary;
+            }
+        }
+        .post-description {
+            margin-bottom: 10px;
+            color: $color-secondary;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    .feed {
+        .caption {
+            font-size: $font-size-medium;
+        }
+        .item {
+            .title {
+                font-size: $font-size-medium;
+            }
+        }
+    }
+}
