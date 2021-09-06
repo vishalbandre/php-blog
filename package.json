@@ -1,0 +1,26 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vishalbandre/php-blog.git"
+  },
+  "author": "Vishal Bandre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vishalbandre/php-blog/issues"
+  },
+  "homepage": "https://github.com/vishalbandre/php-blog#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-sass": "^5.0.0",
+    "sass": "^1.39.0"
+  }
+}
