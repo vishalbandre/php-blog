@@ -39,6 +39,7 @@ gulp.task('prefix_task', async function() {
     prefixify()
 });
 
+// Watching for changes
 gulp.task("watch", () => {
     gulp.watch("./assets/images/*", img);
     gulp.watch("./assets/sass/**/*", sassify).on('change', function() {
