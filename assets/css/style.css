@@ -57,11 +57,20 @@ body a:hover {
   color: #0a0a0aa6;
   text-decoration: none;
   font-size: small;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
+  -webkit-box-shadow: 0px 2px 1px silver;
+  -moz-box-shadow: 0px 2px 1px silver;
   box-shadow: 0px 2px 1px silver;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 .actions li a:hover {
+  -webkit-box-shadow: 0px 3px 2px #0a0a0a;
+  -moz-box-shadow: 0px 3px 2px #0a0a0a;
   box-shadow: 0px 3px 2px #0a0a0a;
 }
 .actions li a:hover {
@@ -92,9 +101,27 @@ body a:hover {
 }
 
 header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -moz-box-align: start;
+  -ms-flex-align: start;
   align-items: flex-start;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: solid 2px #F4FEC1;
 }
@@ -111,12 +138,34 @@ header .menu-toggle {
   display: none;
 }
 header .menu {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
 }
 header .top-search-form {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -moz-box-orient: horizontal;
+  -moz-box-direction: normal;
+  -ms-flex-direction: row;
   flex-direction: row;
   margin-left: 50px;
   width: 275px;
@@ -132,17 +181,27 @@ header .top-search-form .search-btn {
   color: silver;
   width: 100px;
   background-color: #2e2e2e;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
 }
 header .top-search-form .search-btn:hover {
   color: gray;
 }
 header nav {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 0;
   padding: 0;
   background-color: #2e2e2e;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
   border-bottom-left-radius: 6px;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomright: 6px;
   border-bottom-right-radius: 6px;
   overflow: hidden;
 }
@@ -155,6 +214,9 @@ header nav a {
   text-decoration: none;
   font-size: 14px;
   color: gray;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 header nav a:hover {
@@ -173,10 +235,20 @@ header nav a:hover {
   }
   header .menu {
     display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: column-reverse;
+    -moz-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
     width: 150px;
   }
   header .menu-toggle {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 1.8em;
     padding-left: 2.5em;
@@ -194,6 +266,12 @@ header nav a:hover {
     width: 100%;
   }
   header nav {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -229,12 +307,22 @@ header nav a:hover {
 
   header .menu {
     display: none;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+    -webkit-flex-direction: column-reverse;
+    -moz-box-orient: vertical;
+    -moz-box-direction: reverse;
+    -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
     background-color: #2e2e2e;
     width: 10%;
   }
 
   header .menu-toggle {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 1.8em;
     padding-left: 2.5em;
@@ -255,12 +343,28 @@ header nav a:hover {
   }
 
   header nav {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
     margin-top: 25px;
     background-color: #2e2e2e;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
     border-radius: 6px;
   }
 
@@ -278,14 +382,36 @@ header nav a:hover {
 /* forms */
 .form {
   width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
   justify-content: space-around;
   margin-bottom: 25px;
   width: 100%;
 }
 .form .form-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin-top: 15px;
   padding: 10px;
@@ -368,7 +494,15 @@ header nav a:hover {
   }
 }
 .container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-left: 10px;
 }
@@ -428,6 +562,12 @@ header nav a:hover {
 
   .container {
     margin: auto;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     width: 98%;
   }
@@ -444,6 +584,12 @@ header nav a:hover {
   .container {
     margin: auto;
     width: 100%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
 }
@@ -489,9 +635,19 @@ header nav a:hover {
   margin: 0;
   padding: 5px;
   list-style-type: none;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
   border: solid 1px #F4FEC1;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -512,6 +668,10 @@ header nav a:hover {
 
 @media (max-width: 576px) {
   .pagination {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
   }
 }
@@ -557,7 +717,13 @@ header nav a:hover {
 }
 
 .thumb-gallery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: 0;
   margin-top: 10px;
@@ -566,14 +732,32 @@ header nav a:hover {
   gap: 10px;
 }
 .thumb-gallery li {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   margin: 0;
   margin-bottom: 15px;
 }
 
 .banner-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
 }
 .banner-container .banner {
@@ -581,19 +765,43 @@ header nav a:hover {
   margin-bottom: 25px;
   width: 100%;
   height: 500px;
+  -o-object-fit: cover;
   object-fit: cover;
+  -webkit-filter: brightness(65%);
   filter: brightness(65%);
 }
 .banner-container .overlay {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   position: absolute;
   top: 40%;
 }
 .banner-container .overlay .caption,
 .banner-container .overlay .description {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin: auto;
   padding: 0;
@@ -614,6 +822,7 @@ header nav a:hover {
 .thumb {
   width: 100px;
   height: 100px;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -625,12 +834,28 @@ header nav a:hover {
 .splide .splide__list .splide__slide .images {
   width: 100%;
   height: 500px;
+  -o-object-fit: cover;
   object-fit: cover;
+  -webkit-filter: brightness(65%);
   filter: brightness(65%);
 }
 .splide .splide__list .splide__slide .overlay {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   position: absolute;
   width: 100%;
@@ -638,7 +863,15 @@ header nav a:hover {
 }
 .splide .splide__list .splide__slide .overlay .caption,
 .splide .splide__list .splide__slide .overlay .description {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   margin: auto;
   padding: 0;
@@ -678,11 +911,20 @@ header nav a:hover {
     margin-bottom: 25px;
     width: 100%;
     height: 145px;
+    -o-object-fit: cover;
     object-fit: cover;
   }
   .banner-container .caption,
 .banner-container .description {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     margin: auto;
     padding: 0;
@@ -718,17 +960,40 @@ header nav a:hover {
   .splide .splide__list .splide__slide .images {
     width: 100%;
     height: 145px;
+    -o-object-fit: cover;
     object-fit: cover;
   }
   .splide .splide__list .splide__slide .overlay {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     position: absolute;
   }
   .splide .splide__list .splide__slide .overlay .caption,
 .splide .splide__list .splide__slide .overlay .description {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     margin: auto;
     padding: 0;
@@ -744,7 +1009,15 @@ header nav a:hover {
   }
 }
 .error-page {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
   padding: 2em;
   width: 70%;
@@ -753,6 +1026,8 @@ header nav a:hover {
 /* sidebar */
 .sidebar {
   background-color: #2e2e2e;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -795,5 +1070,3 @@ footer {
   font-size: 15px;
   color: #2e2e2e;
 }
-
-/*# sourceMappingURL=style.css.map */
