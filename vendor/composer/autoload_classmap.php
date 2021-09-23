@@ -6,5 +6,17 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Carousel\\Carousel' => $baseDir . '/carousels/models/carousel.php',
+    'Carousel\\Category\\Category' => $baseDir . '/carousels/models/category.php',
+    'Carousel\\Image' => $baseDir . '/carousels/models/image.php',
+    'Carousel\\Image\\CarouselImage' => $baseDir . '/carousels/models/carousel_image.php',
+    'Database\\Connection' => $baseDir . '/components/Database.php',
+    'PHPMailer\\PHPMailer\\Exception' => $vendorDir . '/phpmailer/phpmailer/src/Exception.php',
+    'PHPMailer\\PHPMailer\\OAuth' => $vendorDir . '/phpmailer/phpmailer/src/OAuth.php',
+    'PHPMailer\\PHPMailer\\PHPMailer' => $vendorDir . '/phpmailer/phpmailer/src/PHPMailer.php',
+    'PHPMailer\\PHPMailer\\POP3' => $vendorDir . '/phpmailer/phpmailer/src/POP3.php',
+    'PHPMailer\\PHPMailer\\SMTP' => $vendorDir . '/phpmailer/phpmailer/src/SMTP.php',
+    'Post\\Post' => $baseDir . '/posts/post.php',
+    'User\\Auth\\Auth' => $baseDir . '/accounts/models/Auth.php',
+    'User\\User' => $baseDir . '/accounts/models/User.php',
 );

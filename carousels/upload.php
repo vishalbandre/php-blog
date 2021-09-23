@@ -2,9 +2,15 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Using namespace
+use Carousel\Image;
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php"); ?>
+
 <?php
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -56,9 +62,23 @@ if (!$_SESSION['logged_in']) {
                     if (in_array($fileType, $fileTypes)) {
                         if (is_dir($uploadDir) && is_writable($uploadDir)) {
                             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
-                                $sql = "INSERT INTO images (user, imgpath, caption) VALUES('" . $user . "', '" . $fileName  . "', '" . $caption . "')";
+                                // $sql = "INSERT INTO images (user, imgpath, caption) VALUES('" . $user . "', '" . $fileName  . "', '" . $caption . "')";
 
-                                if ($conn->query($sql) === TRUE) {
+                                // Set data to be stored in database
+                                $data = array(
+                                    'user' => $user,
+                                    'imgpath' => $fileName,
+                                    'caption' => $caption
+                                );
+
+                                // Create a new image object
+                                $image = new Image();
+
+                                // Perform insertion operation
+                                $q = $image->insert($data);
+
+                                // Check if insertion in database successful
+                                if ($q !== null) {
                                     $_SESSION['message'] = '<div class="success">Image Uploaded Successfully!</div>';
                                     $ref = $_POST['prev'];
                                     header("Location: $ref");

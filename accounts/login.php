@@ -2,10 +2,16 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+use User\Auth\Auth;
+
+// error_reporting(-1);
+// ini_set('display_errors', 'On');
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/accounts/models/Auth.php") ?>
 
 <main class="container">
     <div class="content-area">
@@ -53,21 +59,25 @@ if (!isset($_SESSION)) {
                         echo '<div class="form-error">' . $value . '</div>';
                     }
                 } else {
-                    $check = "SELECT username, role FROM users WHERE username='" . $username . "' and password='" . $password_hash . "' LIMIT 1";
-                    $result = $conn->query($check);
-                    if ($result->num_rows > 0) {
-                        foreach ($result as $key => $value) {
+
+                    // Login with username & password
+                    $login = Auth::login($username, $password_hash);
+
+                    if ($login) {
+                        while ($row = $login->fetch_array()) {
                             $_SESSION['message'] = '<div class="success">Welcome back ' . $username . "</div>";
-                            $_SESSION['user'] = $value['username'];
+                            $_SESSION['user'] = $row['username'];
                             $_SESSION['logged_in'] = true;
-                            if ($value['role'] == 'admin')
+                            if ($row['role'] == 'admin')
                                 $_SESSION['is_admin'] = true;
                         }
-                        header('Location: /accounts/view.php?user=' . $value['username']);
+                        header('Location: /accounts/view.php?user=' . $username);
+                        die();
                     }
                 }
             }
             ?>
+
             <form action="/accounts/login.php" method="POST" class="form form-small">
                 <h3 class="form-caption">Login</h3>
                 <div class="form-inner">

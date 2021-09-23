@@ -2,9 +2,15 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Use namespace to interact with database table
+use Carousel\Category\Category;
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
+
 <?php
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -37,11 +43,19 @@ if (!$_SESSION['logged_in']) {
                 }
 
                 if (count($errors) <= 0) {
-                    $sql = "INSERT INTO carousels_categories (name) VALUES('" . $name . "')";
 
-                    if ($conn->query($sql) === TRUE) {
+                    $data = array(
+                        'name' => $name,
+                    );
+
+                    $category = new Category();
+
+                    $q = $category->insert_category($data);
+
+                    if ($q !== null) {
                         $_SESSION['message'] = '<div class="success">Category Added.</div>';
                         header("Location: /carousels/categories/");
+                        die();
                     } else {
                         $_SESSION['message'] = '<div class="warning">Failed to add category.</div>';
                     }

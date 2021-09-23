@@ -3,6 +3,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use namespace to interact with database table
+use Carousel\Category\Category;
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $category_id = null;
@@ -17,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
 
 <main class="container">
     <div class="content-area">
@@ -38,9 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     header('Location: /carousels/categories/view.php?id=' . $id);
                     die();
                 } else {
-
-                    $sql_delete = "DELETE FROM carousels_categories WHERE id=$id";
-                    if ($conn->query($sql_delete) === TRUE) {
+                    if (Category::delete_category($id)) {
                         $_SESSION['message'] = '<div class="success">Category Deleted.</div>';
                         header("Location: /carousels/categories/");
                         die();

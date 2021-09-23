@@ -2,9 +2,15 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Use namespace to interact with database table
+use Carousel\Category\Category;
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
+
 <?php
 $category_id = null;
 if (!isset($_GET['id']) || !isset($_SESSION['logged_in'])) {
@@ -42,9 +48,15 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in'])) {
                 }
 
                 if (isset($errors) && count($errors) <= 0) {
-                    $sql = "UPDATE carousels_categories SET name='$name' WHERE id=$category_id";
+                    $data = array(
+                        'name' => $name,
+                    );
 
-                    if ($conn->query($sql) === TRUE) {
+                    $category = new Category();
+
+                    $q = $category->update_category($data, $category_id);
+
+                    if ($q !== null) {
                         $_SESSION['message'] = '<div class="success">Category Saved.</div>';
                         header("Location: /carousels/categories/");
                         die();

@@ -1,4 +1,10 @@
 <?php
+require "../vendor/autoload.php";
+
+use Carousel\Carousel;
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -23,8 +29,8 @@ if ($result->num_rows <= 0) {
 
 <!-- Carousel -->
 <?php
-$sql_carousel = "SELECT * FROM carousels WHERE category_id=13 ORDER BY updated_at DESC LIMIT 1";
-$result_car = $conn->query($sql_carousel);
+$carousel = new Carousel();
+$result_car = $carousel->getByAttribute('category_id', 13);
 
 $caraousel_id = null;
 if ($result_car->num_rows > 0) {
@@ -88,7 +94,7 @@ if ($caraousel_id != null) {
             $user = $_GET['user'];
             ?>
             <?php
-            if ($_SESSION['message']) {
+            if (isset($_SESSION['message'])) {
                 echo $_SESSION['message'];
                 unset($_SESSION["message"]);
             }

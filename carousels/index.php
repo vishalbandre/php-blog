@@ -3,6 +3,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use namespace to interact with database table
+use Carousel\Carousel;
+
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
@@ -20,8 +23,11 @@ if ($page <= 0) {
 $per_page = 4;
 $offset = ($page - 1) * $per_page;
 ?>
+
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/carousel.php") ?>
+
 <main class="container">
     <div class="content-area">
         <section class="feed">
@@ -33,13 +39,20 @@ $offset = ($page - 1) * $per_page;
             ?>
 
             <?php
-            $total_pages = "SELECT COUNT(*) FROM carousels";
-            $result = mysqli_query($conn, $total_pages);
-            $total_rows = mysqli_fetch_array($result)[0];
+            // Get carousels count
+            $carousel = new Carousel();
+            $total_pages = $carousel->count();
+
+            // Get number of rows present in table
+            $total_rows = mysqli_fetch_array($total_pages)[0];
+
+            // Get number of pages count for pagination
             $pages = ceil($total_rows / $per_page);
 
-            $sql = "SELECT * FROM carousels ORDER BY updated_at DESC LIMIT $offset, $per_page";
-            $result = $conn->query($sql);
+            // Get all carousels
+            $carousel = new Carousel();
+            $result = $carousel->getAll($offset, $per_page);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_array()) {
                     require($_SERVER['DOCUMENT_ROOT'] . "/carousels/item.php");

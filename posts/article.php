@@ -3,13 +3,20 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use Post namespace to interact with posts table
+use Post\Post;
+
 if (empty($_GET['id'])) {
     header('Location: /index.php');
+} else {
+    $id = $_GET['id'];
 }
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/posts/post.php") ?>
+
 <main class="container">
     <div class="content-area">
         <article class="single-post">
@@ -20,8 +27,9 @@ if (empty($_GET['id'])) {
             }
             ?>
             <?php
-            $check = "SELECT * FROM posts WHERE id='" . $_GET['id'] . "' LIMIT 1";
-            $result = $conn->query($check);
+            $post = new Post();
+            $result = $post->get($id);
+
             if ($result->num_rows > 0) {
             ?>
                 <?php while ($row = $result->fetch_array()) : ?>

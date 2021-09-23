@@ -3,6 +3,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+
+// Namespaces
+use User\User;
+
 if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSION['user'] && !$_SESSION['is_admin']) {
     header('Location: /index.php');
 }
@@ -10,6 +14,8 @@ if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSI
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/accounts/models/User.php") ?>
+
 <main class="container">
     <div class="content-area">
         <?php
@@ -49,9 +55,16 @@ if (empty($_GET['user']) || !$_SESSION['logged_in'] || $_GET['user'] !== $_SESSI
 
                 $sql = "UPDATE users SET email='$email' WHERE username='$username'";
 
+                $data = array(
+                    'email' => $email,
+                );
+
+                $ci = User::updateByUsername($data, $username);
+
                 if ($conn->query($sql) === TRUE) {
                     $_SESSION['message'] = '<div class="success">Profile updated successfully.</div>';
                     header("Location: /accounts/view.php?user=$username");
+                    die();
                 }
             }
         endif; ?>

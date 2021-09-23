@@ -1,4 +1,10 @@
 <?php
+require "vendor/autoload.php";
+
+// Use Post namespace to interact with posts table
+use Carousel\Carousel;
+use Post\Post;
+
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
 } else {
@@ -11,14 +17,15 @@ if ($page <= 0) {
 
 $per_page = 4;
 $offset = ($page - 1) * $per_page;
+
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
-<?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
 <!-- Carousel -->
 <?php
-$sql_carousel = "SELECT * FROM carousels WHERE category_id=12 ORDER BY updated_at DESC LIMIT 1";
-$result_car = $conn->query($sql_carousel);
+$carousel = new Carousel();
+$result_car = $carousel->getByAttribute('category_id', 12);
 
 $caraousel_id = null;
 if ($result_car->num_rows > 0) {
@@ -29,8 +36,9 @@ if ($result_car->num_rows > 0) {
 
 if ($caraousel_id != null) {
 
-    $q = "SELECT * FROM images LEFT OUTER JOIN carousels_images ON images.id = carousels_images.image_id AND carousels_images.carousel_id = $caraousel_id LEFT OUTER JOIN carousels ON carousels_images.carousel_id = carousels.id where carousels.id IS NOT NULL";
-    $result_images = $conn->query($q);
+    $carousel = new Carousel();
+
+    $result_images = $carousel->getGallery($caraousel_id);
 
     if ($result_images->num_rows > 0) {
         if ($result_images->num_rows == 1) {
@@ -79,14 +87,27 @@ if ($caraousel_id != null) {
     <div class="content-area">
         <section class="feed">
             <?php
+            if ($_SESSION['message']) {
+                echo $_SESSION['message'];
+                unset($_SESSION["message"]);
+            }
+            ?>
+            <?php
 
-            $total_pages = "SELECT COUNT(*) FROM posts";
-            $result = mysqli_query($conn, $total_pages);
-            $total_rows = mysqli_fetch_array($result)[0];
+            // Get posts count
+            $post = new Post();
+            $total_pages = $post->count();
+
+            // Get number of rows present in table
+            $total_rows = mysqli_fetch_array($total_pages)[0];
+
+            // Get number of pages count for pagination
             $pages = ceil($total_rows / $per_page);
 
-            $sql = "SELECT * FROM posts ORDER BY updated_at DESC LIMIT $offset, $per_page";
-            $result = $conn->query($sql);
+            // Get all posts
+            $post = new Post;
+            $result = $post->getAll($offset, $per_page);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_array()) {
                     require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");

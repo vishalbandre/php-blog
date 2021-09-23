@@ -3,6 +3,9 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use Post namespace to interact with posts table
+use Post\Post;
+
 if (!isset($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
@@ -33,6 +36,7 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/posts/post.php") ?>
 
 <main class="container">
     <div class="content-area">
@@ -85,10 +89,16 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 
                 if (isset($errors) && count($errors) <= 0) {
 
+                    $data = array(
+                        'title' => $title,
+                        'description' => $description,
+                        'body' => $body
+                    );
 
-                    $sql = "UPDATE posts SET title=\"$title\", description=\"$description\", body=\"$body\" WHERE id=$id";
+                    $post = new Post();
+                    $q = $post->update_post($data, $id);
 
-                    if ($conn->query($sql) === TRUE) {
+                    if ($q !== null) {
                         $_SESSION['message'] = '<div class="success">Saved successfully.</div>';
                         header('Location: /posts/article.php?id=' . $id);
                     }

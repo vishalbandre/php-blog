@@ -3,11 +3,16 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use Post namespace to interact with posts table
+use Post\Post;
+
 if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
+
+require_once($_SERVER['DOCUMENT_ROOT'] . "/posts/post.php");
 
 $post_id = null;
 if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'])) {
@@ -45,13 +50,11 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
             }
 
             if ($_POST['submit'] == 'yes') {
-                $sql = "DELETE FROM posts WHERE id='$id'";
-
-                if ($conn->query($sql) === TRUE) {
+                $post = new Post();
+                if ($post->delete_post($id)) {
                     header('Location: /index.php');
-                } else {
-                    echo $conn->error;
-                    echo "Error";
+                    $_SESSION['message'] = '<div class="success">Article deleted successfully.</div>';
+                    die();
                 }
                 $conn->close();
             } else {

@@ -3,13 +3,20 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use namespace to interact with database table
+use Carousel\Category\Category;
+
 if (empty($_GET['id'])) {
     header('Location: /index.php');
+} else {
+    $cat_id = $_GET['id'];
 }
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
+
 <main class="container">
     <div class="content-area">
         <article class="single-post">
@@ -20,8 +27,10 @@ if (empty($_GET['id'])) {
             }
             ?>
             <?php
-            $check = "SELECT * FROM carousels_categories WHERE id='" . $_GET['id'] . "' LIMIT 1";
-            $result = $conn->query($check);
+            // Get category from the database
+            $result = Category::get_category($cat_id);
+
+            // Display category data if it exists
             if ($result->num_rows > 0) {
             ?>
                 <?php while ($row = $result->fetch_array()) : ?>
