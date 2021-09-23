@@ -2,9 +2,17 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Use namespace to interact with database table
+use Carousel\Carousel;
+use Carousel\Image\CarouselImage;
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/carousel.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/carousel_image.php") ?>
+
 <?php
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -81,16 +89,32 @@ if (!$_SESSION['logged_in']) {
                         }
                     }
 
-                    $sql = "INSERT INTO carousels (user, title, category_id, description) VALUES('" . $user . "', '" . $title  . "', '" . $cat_id  . "', '" . $description . "')";
+                    $data = array(
+                        'user' => $user,
+                        'category_id' => $cat_id,
+                        'title' => $title,
+                        'description' => $description
+                    );
 
-                    if ($conn->query($sql) === TRUE) {
-                        $id = mysqli_insert_id($conn);
+                    $carousel = new Carousel();
+                    $q = $carousel->insert($data);
+
+                    if ($q != null) {
+                        $id = $q;
 
                         $success = false;
                         foreach ($_POST['thumb'] as $key) {
 
-                            $sql_relation = "INSERT INTO carousels_images (carousel_id, image_id) VALUES('" . $id . "', '" . $key  . "')";
-                            if ($conn->query($sql_relation) === TRUE) {
+                            $data = array(
+                                'carousel_id' => $id,
+                                'image_id' => $key
+                            );
+
+                            $carousel_image = new CarouselImage();
+
+                            $ci = $carousel_image->insert($data);
+
+                            if ($ci !== null) {
                                 $success = true;
                             }
                         }
@@ -140,7 +164,7 @@ if (!$_SESSION['logged_in']) {
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) { ?>
                             <select name="category" class="category-dropdown <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>">
-                                <option value="" disabled="disabled" selected="selected">Please select a carousel category</option>
+                                <option value="" disabled="disabled" selected="selected">Select category</option>
                                 <?php
                                 while ($row = $result->fetch_array()) {
                                 ?>

@@ -1,4 +1,5 @@
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/Database.php") ?>
 <!DOCTYPE html>
 <html lang="en">
 

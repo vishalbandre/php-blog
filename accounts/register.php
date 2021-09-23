@@ -2,6 +2,9 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Namespaces
+use User\User;
 ?>
 
 <?php
@@ -9,8 +12,11 @@ if ($_SESSION['logged_in']) {
     header('Location: /index.php');
 }
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php include_once($_SERVER['DOCUMENT_ROOT'] . "/accounts/models/User.php") ?>
+
 <main class="container">
     <div class="content-area">
         <section class="content">
@@ -92,9 +98,15 @@ if ($_SESSION['logged_in']) {
 
                     $password_hash = md5($password);
 
-                    $sql = "INSERT INTO users (username, email, password) VALUES('" . $username . "', '" . $email . "', '" . $password_hash . "')";
+                    $data = array(
+                        'username' => $username,
+                        'email' => $email,
+                        'password' => $password_hash
+                    );
 
-                    if ($conn->query($sql) === TRUE) {
+                    $ci = User::insert($data);
+
+                    if ($ci !== null) {
                         $_SESSION['message'] = '<div class="success">Welcome ' . $username . " You've successfully registered on PHP Blog.</div>";
                         $_SESSION['user'] = $username;
                         $_SESSION['logged_in'] = true;

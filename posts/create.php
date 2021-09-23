@@ -2,9 +2,14 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
+// Use Post namespace to interact with posts table
+use Post\Post;
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/posts/post.php") ?>
+
 <?php
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -62,17 +67,31 @@ if (!$_SESSION['logged_in']) {
 
                 if (count($errors) <= 0) {
 
-                    $sql = "INSERT INTO posts (title, user, description, body) VALUES('" . $title . "', '" . $user  . "', '" . $description . "', '" . $body . "')";
+                    $data = array(
+                        'title' => $title,
+                        'user' => $user,
+                        'description' => $description,
+                        'body' => $body
+                    );
 
-                    if ($conn->query($sql) === TRUE) {
+                    // Create post
+                    $post = new Post();
+                    $q = $post->insert($data);
+
+                    // If post is created successfully, redirect to homepage.
+                    if ($q !== null) {
                         header('Location: /index.php');
                         $_SESSION['message'] = '<div class="success">Article saved successfully.</div>';
                         die();
+                    } else {
+                        // If post creation fails, show warning
+                        $_SESSION['message'] = '<div class="warning">Failed to save the article.</div>';
                     }
                 }
             } ?>
             <?php
             if (count($errors) > 0) {
+                // Show errors, if there are any in $errors array
                 foreach ($errors as $key => $value) {
                     echo '<div class="form-error">' . $value . '</div>';
                 }

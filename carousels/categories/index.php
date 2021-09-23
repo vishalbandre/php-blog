@@ -5,9 +5,15 @@ if (!isset($_SESSION)) {
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
+
+// Use namespace to interact with database table
+use Carousel\Category\Category;
 ?>
+
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
+
 <main class="container">
     <div class="content-area">
         <section class="feed">
@@ -21,8 +27,8 @@ if (!$_SESSION['logged_in']) {
             <h3 class="caption">Carousel Categories</h3>
 
             <?php
-            $sql = "SELECT * FROM carousels_categories";
-            $result = $conn->query($sql);
+            // Get all categories
+            $result = Category::get_all_categories();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_array()) {

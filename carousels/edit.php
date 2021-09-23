@@ -3,6 +3,10 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// Use namespace to interact with database table
+use Carousel\Carousel;
+use Carousel\Image\CarouselImage;
+
 require_once($_SERVER['DOCUMENT_ROOT'] . "/components/config.php");
 $carousel_id = null;
 if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'])) {
@@ -25,9 +29,15 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 } else {
     header('Location: /index.php');
 }
+
 ?>
+
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/carousel.php") ?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/carousel_image.php") ?>
+
+
 <?php
 if (!$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -114,7 +124,19 @@ if (!$_SESSION['logged_in']) {
 
                         $sql_update = "UPDATE carousels SET title=\"$title\", description=\"$description\", category_id=$cat_id WHERE id=$id";
 
-                        if ($conn->query($sql_update) === TRUE) {
+                        $data = array(
+                            'title' => $title,
+                            'description' => $description,
+                            'category_id' => $cat_id
+                        );
+    
+                        // Update the carousel table
+                        $carousel = new Carousel();
+
+                        $q = $carousel->update($data, $id);
+    
+                        // If carousel table updates successfully, continue with updating image references
+                        if ($q != null) {
 
                             if ($error_deletion_failed) {
                                 $_SESSION['message'] = '<div class="warning">Something went wrong!</div>';
@@ -122,8 +144,16 @@ if (!$_SESSION['logged_in']) {
                                 $success = false;
                                 foreach ($_POST['thumb'] as $key) {
 
-                                    $sql_relation = "INSERT INTO carousels_images (carousel_id, image_id) VALUES('" . $id . "', '" . $key  . "')";
-                                    if ($conn->query($sql_relation) === TRUE) {
+                                    $data = array(
+                                        'carousel_id' => $id,
+                                        'image_id' => $key
+                                    );
+        
+                                    $carousel_image = new CarouselImage();
+
+                                    $ci = $carousel_image->insert($data);
+
+                                    if ($ci !== null) {
                                         $success = true;
                                     }
                                 }
@@ -198,7 +228,7 @@ if (!$_SESSION['logged_in']) {
                                 $result_cats = $conn->query($sql_cats);
                                 if ($result_cats->num_rows > 0) { ?>
                                     <select name="category" class="category-dropdown <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>">
-                                        <option value="" disabled="disabled" selected="selected">Please select a carousel category</option>
+                                        <option value="" disabled="disabled" selected="selected">Select category</option>
                                         <?php
                                         while ($row_cats = $result_cats->fetch_array()) {
                                         ?>

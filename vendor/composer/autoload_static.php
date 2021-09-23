@@ -21,7 +21,19 @@ class ComposerStaticInit75de5c2fd504e1a41fa404add5a06d8e
     );
 
     public static $classMap = array (
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Carousel\\Carousel' => __DIR__ . '/../..' . '/carousels/models/carousel.php',
+        'Carousel\\Category\\Category' => __DIR__ . '/../..' . '/carousels/models/category.php',
+        'Carousel\\Image' => __DIR__ . '/../..' . '/carousels/models/image.php',
+        'Carousel\\Image\\CarouselImage' => __DIR__ . '/../..' . '/carousels/models/carousel_image.php',
+        'Database\\Connection' => __DIR__ . '/../..' . '/components/Database.php',
+        'PHPMailer\\PHPMailer\\Exception' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/Exception.php',
+        'PHPMailer\\PHPMailer\\OAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/OAuth.php',
+        'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
+        'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
+        'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
+        'Post\\Post' => __DIR__ . '/../..' . '/posts/post.php',
+        'User\\Auth\\Auth' => __DIR__ . '/../..' . '/accounts/models/Auth.php',
+        'User\\User' => __DIR__ . '/../..' . '/accounts/models/User.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

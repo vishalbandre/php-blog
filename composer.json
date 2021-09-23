@@ -1,5 +1,17 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.5"
+    },
+    "autoload": {
+        "classmap": [
+            "components/Database.php",
+            "posts/post.php",
+            "carousels/models/carousel_image.php",
+            "carousels/models/carousel.php",
+            "carousels/models/category.php",
+            "carousels/models/image.php",
+            "accounts/models/User.php",
+            "accounts/models/Auth.php"
+        ]
     }
 }
