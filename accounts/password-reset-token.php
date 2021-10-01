@@ -3,6 +3,7 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+use Creds\Credentials;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -59,9 +60,9 @@ use PHPMailer\PHPMailer\Exception;
                 // enable SMTP authentication
                 $mail->SMTPAuth = true;
                 // GMAIL username
-                $mail->Username = $cred_email;
+                $mail->Username = Credentials::$cred_email;
                 // GMAIL password
-                $mail->Password = $cred_password;
+                $mail->Password = Credentials::$cred_password;
                 $mail->SMTPSecure = "ssl";
                 // sets GMAIL as the SMTP server
                 $mail->Host = "smtp.gmail.com";

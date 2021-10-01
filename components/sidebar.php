@@ -26,6 +26,15 @@ if (!isset($_SESSION)) {
 
         <hr>
     <?php endif; ?>
+
+    <form action="/newsletters/subscribe.php" method="post" class="subscribe">
+        <fieldset>
+            <input type="email" name="email" class="input-subscriber">
+            <button type="submit" name="submit" value="create" class="button button-ok">Subscribe to Newsletter</button>
+        </fieldset>
+    </form>
+
+    <?php // Queued for change ?>
     <h3 class="sidebar-caption">Editors:</h3>
     <ul class="sidebar-list">
         <?php

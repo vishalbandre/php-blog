@@ -162,6 +162,27 @@ class Connection
         return $result;
     }
 
+    /**
+     * Return recent posts based on limit.
+     */
+    public function getAllByLimit($table, $limit)
+    {
+        $conn = $this->connect();
+
+        $sql = "SELECT * FROM $table LIMIT $limit";
+
+        // Execute the query
+        $result = $conn->query($sql);
+
+        // If there are no results present, set the value of $result to null.
+        if ($result->num_rows <= 0) {
+            $result = null;
+        }
+
+        // Return $result - it will either have results or null
+        return $result;
+    }
+
     // Get particular record from table
     public function get($table, $id)
     {
@@ -230,7 +251,23 @@ class Connection
             return true;
         }
 
-        // Return null, if operation failed
+        // Return false, if operation failed
+        return false;
+    }
+
+    // Delete particular record from table based on attribute and value provided
+    public function deleteByAttribute($table, $attribute, $value)
+    {
+        // Delete record having specific attribute and corresponding value
+        $sql = "DELETE FROM $table WHERE $attribute='$value'";
+
+        $conn = $this->connect();
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        }
+
+        // Return false, if operation failed
         return false;
     }
 

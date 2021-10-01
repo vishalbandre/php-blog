@@ -70,23 +70,26 @@ insert into users(username, password, name, role, email) values('vishal', md5('v
 insert into posts(user, title, description, body) values('admin', 'First Post', 'First Post Description', 'First Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Second Post', 'Second Post Description', 'Second Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Third Post', 'Third Post Description', 'Third Post Body');
+</pre>
 
--- New features
--- 1. Adding new field for managing the user roles
--- 1.1 Added user role field to users table
-alter table users add role varchar(10) not null default 'editor';
--- 1.2 Updated first registered user with admin role
-update users set role='admin' where id=1;
+### Periodic jobs
+# Setting cron jobs with crontab
+<pre>
+> crontab -e
+# crontag content:
+# Output to file
+# */1 * * * * php -q /home/vish/dev/web/php/blog/newsletters/cron.php > /home/vish/dev/web/php/blog/logs/newsletters.txt
+
+# Run script with php command
+# Append to file
+#*/1 * * * * php -q /home/vish/dev/web/php/blog/newsletters/cron.php >> /home/vish/dev/web/php/blog/logs/newsletters.txt
+
+# Will give access to $_SERVER
+#*/1 * * * * curl -q http://blog/newsletters/cron.php >> /home/vish/dev/web/php/blog/logs/newsletters.txt
 
 
--- 2. Forgot Password
--- 2.1. Adding email field to users table
-alter table users add email varchar(200);
-alter table users add reset_link_token varchar(200);
-alter table users add exp_date datetime;
+# You can check your cronjob activity with:
+> /var/log$ grep CRON /var/log/syslog
 
--- 3. Carousel
--- Adding fields to carousels table
-alter table carousels add category_id int not null;
-ALTER TABLE carousels ADD FOREIGN KEY (category_id) REFERENCES carousels_categories(id);
+e.g. vish@ubuntu:/var/log$ grep CRON /var/log/syslog
 </pre>
