@@ -88,7 +88,7 @@ insert into posts(user, title, description, body) values('vishal', 'Third Post',
 #*/1 * * * * curl -q http://blog/newsletters/cron.php >> /home/vish/dev/web/php/blog/logs/newsletters.txt
 
 
-# You can check your cronjob activity with:
+# Check your cronjob activity with:
 > /var/log$ grep CRON /var/log/syslog
 
 e.g. vish@ubuntu:/var/log$ grep CRON /var/log/syslog
