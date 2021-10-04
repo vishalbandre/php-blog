@@ -92,6 +92,17 @@ class Post
     }
 
     /**
+     * Return recent posts based on limit.
+     */
+    public function getAllByLimit($limit)
+    {
+        // Get a database connection.
+        $c = new Database\Connection();
+
+        return $c->getAll('posts', $limit);
+    }
+
+    /**
      * Return the post with specified $id.
      */
     public function get($id)

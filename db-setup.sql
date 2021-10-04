@@ -61,6 +61,10 @@ create table carousels_images (
     foreign key (image_id) references images(id)
 );
 
+create table subscribers (
+    email varchar(200) not null unique
+);
+
 insert into users(username, password, name, role, email) values('admin', md5('admin'), 'Administrator', 'admin', 'vshlbndr@gmail.com');
 insert into users(username, password, name, role, email) values('vishal', md5('vishal'), 'Vishal Bandre', 'editor', 'iamvshlbndr@gmail.com');
 insert into posts(user, title, description, body) values('admin', 'First Post', 'First Post Description', 'First Post Body');
