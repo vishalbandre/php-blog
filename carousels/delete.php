@@ -34,58 +34,64 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
-<main class="container">
-    <div class="content-area">
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') :
-            if (!empty($_POST['id'])) {
-                $id = htmlspecialchars($_POST['id']);
-            } else {
-                $id = null;
-            }
-
-            if ($_POST['submit'] == 'yes') {
-                $sql_delete = "DELETE FROM carousels_images WHERE carousel_id=$id";
-                if ($conn->query($sql_delete) === TRUE) {
-                    $sql = "DELETE FROM carousels WHERE id='$id'";
-                    if ($conn->query($sql) === TRUE) {
-                        header('Location: /carousels/index.php');
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-area">
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+                    if (!empty($_POST['id'])) {
+                        $id = htmlspecialchars($_POST['id']);
                     } else {
-                        echo $conn->error;
-                        echo "Error";
+                        $id = null;
                     }
-                }
-                $conn->close();
-            } else {
-                header('Location: /carousels/view.php?id=' . $id);
-                // echo "Yes: " . $_POST['submit'];
-            }
-        else : ?>
 
-            <?php
-            $check = "SELECT * FROM carousels WHERE id='" . $_GET['id'] . "' LIMIT 1";
-            $result = $conn->query($check);
-            if ($result->num_rows > 0) {
-            ?>
-                <p>Are you sure to delete this article?</p>
-                <?php foreach ($result as $key => $value) : ?>
-                    <form action="/carousels/delete.php" method="POST">
-                        <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
-                        <p>
-                            <button type="submit" name="submit" value="yes" class="button button-ok">Yes</button>
-                            <button type="submit" name="submit" value="no" class="button button-ok">No</button>
-                        </p>
-                    </form>
-                <?php endforeach; ?>
-            <?php
-            } else {
-                $error = "Something went wrong. " . $conn->error;
-                echo $conn->error;
-            }
-            ?>
-        <?php endif; ?>
+                    if ($_POST['submit'] == 'yes') {
+                        $sql_delete = "DELETE FROM carousels_images WHERE carousel_id=$id";
+                        if ($conn->query($sql_delete) === TRUE) {
+                            $sql = "DELETE FROM carousels WHERE id='$id'";
+                            if ($conn->query($sql) === TRUE) {
+                                header('Location: /carousels/index.php');
+                            } else {
+                                echo $conn->error;
+                                echo "Error";
+                            }
+                        }
+                        $conn->close();
+                    } else {
+                        header('Location: /carousels/view.php?id=' . $id);
+                        // echo "Yes: " . $_POST['submit'];
+                    }
+                else : ?>
+
+                    <?php
+                    $check = "SELECT * FROM carousels WHERE id='" . $_GET['id'] . "' LIMIT 1";
+                    $result = $conn->query($check);
+                    if ($result->num_rows > 0) {
+                    ?>
+                        <p>Are you sure to delete this article?</p>
+                        <?php foreach ($result as $key => $value) : ?>
+                            <form action="/carousels/delete.php" method="POST">
+                                <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
+                                <p>
+                                    <button type="submit" name="submit" value="yes" class="btn btn-danger">Yes</button>
+                                    <button type="submit" name="submit" value="no" class="btn btn-outline-secondary">No</button>
+                                </p>
+                            </form>
+                        <?php endforeach; ?>
+                    <?php
+                    } else {
+                        $error = "Something went wrong. " . $conn->error;
+                        echo $conn->error;
+                    }
+                    ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+        </div>
     </div>
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>

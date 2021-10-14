@@ -10,32 +10,39 @@ if ($_SESSION['logged_in']) {
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
-<main class="container">
-    <div class="content-area">
-        <section class="content">
-            <?php
-            if ($_SESSION['message']) {
-                echo $_SESSION['message'];
-                unset($_SESSION["message"]);
-            }
-            ?>
 
-            <form action="password-reset-token.php" method="post" class="accounts-forms">
-                <h3 class="form-caption">Password Reset: </h3>
-                <div class="form-inner">
-                    <fieldset>
-                        <label>Email address:</label>
-                        <input type="text" name="email" required>
-                        <small>(Please enter an email you registered here account with.)</small>
-                    </fieldset>
-                    <fieldset>
-                        <input type="submit" name="password-reset-token" value="Send Me Password Reset Mail" class="button">
-                    </fieldset>
-                </div>
-            </form>
-        </section>
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-area">
+                <section class="content">
+                    <?php
+                    if ($_SESSION['message']) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION["message"]);
+                    }
+                    ?>
+
+                    <form action="password-reset-token.php" method="post" class="form form-small">
+                        <h3 class="form-caption">Password Reset: </h3>
+                        <div class="form-inner">
+                            <fieldset>
+                                <label class="form-label">Email address:</label>
+                                <input type="text" name="email" class="form-control m-0" required>
+                                <small>(Please enter an email you registered here account with.)</small>
+                            </fieldset>
+                            <fieldset>
+                                <input type="submit" name="password-reset-token" value="Send Me Password Reset Mail" class="btn btn-dark">
+                            </fieldset>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+        </div>
     </div>
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>

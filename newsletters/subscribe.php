@@ -89,12 +89,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
 
                         if ($q) {
                             header('Location: /newsletters/landing.php');
-                            $_SESSION['message'] = '<div class="success">You\'ve Successfully Subscribed To The Newsletter.</div>';
+                            $_SESSION['message'] = '<div class="alert alert-success">You\'ve Successfully Subscribed To The Newsletter.</div>';
                             die();
                         }
                     } else {
                         // If subscriber creation fails, show warning
-                        $_SESSION['message'] = '<div class="warning">Sorry! Something went wrong.</div>';
+                        $_SESSION['message'] = '<div class="alert alert-warning">Sorry! Something went wrong.</div>';
                     }
                 }
             } ?>

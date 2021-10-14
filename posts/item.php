@@ -32,11 +32,11 @@ if (!isset($_SESSION)) {
     </summary>
     <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
         <ul class="actions">
-            <li class="edit">
-                <a href="/posts/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Edit</a>
+            <li>
+                <a href="/posts/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
             </li>
-            <li class="delete">
-                <a href="/posts/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Delete</a>
+            <li>
+                <a href="/posts/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
             </li>
         </ul>
     <?php endif; ?>

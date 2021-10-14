@@ -1,7 +1,6 @@
 /* sidebar */
 
 .sidebar {
-    background-color: #2e2e2e;
     border-radius: 6px;
     overflow: hidden;
     .sidebar-caption {
@@ -27,6 +26,11 @@
         li a:hover {
             color: #8a8a8a;
         }
+    }
+    .subscription-form {
+        padding: 20px 10px;
+        background-color: cadetblue;
+        border: solid 1px whitesmoke;
     }
 }
 

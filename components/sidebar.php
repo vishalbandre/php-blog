@@ -5,36 +5,20 @@ if (!isset($_SESSION)) {
 ?>
 
 <aside class="sidebar">
-    <?php if ($_SESSION['logged_in']) : ?>
-        <h3 class="sidebar-caption">Carousels:</h3>
-        <ul class="sidebar-list">
-            <li>
-                <a href="/carousels/">All Carousels</a>
-            </li>
-            <li>
-                <a href="/carousels/create.php">Add New Carousel</a>
-            </li>
-            <?php if (isset($_SESSION['is_admin'])) : ?>
-                <li>
-                    <a href="/carousels/categories/index.php">All Categories</a>
-                </li>
-                <li>
-                    <a href="/carousels/categories/create.php">Add New Category</a>
-                </li>
-            <?php endif; ?>
-        </ul>
+    <div class="container-fluid mt-5">
+        <form class="row subscription-form" action="/newsletters/subscribe.php" method="post">
+        <h6 class="mb-3">Subscribe to Email Newsletter: </h6>
+            <div class="col">
+                <div class="input-group">
+                    <input type="text" name="email" class="form-control" placeholder="Email">
+                    <button type="submit" name="submit" value="create" class="btn btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <hr>
-    <?php endif; ?>
-
-    <form action="/newsletters/subscribe.php" method="post" class="subscribe">
-        <fieldset>
-            <input type="email" name="email" class="input-subscriber">
-            <button type="submit" name="submit" value="create" class="button button-ok">Subscribe to Newsletter</button>
-        </fieldset>
-    </form>
-
-    <?php // Queued for change ?>
+    <?php // Queued for change 
+    ?>
     <h3 class="sidebar-caption">Editors:</h3>
     <ul class="sidebar-list">
         <?php
