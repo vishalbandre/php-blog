@@ -1,0 +1,174 @@
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: solid 2px $color-accent;
+    .branding {
+        display: inline-block;
+        margin-left: 20px;
+        padding: 0;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 700;
+        color: $color-primary;
+    }
+    .menu-toggle {
+        display: none;
+    }
+    .menu {
+        display: flex;
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+    .top-search-form {
+        display: flex;
+        flex-direction: row;
+        margin-left: 50px;
+        width: 275px;
+        input {
+            margin-top: 0px;
+            margin-right: 0;
+            width: 85%;
+        }
+        .search-btn {
+            margin-left: 10px;
+            cursor: pointer;
+            color: $color-silver;
+            width: 100px;
+            background-color: $color-blakish;
+            border-radius: 6px;
+        }
+        .search-btn:hover {
+            color: $color-gray;
+        }
+    }
+    nav {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        background-color: $color-blakish;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+        overflow: hidden;
+    }
+    nav a {
+        display: inline-block;
+        margin: 0;
+        padding: 15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-decoration: none;
+        font-size: 14px;
+        color: $color-gray;
+        transition: all 0.3s ease;
+    }
+    nav a:hover {
+        background-color: $color-silver;
+    }
+    @media (max-width: $mobile) {
+        .top-search-form {
+            width: 46%;
+        }
+        .branding {
+            display: block;
+            margin: 0;
+            padding: 0;
+            padding-left: 10px;
+            font-size: 2rem;
+        }
+        .menu {
+            display: none;
+            flex-direction: column-reverse;
+            width: 150px;
+        }
+        .menu-toggle {
+            display: flex;
+            padding: 1.8em;
+            padding-left: 2.5em;
+            padding-right: 2.5em;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='slategray' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+            border: none;
+        }
+        .menu-untoggle {
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='53.7' height='53.7' viewBox='0 0 53.7 53.7'><path opacity='.6' fill='%23666E6E' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+        }
+        .top-search-form {
+            margin-left: 0;
+            width: 100%;
+        }
+        nav {
+            flex-direction: column;
+        }
+    }
+}
+
+@media (max-width: $mobile) {
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: none;
+        background-color: transparent;
+        z-index: 10000;
+    }
+}
+
+@media (max-width: $tablet) and (min-width: $mobile) {
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        border-bottom: none;
+        background-color: $transparent;
+        z-index: 10000;
+    }
+    header .branding {
+        display: block;
+        margin: 0;
+        padding-left: 10px;
+        font-size: 2rem;
+    }
+    header .menu {
+        display: none;
+        flex-direction: column-reverse;
+        background-color: $color-blakish;
+        width: 10%;
+    }
+    header .menu-toggle {
+        display: flex;
+        padding: 1.8em;
+        padding-left: 2.5em;
+        padding-right: 2.5em;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='slategray' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+        border: none;
+    }
+    header .menu-untoggle {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='53.7' height='53.7' viewBox='0 0 53.7 53.7'><path opacity='.6' fill='%23666E6E' d='M35.6 34.4L28 26.8l7.6-7.6c.2-.2.2-.5 0-.7l-.5-.5c-.2-.2-.5-.2-.7 0l-7.6 7.6-7.5-7.6c-.2-.2-.5-.2-.7 0l-.6.6c-.2.2-.2.5 0 .7l7.6 7.6-7.6 7.5c-.2.2-.2.5 0 .7l.5.5c.2.2.5.2.7 0l7.6-7.6 7.6 7.6c.2.2.5.2.7 0l.5-.5c.2-.2.2-.5 0-.7z'/></svg>");
+    }
+    .top-search-form {
+        margin-left: 0;
+        width: 100%;
+    }
+    header nav {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-top: 25px;
+        background-color: $color-blakish;
+        border-radius: 6px;
+    }
+    header nav a {
+        display: block;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 0.75rem;
+    }
+}

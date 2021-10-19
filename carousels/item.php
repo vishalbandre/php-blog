@@ -42,12 +42,12 @@ if (!isset($_SESSION)) {
         ?>
     </div>
     <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
-        <ul class="actions">
-            <li class="edit">
-                <a href="/carousels/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Edit</a>
+        <ul class="actions mt-2">
+            <li>
+                <a href="/carousels/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
             </li>
-            <li class="delete">
-                <a href="/carousels/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Delete</a>
+            <li>
+                <a href="/carousels/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
             </li>
         </ul>
     <?php endif; ?>

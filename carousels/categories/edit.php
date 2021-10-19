@@ -21,98 +21,104 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in'])) {
     header('Location: /index.php');
 }
 ?>
-<main class="container">
-    <div class="content-area">
-        <section class="content">
-            <?php
-            // to handle carousel
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_REQUEST['submit'] == 'edit') :
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-area">
+                <section class="content">
+                    <?php
+                    // to handle carousel
+                    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_REQUEST['submit'] == 'edit') :
 
-                if (!empty($_POST['name'])) {
-                    $name = htmlspecialchars($_POST['name']);
-                } else {
-                    $name = null;
-                }
+                        if (!empty($_POST['name'])) {
+                            $name = htmlspecialchars($_POST['name']);
+                        } else {
+                            $name = null;
+                        }
 
-                $errors = array();
+                        $errors = array();
 
-                if ($name == null) {
-                    $errors['name'] = 'Name is required.';
-                } else {
-                    // also check for existing name
-                    $check = "SELECT name FROM carousels_categories WHERE name='" . $name . "' LIMIT 1";
+                        if ($name == null) {
+                            $errors['name'] = 'Name is required.';
+                        } else {
+                            // also check for existing name
+                            $check = "SELECT name FROM carousels_categories WHERE name='" . $name . "' LIMIT 1";
+                            $result = $conn->query($check);
+                            if ($result->num_rows > 0) {
+                                $errors['name'] = 'Category with this name already exists.';
+                            }
+                        }
+
+                        if (isset($errors) && count($errors) <= 0) {
+                            $data = array(
+                                'name' => $name,
+                            );
+
+                            $category = new Category();
+
+                            $q = $category->update_category($data, $category_id);
+
+                            if ($q !== null) {
+                                $_SESSION['message'] = '<div class="alert alert-success">Category Saved.</div>';
+                                header("Location: /carousels/categories/");
+                                die();
+                            } else {
+                                $_SESSION['message'] = '<div class="alert alert-warning">Failed to save category.</div>';
+                            }
+                        }
+
+                    endif; ?>
+
+                    <?php
+                    if (isset($errors) && count($errors) > 0) {
+                        foreach ($errors as $key => $value) {
+                            echo '<div class="alert alert-danger">' . $value . '</div>';
+                        }
+                    }
+                    ?>
+
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION["message"]);
+                    }
+                    ?>
+
+                    <?php
+                    $check = "SELECT * FROM carousels_categories WHERE id='" . $category_id . "' LIMIT 1";
                     $result = $conn->query($check);
-                    if ($result->num_rows > 0) {
-                        $errors['name'] = 'Category with this name already exists.';
-                    }
-                }
+                    if ($result->num_rows > 0) :
+                    ?>
+                        <?php while ($row = $result->fetch_array()) : ?>
 
-                if (isset($errors) && count($errors) <= 0) {
-                    $data = array(
-                        'name' => $name,
-                    );
+                            <!-- Carousel Form -->
+                            <form action="" method="POST" class="form form-small">
+                                <h3 class="form-caption">Edit Category</h3>
+                                <div class="form-inner">
+                                    <fieldset>
+                                        <label class="form-label">Category Name: </label><br>
+                                        <input type="text" name="name" class="form-control m-0 <?php if (isset($errors['name'])) : ?>input-error<?php endif; ?>" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                                                                                                            echo $name;
+                                                                                                                                                                        } else {
+                                                                                                                                                                            echo $row['name'];
+                                                                                                                                                                        } ?>" />
+                                    </fieldset>
+                                    <fieldset>
+                                        <button type="submit" name="submit" value="edit" class="btn btn-dark">Save Category</button>
+                                    </fieldset>
+                                </div>
+                            </form>
 
-                    $category = new Category();
+                    <?php endwhile;
+                    endif; ?>
 
-                    $q = $category->update_category($data, $category_id);
-
-                    if ($q !== null) {
-                        $_SESSION['message'] = '<div class="success">Category Saved.</div>';
-                        header("Location: /carousels/categories/");
-                        die();
-                    } else {
-                        $_SESSION['message'] = '<div class="warning">Failed to save category.</div>';
-                    }
-                }
-
-            endif; ?>
-
-            <?php
-            if (isset($errors) && count($errors) > 0) {
-                foreach ($errors as $key => $value) {
-                    echo '<div class="form-error">' . $value . '</div>';
-                }
-            }
-            ?>
-
-            <?php
-            if (isset($_SESSION['message'])) {
-                echo $_SESSION['message'];
-                unset($_SESSION["message"]);
-            }
-            ?>
-
-            <?php
-            $check = "SELECT * FROM carousels_categories WHERE id='" . $category_id . "' LIMIT 1";
-            $result = $conn->query($check);
-            if ($result->num_rows > 0) :
-            ?>
-                <?php while ($row = $result->fetch_array()) : ?>
-
-                    <!-- Carousel Form -->
-                    <form action="" method="POST" class="form form-small">
-                        <h3 class="form-caption">Edit Category</h3>
-                        <div class="form-inner">
-                            <fieldset>
-                                <label>Category Name: </label><br>
-                                <input type="text" name="name" class="<?php if (isset($errors['name'])) : ?>input-error<?php endif; ?>" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                                                                                                                                    echo $name;
-                                                                                                                                                } else {
-                                                                                                                                                    echo $row['name'];
-                                                                                                                                                } ?>" />
-                            </fieldset>
-                            <fieldset>
-                                <button type="submit" name="submit" value="edit" class="button button-ok">Save Category</button>
-                            </fieldset>
-                        </div>
-                    </form>
-
-            <?php endwhile;
-            endif; ?>
-
-        </section>
+                </section>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+        </div>
     </div>
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 
 <?php $conn->close();

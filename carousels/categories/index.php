@@ -14,37 +14,43 @@ use Carousel\Category\Category;
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/carousels/models/category.php") ?>
 
-<main class="container">
-    <div class="content-area">
-        <section class="feed">
-            <?php
-            if (isset($_SESSION['message'])) {
-                echo $_SESSION['message'];
-                unset($_SESSION["message"]);
-            }
-            ?>
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="content-area">
+                <section class="feed">
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION["message"]);
+                    }
+                    ?>
 
-            <h3 class="caption">Carousel Categories</h3>
+                    <h3 class="caption">Carousel Categories</h3>
 
-            <?php
-            // Get all categories
-            $result = Category::get_all_categories();
+                    <?php
+                    // Get all categories
+                    $result = Category::get_all_categories();
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_array()) {
-                    require($_SERVER['DOCUMENT_ROOT'] . "/carousels/categories/item.php");
-                }
-            } else {
-            ?>
-                <p class="message">
-                    Sorry! There are no categories yet.
-                </p>
-            <?php
-            }
-            ?>
-        </section>
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_array()) {
+                            require($_SERVER['DOCUMENT_ROOT'] . "/carousels/categories/item.php");
+                        }
+                    } else {
+                    ?>
+                        <p class="message">
+                            Sorry! There are no categories yet.
+                        </p>
+                    <?php
+                    }
+                    ?>
+                </section>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
+        </div>
     </div>
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/sidebar.php") ?>
 </main>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/footer.php") ?>
