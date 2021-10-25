@@ -1,17 +1,20 @@
 * {
-    font-family: "Poppins", sans-serif;
+    font-family: "Metropolis", sans-serif;
 }
 
-body {
-    margin: auto;
-    padding: 0;
-    padding-top: 60px;
-    font-size: 14px;
-    a {
-        color: #2e2e2e;
-        text-decoration: none;
-    }
-    a:hover {
-        color: crimson;
+html {
+    // scroll-behavior: smooth;
+    body {
+        margin: auto;
+        padding: 0;
+        padding-top: 90px;
+        font-size: 14px;
+        a {
+            color: $color-secondary;
+            text-decoration: none;
+        }
+        a:hover {
+            color: $color-primary;
+        }
     }
 }

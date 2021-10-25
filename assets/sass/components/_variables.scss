@@ -1,6 +1,8 @@
 // Fonts
-$font-heading: 'Poppins Bold';
-$font-normal: 'Poppins';
+$font-heading: 'Metropolis Bold';
+$font-primary: 'Metropolis';
+$font-nav: 'Metropolis Extra Light';
+$font-normal: 'Lora';
 // Font sizes
 $font-size: 16px;
 $font-size-large: 3rem;
@@ -8,6 +10,9 @@ $font-size-medium: 2rem;
 $font-size-small: 14px;
 // Colors
 $color-primary: #DC143C;
+$color-green: #00A300;
+$color-blue: #0000FF;
+$color-blue-green: #21B6A8;
 $color-secondary: #2F323A;
 $color-accent: #F4FEC1;
 $color-jetblack: #0a0a0a;
@@ -15,6 +20,12 @@ $color-blakish: #2e2e2e;
 $color-gray: gray;
 $color-silver: silver;
 $color-red-border: rgba(220, 20, 60, 0.144);
+$color-maroon: #af4261;
+$color-yellowish: #f3ec78;
+$color-whitesmoke: whitesmoke;
+$color-lavender: lavender;
+$color-beige: beige;
+$color-bisque: bisque;
 $transparent: rgba(245, 245, 245, 0.432);
 // Breakpoints
 $mobile: 576px;

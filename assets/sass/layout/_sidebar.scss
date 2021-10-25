@@ -7,8 +7,8 @@
         margin: 0;
         padding: 20px;
         font-size: 38px;
-        color: rgba(192, 192, 192, 0.562);
-        border-bottom: solid 1px #454545;
+        color: $color-blakish;
+        border-bottom: solid 1px $color-blakish;
     }
     .sidebar-list {
         margin: 0;
@@ -21,16 +21,22 @@
             padding-top: 15px;
             padding-bottom: 15px;
             text-decoration: none;
-            color: #737373;
+            color: $color-blakish;
         }
         li a:hover {
-            color: #8a8a8a;
+            color: $color-blakish;
         }
     }
     .subscription-form {
         padding: 20px 10px;
-        background-color: cadetblue;
-        border: solid 1px whitesmoke;
+        background-color: transparent;
+        background: radial-gradient(circle, $transparent 0%, $color-blakish 35%, $color-gray 100%);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        border: solid 1px $color-secondary;
+        .caption {
+            color: $transparent;
+        }
     }
 }
 

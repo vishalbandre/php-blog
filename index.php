@@ -23,6 +23,9 @@ $offset = ($page - 1) * $per_page;
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 
 <style>
+    .carousel {
+        margin-bottom: 50px;
+    }
     .carousel .carousel-item {
         height: 350px;
     }
