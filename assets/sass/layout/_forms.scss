@@ -2,8 +2,16 @@
     margin-bottom: 25px;
 }
 
+.top-search-form {
+    width: 25%;
+    transition: 0.30s ease all;
+}
 
-/* forms */
+.top-search-form {
+    &:hover {
+        width: 30%;
+    }
+}
 
 .form {
     width: 100%;

@@ -2,11 +2,12 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 @import "./utils/mixins";
 @import './components/fonts';
-@import "./components/globals";
 @import './components/variables';
 @import "./components/buttons";
 @import "./components/actions";
 @import "./components/messages";
+@import "./components/globals";
+@import "./components/animations";
 @import "./components/header";
 @import "./layout/forms";
 @import "./layout/layout";

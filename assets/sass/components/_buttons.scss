@@ -1,17 +1,18 @@
-.button-link {
-    text-decoration: none;
-    color: gray;
+.btn:hover {
+    background-color: transparent;
+    background: radial-gradient(circle, $color-jetblack 0%, $color-blakish 35%, $transparent 100%);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
 }
 
-.button-link:hover {
-    color: crimson;
+.btn-outline-danger:hover {
+    background: radial-gradient(circle, $color-jetblack 0%, $color-primary 35%, $transparent 100%);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
 }
 
-.disabled {
-    a {
-        pointer-events: none;
-        cursor: default;
-        text-decoration: none;
-        color: gray;
-    }
+.btn-outline-primary:hover {
+    background: radial-gradient(circle, $color-jetblack 0%, $color-blue 35%, $transparent 100%);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
 }

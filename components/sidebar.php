@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 <aside class="sidebar">
     <div class="container-fluid mt-5">
         <form class="row subscription-form" action="/newsletters/subscribe.php" method="post">
-        <h6 class="mb-3">Subscribe to Email Newsletter: </h6>
+            <h6 class="caption mb-3">Subscribe to Email Newsletter: </h6>
             <div class="col">
                 <div class="input-group">
                     <input type="text" name="email" class="form-control" placeholder="Email">
