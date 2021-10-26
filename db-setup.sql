@@ -71,6 +71,9 @@ insert into posts(user, title, description, body) values('admin', 'First Post', 
 insert into posts(user, title, description, body) values('vishal', 'Second Post', 'Second Post Description', 'Second Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Third Post', 'Third Post Description', 'Third Post Body');
 
+-- Export Database Schema Only
+sudo mysqldump -u root -p --no-data php_blog > schema.sql
+
 -- New features
 -- 1. Adding new field for managing the user roles
 -- 1.1 Added user role field to users table
