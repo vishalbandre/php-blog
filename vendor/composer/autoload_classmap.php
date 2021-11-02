@@ -23,4 +23,6 @@ return array(
     'Post\\Post' => $baseDir . '/posts/post.php',
     'User\\Auth\\Auth' => $baseDir . '/accounts/models/Auth.php',
     'User\\User' => $baseDir . '/accounts/models/User.php',
+    'Util\\Util' => $baseDir . '/components/Util.php',
+    'Validator\\Validator' => $baseDir . '/components/Validator.php',
 );

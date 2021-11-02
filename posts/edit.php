@@ -1,10 +1,18 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
+
 if (!isset($_SESSION)) {
     session_start();
 }
 
 // Use Post namespace to interact with posts table
 use Post\Post;
+
+// Validations
+use Validator\Validator;
+
+// String to Slug Conversion
+use Util\Util;
 
 if (!isset($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
@@ -63,6 +71,12 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                             $title = null;
                         }
 
+                        if (!empty($_POST['slug'])) {
+                            $slug = htmlspecialchars($_POST['slug']);
+                        } else {
+                            $slug = null;
+                        }
+
                         if (!empty($_POST['body'])) {
                             $body = htmlspecialchars($_POST['body']);
                         } else {
@@ -81,6 +95,29 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                             $errors['title'] = 'Title is required.';
                         }
 
+                        if ($slug != null) {
+                            // also check for existing slug
+                            $check = "SELECT id, slug FROM posts WHERE slug='" . $slug . "' LIMIT 1";
+                            $result = $conn->query($check);
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    if (!is_null($id) && $row['id'] != $id) {
+                                        $errors['slug'] = 'Article with this slug already exists.';
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if ($title != null && $slug == null) {
+                            $util = new Util();
+
+                            // Turn title to slug if not slug is provided
+                            $slug = $util->stringToSlug($title);
+                        } else {
+                            $validator = new Validator();
+                            $errors = $validator->validateSlug($slug);
+                        }
+
                         if ($description == null) {
                             $errors['description'] = 'Description is required.';
                         }
@@ -94,7 +131,8 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                             $data = array(
                                 'title' => $title,
                                 'description' => $description,
-                                'body' => $body
+                                'body' => $body,
+                                'slug' => $slug,
                             );
 
                             $post = new Post();
@@ -102,7 +140,7 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
 
                             if ($q !== null) {
                                 $_SESSION['message'] = '<div class="alert alert-success">Saved successfully.</div>';
-                                header('Location: /posts/article.php?id=' . $id);
+                                header('Location: /');
                             }
                         }
                     } ?>
@@ -128,28 +166,36 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                                     <fieldset>
                                         <label for="title" class="form-label">Title: </label><br>
                                         <input type="text" name="title" class="form-control m-0 <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                                                                                echo $title;
-                                                                                            } else {
-                                                                                                echo $row['title'];
-                                                                                            } ?>" />
+                                                                                                                                                                                echo $title;
+                                                                                                                                                                            } else {
+                                                                                                                                                                                echo $row['title'];
+                                                                                                                                                                            } ?>" />
                                     </fieldset>
                                     <fieldset>
                                         <label for="description" class="form-label">Description: </label><br>
                                         <textarea name="description" class="form-control m-0 <?php if (isset($errors['description'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                                                                                                if (isset($description)) : echo $description;
-                                                                                                                endif;
-                                                                                                            } else {
-                                                                                                                echo $row['description'];
-                                                                                                            } ?></textarea>
+                                                                                                                                                                                                if (isset($description)) : echo $description;
+                                                                                                                                                                                                endif;
+                                                                                                                                                                                            } else {
+                                                                                                                                                                                                echo $row['description'];
+                                                                                                                                                                                            } ?></textarea>
                                     </fieldset>
                                     <fieldset>
                                         <label for="body" class="form-label">Body: </label><br>
                                         <textarea name="body" class="form-control m-0 <?php if (isset($errors['body'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                                                                                                if (isset($body)) : echo $body;
-                                                                                                endif;
-                                                                                            } else {
-                                                                                                echo $row['body'];
-                                                                                            } ?></textarea>
+                                                                                                                                                                                if (isset($body)) : echo $body;
+                                                                                                                                                                                endif;
+                                                                                                                                                                            } else {
+                                                                                                                                                                                echo $row['body'];
+                                                                                                                                                                            } ?></textarea>
+                                    </fieldset>
+                                    <fieldset>
+                                        <label for="slug" class="form-label">Custom Slug: (Optional) </label><br>
+                                        <input type="text" name="slug" class="form-control m-0 <?php if (isset($errors['slug'])) : ?>input-error<?php endif; ?>" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                                                                                                            echo $slug;
+                                                                                                                                                                        } else {
+                                                                                                                                                                            echo $row['slug'];
+                                                                                                                                                                        } ?>" />
                                     </fieldset>
                                     <fieldset>
                                         <button type="submit" name="submit" value="create" class="btn btn-dark">Save Article</button>

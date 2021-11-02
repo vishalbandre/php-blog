@@ -12,7 +12,7 @@ if (!isset($_SESSION)) {
 ?>
 
 <article class="item">
-    <a href="/carousels/view.php?id=<?php echo $row['id']; ?>">
+    <a href="/carousels/view/<?php echo $row['id']; ?>">
         <h2 class="title">
             <?php echo $row["title"]; ?>
         </h2>
@@ -44,10 +44,10 @@ if (!isset($_SESSION)) {
     <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
         <ul class="actions mt-2">
             <li>
-                <a href="/carousels/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
+                <a href="/carousels/edit/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
             </li>
             <li>
-                <a href="/carousels/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
+                <a href="/carousels/delete/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
             </li>
         </ul>
     <?php endif; ?>

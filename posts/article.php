@@ -6,11 +6,20 @@ if (!isset($_SESSION)) {
 // Use Post namespace to interact with posts table
 use Post\Post;
 
-if (empty($_GET['id'])) {
-    header('Location: /index.php');
-} else {
+// if (empty($_GET['id']) || empty($_GET['slug'])) {
+//     header('Location: /index.php');
+// } else {
+//     $id = $_GET['id'];
+// }
+
+if(!empty($_GET['id'])) {
     $id = $_GET['id'];
 }
+
+if (!empty($_GET['slug'])) {
+    $slug = $_GET['slug'];
+}
+
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -30,7 +39,11 @@ if (empty($_GET['id'])) {
                     ?>
                     <?php
                     $post = new Post();
-                    $result = $post->get($id);
+                    if (isset($id)) {
+                        $result = $post->get($id);
+                    } else {
+                        $result = $post->getBySlug($slug);
+                    }
 
                     if ($result->num_rows > 0) {
                     ?>
@@ -46,10 +59,10 @@ if (empty($_GET['id'])) {
                             <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
                                 <ul class="actions">
                                     <li>
-                                        <a href="/posts/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
+                                        <a href="/posts/edit/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
                                     </li>
                                     <li>
-                                        <a href="/posts/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
+                                        <a href="/posts/delete/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
                                     </li>
                                 </ul>
                             <?php endif; ?>

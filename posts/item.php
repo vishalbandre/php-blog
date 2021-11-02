@@ -16,11 +16,19 @@ if (!isset($_SESSION)) {
 ?>
 
 <article class="item">
-    <a href="/posts/article.php?id=<?php echo $row['id']; ?>">
-        <h2 class="title">
-            <?php echo $row["title"]; ?>
-        </h2>
-    </a>
+    <?php if (empty($row['slug'])) { ?>
+        <a href="/posts/article.php?id=<?php echo $row['id']; ?>">
+            <h2 class="title">
+                <?php echo $row["title"]; ?>
+            </h2>
+        </a>
+    <?php } else { ?>
+        <a href="/posts/view/<?php echo $row['slug']; ?>">
+            <h2 class="title">
+                <?php echo $row["title"]; ?>
+            </h2>
+        </a>
+    <?php } ?>
     <section class="author">
         <strong>Posted by: </strong>
         <a href="/accounts/view.php?user=<?php echo $row['user']; ?>"><?php echo $row['user']; ?></a>
@@ -33,10 +41,10 @@ if (!isset($_SESSION)) {
     <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
         <ul class="actions">
             <li>
-                <a href="/posts/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
+                <a href="/posts/edit/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>
             </li>
             <li>
-                <a href="/posts/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
+                <a href="/posts/delete/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-danger">Delete</a>
             </li>
         </ul>
     <?php endif; ?>

@@ -114,6 +114,17 @@ class Post
     }
 
     /**
+     * Return the post with specified slug.
+     */
+    public function getBySlug($slug)
+    {
+        // Get a database connection
+        $c = new Database\Connection();
+
+        return $c->getByAttribute('posts', 'slug', $slug);
+    }
+
+    /**
      * Returns the count of posts
      */
     public function count()

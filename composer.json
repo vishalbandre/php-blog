@@ -6,6 +6,8 @@
         "classmap": [
             "components/Database.php",
             "components/Email.php",
+            "components/Validator.php",
+            "components/Util.php",
             "posts/post.php",
             "carousels/models/carousel_image.php",
             "carousels/models/carousel.php",

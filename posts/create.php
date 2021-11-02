@@ -1,10 +1,18 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
+
 if (!isset($_SESSION)) {
     session_start();
 }
 
 // Use Post namespace to interact with posts table
 use Post\Post;
+
+// Validations
+use Validator\Validator;
+
+// String to Slug Conversion
+use Util\Util;
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
@@ -34,6 +42,12 @@ if (!$_SESSION['logged_in']) {
                             $title = null;
                         }
 
+                        if (!empty($_POST['slug'])) {
+                            $slug = htmlspecialchars($_POST['slug']);
+                        } else {
+                            $slug = null;
+                        }
+
                         if (!empty($_POST['body'])) {
                             $body = htmlspecialchars($_POST['body']);
                         } else {
@@ -59,6 +73,29 @@ if (!$_SESSION['logged_in']) {
                             }
                         }
 
+                        if ($slug != null) {
+                            // also check for existing slug
+                            $check = "SELECT id, slug FROM posts WHERE slug='" . $slug . "' LIMIT 1";
+                            $result = $conn->query($check);
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    if (!is_null($id) && $row['id'] != $id) {
+                                        $errors['slug'] = 'Article with this slug already exists.';
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if ($title != null && $slug == null) {
+                            $util = new Util();
+
+                            // Turn title to slug if not slug is provided
+                            $slug = $util->stringToSlug($title);
+                        } else {
+                            $validator = new Validator();
+                            $errors = $validator->validateSlug($slug);
+                        }
+
                         if ($description == null) {
                             $errors['description'] = 'Description is required.';
                         }
@@ -73,7 +110,8 @@ if (!$_SESSION['logged_in']) {
                                 'title' => $title,
                                 'user' => $user,
                                 'description' => $description,
-                                'body' => $body
+                                'body' => $body,
+                                'slug' => $slug,
                             );
 
                             // Create post
@@ -82,7 +120,7 @@ if (!$_SESSION['logged_in']) {
 
                             // If post is created successfully, redirect to homepage.
                             if ($q !== null) {
-                                header('Location: /index.php');
+                                header('Location: /');
                                 $_SESSION['message'] = '<div class="alert alert-success">Article saved successfully.</div>';
                                 die();
                             } else {
@@ -114,6 +152,10 @@ if (!$_SESSION['logged_in']) {
                             <fieldset>
                                 <label class="form-label">Body: </label><br>
                                 <textarea name="body" class="form-control m-0 <?php if (isset($errors['body'])) : ?>input-error<?php endif; ?>" cols="30" rows="20"><?php echo $body; ?></textarea>
+                            </fieldset>
+                            <fieldset>
+                                <label class="form-label">Custom Slug: (Optional) </label><br>
+                                <input type="text" name="slug" class="form-control m-0 <?php if (isset($errors['slug'])) : ?>input-error<?php endif; ?>" value="<?php echo $slug; ?>" />
                             </fieldset>
                             <fieldset>
                                 <button type="submit" name="submit" value="create" class="btn btn-dark">Save Post</button>
