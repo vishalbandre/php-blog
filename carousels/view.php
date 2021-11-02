@@ -48,10 +48,10 @@ if (empty($_GET['id'])) {
                             <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
                                 <ul class="actions">
                                     <li class="edit">
-                                        <a href="/carousels/edit.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Edit</a>
+                                        <a href="/carousels/edit/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>">Edit</a>
                                     </li>
                                     <li class="delete">
-                                        <a href="/carousels/delete.php?id=<?php echo $row['id']; ?>&user=<?php echo $row['user']; ?>">Delete</a>
+                                        <a href="/carousels/delete/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>">Delete</a>
                                     </li>
                                 </ul>
                             <?php endif; ?>

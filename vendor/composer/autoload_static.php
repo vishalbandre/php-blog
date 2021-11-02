@@ -38,6 +38,8 @@ class ComposerStaticInit75de5c2fd504e1a41fa404add5a06d8e
         'Post\\Post' => __DIR__ . '/../..' . '/posts/post.php',
         'User\\Auth\\Auth' => __DIR__ . '/../..' . '/accounts/models/Auth.php',
         'User\\User' => __DIR__ . '/../..' . '/accounts/models/User.php',
+        'Util\\Util' => __DIR__ . '/../..' . '/components/Util.php',
+        'Validator\\Validator' => __DIR__ . '/../..' . '/components/Validator.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

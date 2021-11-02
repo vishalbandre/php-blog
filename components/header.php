@@ -20,7 +20,7 @@ if (!isset($_SESSION)) {
                             </li>
                             <?php if ($_SESSION['logged_in']) : ?>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/posts/create.php">New Article</a>
+                                    <a class="nav-link" href="/posts/create">New Article</a>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -39,7 +39,7 @@ if (!isset($_SESSION)) {
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li>
-                                            <a class="dropdown-item" href="/accounts/view.php?user=<?php echo $_SESSION['user']; ?>">My Profile</a>
+                                            <a class="dropdown-item" href="/accounts/profile/<?php echo $_SESSION['user']; ?>">My Profile</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="/accounts/edit.php?user=<?php echo $_SESSION['user']; ?>">Edit Profile</a>

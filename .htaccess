@@ -1,0 +1,28 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} /(.*)/$
+RewriteRule ^ /%1 [R=301,L]
+
+# Views
+RewriteRule ^posts/article/(.+)/?$ posts/article.php?id=$1
+RewriteRule ^carousels/view/(.+)/?$ carousels/view.php?id=$1
+RewriteRule ^accounts/profile/(.+)/?$ accounts/view.php?user=$1
+
+# Slug
+RewriteRule ^posts/view/(.+)/?$ posts/article.php?slug=$1
+# how to get the slug from the url with htaccess rule to php file
+
+
+
+# Edit
+RewriteRule ^posts/edit/(.+)/(.+)/?$ posts/edit.php?id=$1&user=$2
+RewriteRule ^carousels/edit/(.+)/(.+)/?$ carousels/edit.php?id=$1&user=$2
+RewriteRule ^accounts/profile/edit/(.+)/?$ accounts/edit.php?user=$1
+
+# Delete
+RewriteRule ^posts/delete/(.+)/(.+)/?$ posts/delete.php?id=$1&user=$2
+RewriteRule ^carousels/delete/(.+)/(.+)/?$ carousels/delete.php?id=$1&user=$2
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]

@@ -29,7 +29,7 @@ if (!isset($_SESSION)) {
             while ($row = $result->fetch_array()) {
         ?>
                 <li>
-                    <a href="/accounts/view.php?user=<?php echo $row['username']; ?>">
+                    <a href="/accounts/profile/<?php echo $row['username']; ?>">
                         <?php echo $row['username']; ?></a>
                 </li>
         <?php

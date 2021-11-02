@@ -92,3 +92,6 @@ alter table users add exp_date datetime;
 -- Adding fields to carousels table
 alter table carousels add category_id int not null;
 ALTER TABLE carousels ADD FOREIGN KEY (category_id) REFERENCES carousels_categories(id);
+
+--4. Slug Field
+alter table posts add slug varchar(200) unique;
