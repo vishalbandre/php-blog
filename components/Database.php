@@ -75,6 +75,8 @@ class Connection
             // Return id, if query is successful
             return mysqli_insert_id($conn);
         }
+        
+        echo $conn->error;die();
 
         // Return null, if operation failed
         return null;

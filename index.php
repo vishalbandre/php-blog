@@ -43,7 +43,7 @@ $offset = ($page - 1) * $per_page;
 <!-- Carousel -->
 <?php
 $carousel = new Carousel();
-$result_car = $carousel->getByAttribute('category_id', 12);
+$result_car = $carousel->getByAttribute('category_id', 18);
 
 $caraousel_id = null;
 if ($result_car->num_rows > 0) {
