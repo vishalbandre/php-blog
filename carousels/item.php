@@ -41,7 +41,7 @@ if (!isset($_SESSION)) {
         }
         ?>
     </div>
-    <?php if ($_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || $_SESSION['is_admin']) : ?>
+    <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && $_SESSION['user'] == $row['user'] || isset($_SESSION['is_admin']) && $_SESSION['is_admin']) : ?>
         <ul class="actions mt-2">
             <li>
                 <a href="/carousels/edit/<?php echo $row['id']; ?>/<?php echo $row['user']; ?>" class="btn btn-outline-primary">Edit</a>

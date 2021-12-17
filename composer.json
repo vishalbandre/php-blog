@@ -16,7 +16,10 @@
             "accounts/models/User.php",
             "accounts/models/Auth.php",
             "newsletters/models/subscriber.php",
-            "newsletters/newsletter.php"
+            "newsletters/newsletter.php",
+            "admin/multilingual/langs/models/Language.php",
+            "admin/multilingual/translations/models/Term.php",
+            "admin/multilingual/translations/models/Translation.php"
         ]
     }
 }

@@ -66,10 +66,12 @@ if (!$_SESSION['logged_in']) {
 
                         $thumbs = null;
 
-                        if (count($_POST['thumb']) < 1) {
-                            $errors['thumb'] = 'Select at least 1 image for carousel.';
+                        if (isset($_POST['thumb']) && count($_POST['thumb']) < 1) {
+                            if (isset($errors['thumb']))
+                                $errors['thumb'] = 'Select at least 1 image for carousel.';
                         } else {
-                            $thumbs = $_POST['thumb'];
+                            if (isset($_POST['thumb']))
+                                $thumbs = $_POST['thumb'];
                         }
 
                         if ($category == null) {
@@ -135,7 +137,7 @@ if (!$_SESSION['logged_in']) {
                     endif; ?>
 
                     <?php
-                    if (count($errors) > 0) {
+                    if (isset($errors) && count($errors) > 0) {
                         foreach ($errors as $key => $value) {
                             echo '<div class="alert alert-danger">' . $value . '</div>';
                         }
@@ -156,7 +158,8 @@ if (!$_SESSION['logged_in']) {
                             <input name="user" type="hidden" value="<?php echo $_SESSION['user']; ?>" />
                             <fieldset>
                                 <label class="form-label">Title: </label>
-                                <input type="text" name="title" class="form-control m-0 <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>" value="<?php echo $title; ?>" />
+                                <input type="text" name="title" class="form-control m-0 <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>" value="<?php if (isset($title)) : echo $title;
+                                                                                                                                                                    endif; ?>" />
                             </fieldset>
 
                             <fieldset>
@@ -170,7 +173,7 @@ if (!$_SESSION['logged_in']) {
                                         <?php
                                         while ($row = $result->fetch_array()) {
                                         ?>
-                                            <option value="<?php echo $row['name']; ?>" <?php if ($category == $row['name']) : echo "selected";
+                                            <option value="<?php echo $row['name']; ?>" <?php if (isset($category) && $category == $row['name']) : echo "selected";
                                                                                         endif; ?>><?php echo $row['name']; ?></option>
                                         <?php
                                         }
@@ -205,7 +208,8 @@ if (!$_SESSION['logged_in']) {
                             </fieldset>
                             <fieldset>
                                 <label class="form-label">Description: </label><br>
-                                <textarea name="description" class="form-control m-0 <?php if (isset($errors['description'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php echo $description; ?></textarea>
+                                <textarea name="description" class="form-control m-0 <?php if (isset($errors['description'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php if (isset($description)) : echo $description;
+                                                                                                                                                                                    endif; ?></textarea>
                             </fieldset>
                             <fieldset>
                                 <button type="submit" name="submit" value="create" class="btn btn-dark">Save Post</button>

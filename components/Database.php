@@ -5,6 +5,8 @@ namespace Database;
 // Using mysqli namespace
 use mysqli;
 
+use function PHPSTORM_META\type;
+
 /**
  * Connection class provides:
  * 1. Database connection
@@ -61,9 +63,10 @@ class Connection
         // Get values separated
         $values  = implode(", ", array_map(function ($val) {
             if (!is_numeric($val))
-                return sprintf("'%s'", $val);
+                $val = sprintf("'%s'", $val);
             else
                 return $val;
+            return $val;
         }, $data));
 
         // Insert values according to their columns in table
@@ -72,11 +75,15 @@ class Connection
         $conn = $this->connect();
 
         if ($conn->query($sql) === TRUE) {
+            $id = mysqli_insert_id($conn);
+
+            echo $id . '<br />';
+
             // Return id, if query is successful
-            return mysqli_insert_id($conn);
+            return $id;
+        } else {
+            print($conn->error);
         }
-        
-        echo $conn->error;die();
 
         // Return null, if operation failed
         return null;
@@ -124,6 +131,10 @@ class Connection
             }
         }
 
+        if (is_string($_value)) {
+            $_value = "'$_value'";
+        }
+
         $values = implode(", ", $updates);
 
         $sql = "UPDATE $table SET $values WHERE $attribute=$_value";
@@ -140,17 +151,64 @@ class Connection
     }
 
     /**
+     * Return all records from specified table.
+     */
+    public function getAllRecords($table = null)
+    {
+        $conn = $this->connect();
+
+        $sql = "SELECT * FROM $table";
+
+        // Execute the query
+        $result = $conn->query($sql);
+
+        // If there are no results present, set the value of $result to null.
+        if ($result->num_rows <= 0) {
+            $result = null;
+        }
+
+        // Return $result - it will either have results or null
+        return $result;
+    }
+
+    /**
      * Return all records from specified table, based on supplied parameters
      */
     public function getAll($table = null, $offset = null, $per_page = null)
     {
         $conn = $this->connect();
 
-        if ($offset !== null && $per_page !== null) {
-            $sql = "SELECT * FROM $table ORDER BY created_at DESC LIMIT $offset, $per_page";
+        if ($table == 'posts') {
+
+            if ($offset !== null && $per_page !== null) {
+                $sql = "SELECT * FROM $table ORDER BY created_at DESC LIMIT $offset, $per_page";
+            } else {
+                $sql = "SELECT * FROM $table";
+            }
         } else {
             $sql = "SELECT * FROM $table";
         }
+
+        // Execute the query
+        $result = $conn->query($sql);
+
+        // If there are no results present, set the value of $result to null.
+        if ($result->num_rows <= 0) {
+            $result = null;
+        }
+
+        // Return $result - it will either have results or null
+        return $result;
+    }
+
+    /**
+     * Return all records from specified table, based on request attribute
+     */
+    public function getAllByAttribute($table = null, $attribute = null, $value = null)
+    {
+        $conn = $this->connect();
+
+        $sql = "SELECT * FROM $table WHERE $attribute='$value'";
 
         // Execute the query
         $result = $conn->query($sql);
@@ -190,7 +248,7 @@ class Connection
     {
 
         // Select record having this id
-        $sql = "SELECT * FROM $table WHERE id='$id' ORDER BY updated_at DESC LIMIT 1";
+        $sql = "SELECT * FROM $table WHERE id='$id'";
 
         $conn = $this->connect();
 
@@ -225,6 +283,30 @@ class Connection
         return $result;
     }
 
+    // Future
+    // getByAttributes($multiple_attributes)
+
+    // Get id of a particular record from table based on the specified attribute
+    public function getIdByAttribute($table, $attribute, $value)
+    {
+
+        // Return record as per specified attribute and value
+        $sql = "SELECT id FROM $table WHERE $attribute='$value'";
+
+        $conn = $this->connect();
+
+        $result = $conn->query($sql);
+
+        $result = $result->fetch_assoc();
+
+        if ($result) {
+            // Return id - it will either have id or null
+            return $result['id'];
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Get last inserted record
      */
@@ -252,6 +334,8 @@ class Connection
         if ($conn->query($sql) === TRUE) {
             return true;
         }
+
+        print($conn->error);
 
         // Return false, if operation failed
         return false;

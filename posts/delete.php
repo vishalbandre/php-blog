@@ -6,6 +6,8 @@ if (!isset($_SESSION)) {
 // Use Post namespace to interact with posts table
 use Post\Post;
 
+use Admin\Translation;
+
 if (empty($_GET['id']) || !$_SESSION['logged_in']) {
     header('Location: /index.php');
 }
@@ -34,6 +36,13 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
     }
 } else {
     header('Location: /index.php');
+}
+
+// check if 'lang' cookie is set
+if (isset($_COOKIE['lang'])) {
+    $site_lang = $_COOKIE['lang'];
+} else {
+    $site_lang = $lang;
 }
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -69,13 +78,13 @@ if (!isset($_GET['id']) || !isset($_SESSION['logged_in']) || !isset($_GET['user'
                     $result = $conn->query($check);
                     if ($result->num_rows > 0) {
                     ?>
-                        <p>Are you sure to delete this article?</p>
+                        <p><?php Translation::translate('Are you sure to delete this article?', $site_lang); ?></p>
                         <?php foreach ($result as $key => $value) : ?>
                             <form action="/posts/delete.php" method="POST">
                                 <input name="id" type="hidden" value="<?php echo $_GET['id']; ?>" />
                                 <p>
-                                    <button type="submit" name="submit" value="yes" class="btn btn-danger">Yes</button>
-                                    <button type="submit" name="submit" value="no" class="btn btn-outline-secondary">No</button>
+                                    <button type="submit" name="submit" value="yes" class="btn btn-danger"><?php Translation::translate('Yes', $site_lang); ?></button>
+                                    <button type="submit" name="submit" value="no" class="btn btn-outline-secondary"><?php Translation::translate('No', $site_lang); ?></button>
                                 </p>
                             </form>
                         <?php endforeach; ?>

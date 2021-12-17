@@ -17,7 +17,7 @@ use User\Auth\Auth;
             <div class="content-area">
                 <section class="content">
                     <?php
-                    if ($_SESSION['logged_in']) {
+                    if (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
                         header('Location: /index.php');
                     }
                     ?>
@@ -83,11 +83,11 @@ use User\Auth\Auth;
                         <div class="form-inner">
                             <fieldset>
                                 <label for="username" class="form-label">Username: </label><br>
-                                <input type="text" name="username" class="form-control m-0 <?php if (isset($errors['username']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="<?php echo $username; ?>" />
+                                <input type="text" name="username" class="form-control m-0 <?php if (isset($errors['username']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="<?php if(isset($username)) { echo $username; } ?>" />
                             </fieldset>
                             <fieldset>
                                 <label for="password" class="form-label">Password: </label><br>
-                                <input type="password" name="password" class="form-control m-0 <?php if (isset($errors['password']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="<?php echo $password; ?>" />
+                                <input type="password" name="password" class="form-control m-0 <?php if (isset($errors['password']) || isset($errors['check_credentials'])) : ?>input-error<?php endif; ?>" value="" />
                             </fieldset>
                             <fieldset>
                                 <button type="submit" name="submit" value="login" class="btn btn-dark">Login</button>

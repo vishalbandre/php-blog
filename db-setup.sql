@@ -18,14 +18,25 @@ create table users (
 
 create table posts (
     id int not null auto_increment primary key,
+    base_post_id int,
+    language_id int,
     user varchar(25) not null,
-    title varchar(200) not null unique,
+    title varchar(200) not null,
+    slug varchar(200),
     description text,
     body text,
     created_at datetime default now(),
     updated_at timestamp not null default current_timestamp on update current_timestamp,
-    foreign key (user) references users(username)
+    foreign key (user) references users(username) on delete cascade,
+    foreign key (base_post_id) references posts(id) on delete cascade,
+    foreign key (language_id) references languages(id) on delete cascade
 );
+
+alter table posts add ;
+ALTER TABLE posts ADD FOREIGN KEY (base_post_id) REFERENCES posts(id);
+
+alter table posts add ;
+ALTER TABLE posts ADD FOREIGN KEY (language_id) REFERENCES languages(id) on delete cascade;
 
 create table carousels_categories (
     id int not null auto_increment primary key,
@@ -65,11 +76,51 @@ create table subscribers (
     email varchar(200) not null unique
 );
 
+create table languages (
+    id int not null auto_increment primary key,
+    name varchar(100) not null unique,
+    prefix varchar(25) not null unique,
+    is_default boolean not null default false
+);
+
+create table terms (
+    id int not null auto_increment primary key,
+    term varchar(100) not null unique
+);
+
+create table translations (
+    id int not null auto_increment primary key,
+    translation varchar(250) not null,
+    term_id int not null,
+    language_id int not null,
+    foreign key (term_id) references terms(id) on delete cascade,
+    foreign key (language_id) references languages(id) on delete cascade
+);
+
+-- User Seed
 insert into users(username, password, name, role, email) values('admin', md5('admin'), 'Administrator', 'admin', 'vshlbndr@gmail.com');
 insert into users(username, password, name, role, email) values('vishal', md5('vishal'), 'Vishal Bandre', 'editor', 'iamvshlbndr@gmail.com');
+
+-- Posts Seed
 insert into posts(user, title, description, body) values('admin', 'First Post', 'First Post Description', 'First Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Second Post', 'Second Post Description', 'Second Post Body');
 insert into posts(user, title, description, body) values('vishal', 'Third Post', 'Third Post Description', 'Third Post Body');
+
+-- Language Seed
+insert into languages(name, prefix, is_default) values('English', 'en', true);
+insert into languages(name, prefix, is_default) values('Marathi', 'mr', false);
+insert into languages(name, prefix, is_default) values('Hindi', 'hi', false);
+
+-- Multilingual Seeding
+-- insert language id 1 for English
+insert into posts(user, title, description, body, slug, base_post_id, language_id) values('admin', 'Marathi Title', 'Marathi Description', 'Marathi Content', 'marathi-title', 47, 9);
+-- Insert language id 9 for Marathi
+insert into posts(user, title, description, body, slug, base_post_id, language_id) values('admin', 'Marathi Title', 'Marathi Description', 'Marathi Content', 'marathi-title', 47, 9);
+insert into posts(user, title, description, body, slug, base_post_id, language_id) values('admin', 'Hindi Title', 'Hindi Description', 'Hindi Content', 'hindi-title', 47, 4);
+
+-- update posts table for default English language with language_id 1
+update posts set language_id=1 where slug is null;
+
 
 -- Export Database Schema Only
 sudo mysqldump -u root -p --no-data php_blog > schema.sql
@@ -95,3 +146,14 @@ ALTER TABLE carousels ADD FOREIGN KEY (category_id) REFERENCES carousels_categor
 
 --4. Slug Field
 alter table posts add slug varchar(200) unique;
+
+--5. Added new table for Post Translations with two extra fields than Posts table
+alter table posts add base_post_id int;
+ALTER TABLE posts ADD FOREIGN KEY (base_post_id) REFERENCES posts(id);
+
+alter table posts add language_id int;
+ALTER TABLE posts ADD FOREIGN KEY (language_id) REFERENCES languages(id) on delete cascade;
+
+-- Posts table altered to allow non unique title and slugs, because we were not able to insert null value, mysql was storing them as empty strings.
+alter table posts drop index title;
+alter table translations drop foreign key translations_ibfk_1;
