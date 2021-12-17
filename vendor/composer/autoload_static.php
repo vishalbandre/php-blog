@@ -21,6 +21,9 @@ class ComposerStaticInit75de5c2fd504e1a41fa404add5a06d8e
     );
 
     public static $classMap = array (
+        'Admin\\Language' => __DIR__ . '/../..' . '/admin/multilingual/langs/models/Language.php',
+        'Admin\\Term' => __DIR__ . '/../..' . '/admin/multilingual/translations/models/Term.php',
+        'Admin\\Translation' => __DIR__ . '/../..' . '/admin/multilingual/translations/models/Translation.php',
         'Carousel\\Carousel' => __DIR__ . '/../..' . '/carousels/models/carousel.php',
         'Carousel\\Category\\Category' => __DIR__ . '/../..' . '/carousels/models/category.php',
         'Carousel\\Image' => __DIR__ . '/../..' . '/carousels/models/image.php',

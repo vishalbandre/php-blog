@@ -9,7 +9,6 @@ class Util
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -30,6 +29,7 @@ class Util
 
         // Remove hyphen from tail
         $str = rtrim($str, '-');
+
         return $str;
     }
 }

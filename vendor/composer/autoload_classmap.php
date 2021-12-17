@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Admin\\Language' => $baseDir . '/admin/multilingual/langs/models/Language.php',
+    'Admin\\Term' => $baseDir . '/admin/multilingual/translations/models/Term.php',
+    'Admin\\Translation' => $baseDir . '/admin/multilingual/translations/models/Translation.php',
     'Carousel\\Carousel' => $baseDir . '/carousels/models/carousel.php',
     'Carousel\\Category\\Category' => $baseDir . '/carousels/models/category.php',
     'Carousel\\Image' => $baseDir . '/carousels/models/image.php',

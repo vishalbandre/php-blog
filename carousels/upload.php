@@ -100,14 +100,14 @@ if (!$_SESSION['logged_in']) {
                     ?>
 
                     <?php
-                    if ($_SESSION['message']) {
+                    if (isset($_SESSION['message']) && $_SESSION['message']) {
                         echo $_SESSION['message'];
                         unset($_SESSION["message"]);
                     }
                     ?>
 
                     <?php
-                    if (count($errors) > 0) {
+                    if (isset($errors) && count($errors) > 0) {
                         foreach ($errors as $key => $value) {
                             echo '<div class="alert alert-danger">' . $value . '</div>';
                         }
@@ -125,7 +125,7 @@ if (!$_SESSION['logged_in']) {
                             </fieldset>
                             <fieldset>
                                 <label class="form-label">Caption: </label><br>
-                                <input type="text" name="caption" class="form-control m-0 <?php if (isset($errors['caption'])) : ?>input-error<?php endif; ?>" value="<?php echo $caption; ?>" />
+                                <input type="text" name="caption" class="form-control m-0 <?php if (isset($errors['caption'])) : ?>input-error<?php endif; ?>" value="<?php if(isset($caption)): echo $caption; endif; ?>" />
                             </fieldset>
                             <fieldset>
                                 <button type="submit" name="upload" value="upload-image" class="btn btn-dark">Upload Image</button>

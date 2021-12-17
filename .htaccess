@@ -4,16 +4,11 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} /(.*)/$
 RewriteRule ^ /%1 [R=301,L]
 
+
 # Views
 RewriteRule ^posts/article/(.+)/?$ posts/article.php?id=$1
 RewriteRule ^carousels/view/(.+)/?$ carousels/view.php?id=$1
 RewriteRule ^accounts/profile/(.+)/?$ accounts/view.php?user=$1
-
-# Slug
-RewriteRule ^posts/view/(.+)/?$ posts/article.php?slug=$1
-# how to get the slug from the url with htaccess rule to php file
-
-
 
 # Edit
 RewriteRule ^posts/edit/(.+)/(.+)/?$ posts/edit.php?id=$1&user=$2
@@ -24,5 +19,45 @@ RewriteRule ^accounts/profile/edit/(.+)/?$ accounts/edit.php?user=$1
 RewriteRule ^posts/delete/(.+)/(.+)/?$ posts/delete.php?id=$1&user=$2
 RewriteRule ^carousels/delete/(.+)/(.+)/?$ carousels/delete.php?id=$1&user=$2
 
+# Admin Views
+# Multilingual
+RewriteRule ^admin/multilingual/language/edit/(.+)/?$ admin/multilingual/langs/edit.php?lang=$1
+# RewriteRule ^admin/multilingual/language/delete/$ admin/multilingual/langs/delete.php
+RewriteRule ^admin/multilingual/language/delete/(.+)/?$ admin/multilingual/langs/delete.php?lang=$1
+
+# Terms
+RewriteRule ^admin/multilingual/translations/edit-term/(.+)/?$ admin/multilingual/translations/edit-term.php?id=$1
+RewriteRule ^admin/multilingual/translations/view-term/(.+)/?$ admin/multilingual/translations/view-term.php?id=$1
+RewriteRule ^admin/multilingual/translations/delete-term/(.+)/?$ admin/multilingual/translations/delete-term.php?id=$1
+
+# Translations
+
+
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+# Multilingual Views
+# Create
+RewriteRule ^en/posts/create/?$ posts/create.php?lang=$1
+
+# View
+RewriteRule ^(.+)/posts/view/(.+)/?$ posts/article.php?slug=$2&lang=$1
+
+# Edit
+RewriteRule ^(.+)/posts/edit/(.+)/(.+)/?$ posts/edit.php?lang=$1&id=$2&user=$3
+
+# Delete
+RewriteRule ^(.+)/posts/delete/(.+)/(.+)/?$ posts/delete.php?lang=$1&id=$2&user=$3
+
+# Searching
+RewriteRule ^(.+)/posts/search.php?$ posts/search.php?lang=$1&q=$2 [QSA,L]
+
+RewriteRule ^(.+)/set-language/?$ set-language.php?lang=$1
+
+
+# Last in multilingual
+# RewriteRule ^(.+)/$ index.php?lang=$1 [QSA,L]
+
+# RewriteRule ^(.+)/$ index.php?lang=$1
+
+# RewriteRule ^(en|fr)/posts/view/(.+)/?$ posts/article.php?slug=$2

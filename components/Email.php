@@ -44,7 +44,7 @@ class Email
         // set the SMTP port for the GMAIL server
         $mail->Port = "465";
         $mail->From = Credentials::$cred_email;
-        $mail->FromName = 'PHP Blog';
+        $mail->FromName = 'Colors Blog';
         $mail->AddAddress($email, 'Newsletter');
         $mail->Subject  =  $subject;
         $mail->IsHTML(true);

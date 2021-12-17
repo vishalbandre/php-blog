@@ -1,7 +1,13 @@
 <?php
-require "../vendor/autoload.php";
+require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
 
 use Carousel\Carousel;
+use Carousel\Category\Category;
+use Post\Post;
+use Admin\Language;
+
+$language = new Language();
+$post = new Post();
 
 if (!isset($_SESSION)) {
     session_start();
@@ -20,6 +26,16 @@ if ($result->num_rows <= 0) {
     header('HTTP/1.0 404 Not Found', TRUE, 404);
     die(header('location: /errors/404.php'));
 }
+
+
+if (isset($_GET['lang'])) {
+    $language_prefix = $_GET['lang'];
+} else {
+    $language_prefix = 'en';
+}
+
+$language = new Language();
+$lang_id = $language->getIdByPrefix($language_prefix);
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
@@ -47,12 +63,18 @@ if ($result->num_rows <= 0) {
 <!-- Carousel -->
 <?php
 $carousel = new Carousel();
-$result_car = $carousel->getByAttribute('category_id', 13);
+// Get category id based on category name
+$category = new Category();
+$category_id = $category->getCategoryIdByName('Profile');
+
+$result_car = $carousel->getByCategoryId($category_id);
 
 $caraousel_id = null;
-if ($result_car->num_rows > 0) {
-    while ($row = $result_car->fetch_array()) {
-        $caraousel_id = $row['id'];
+if ($result_car) {
+    if ($result_car->num_rows > 0) {
+        while ($row = $result_car->fetch_array()) {
+            $caraousel_id = $row['id'];
+        }
     }
 }
 
@@ -149,20 +171,22 @@ if ($caraousel_id != null) {
                         unset($_SESSION["message"]);
                     }
                     ?>
-                    <?php if ($_SESSION['logged_in'] && $_SESSION['is_admin']) : ?>
+                    <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] && isset($_SESSION['is_admin']) && $_SESSION['is_admin']) : ?>
                         <a href="/accounts/edit.php?user=<?php echo $_GET['user']; ?>">Edit This Profile*</a><br>
                     <?php endif; ?>
 
                     <h3 class="caption">All Articles by <?php echo $user; ?></h3>
                     <?php
                     $user = $_GET['user'];
-                    $sql = "SELECT * FROM posts WHERE user='$user' ORDER BY updated_at DESC";
-                    $result = $conn->query($sql);
+
+                    $result = $post->getAllBasePostsByUser($user, $lang_id);
 
                     if ($result->num_rows > 0) {
                         $dataArray = array();
                         while ($row = $result->fetch_array()) {
-                            require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");
+                            if (isset($row['title']) && $row['title'] != '') {
+                                require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");
+                            }
                         }
                     } else {
                     ?>

@@ -20,7 +20,7 @@ class Carousel
     private $created_at;
     private $updated_at;
 
-    public function __construct($category_id=null, $user = null, $title = null, $description = null)
+    public function __construct($category_id = null, $user = null, $title = null, $description = null)
     {
         $this->category_id = $category_id;
         $this->user = $user;
@@ -33,11 +33,13 @@ class Carousel
         return $this->id;
     }
 
-    public function setCategoryId($category_id) {
+    public function setCategoryId($category_id)
+    {
         $this->category_id = $category_id;
     }
 
-    public function getCategoryId() {
+    public function getCategoryId()
+    {
         return $this->category_id;
     }
 
@@ -66,7 +68,8 @@ class Carousel
         $this->description = $desc;
     }
 
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
@@ -111,6 +114,30 @@ class Carousel
         $c = new Database\Connection();
 
         return $c->getByAttribute('carousels', $attribute, $value);
+    }
+
+    /**
+     * Return the carousel by category id
+     */
+    public function getByCategoryId($value)
+    {
+        // Get a database connection
+        $c = new Database\Connection();
+
+        $conn = $c->connect();
+
+        // Return record as per specified attribute and value
+        $sql = "SELECT * FROM carousels WHERE category_id=$value";
+
+        $result = $conn->query($sql);
+
+        // If there are no results present, set the value of $result to null.
+        if ($result->num_rows <= 0) {
+            $result = null;
+        }
+
+        // Return $result - it will either have results or null
+        return $result;
     }
 
     /**

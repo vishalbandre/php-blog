@@ -85,4 +85,16 @@ class Category
         // Returns true if record is deleted, else false
         return $c->delete('carousels_categories', $id);
     }
+
+    /**
+     * Get id by category name
+     */
+    public function getCategoryIdByName($category_name)
+    {
+        // Get a database connection
+        $c = new Database\Connection();
+
+        // Return the id of the category with specified name
+        return $c->getIdByAttribute('carousels_categories', 'name', $category_name);
+    }
 }

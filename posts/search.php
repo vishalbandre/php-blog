@@ -1,3 +1,45 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
+
+// Use Post namespace to interact with posts table
+use Post\Post;
+
+// Use Language namespace to handle the languages
+use Admin\Language;
+
+use Admin\Translation;
+
+// Set language if it is provided else set it to default (en)
+if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+    $lang = $_GET['lang'];
+} else {
+    $lang = 'en';
+}
+
+// Get the language id based on the language code/prefix
+$language = new Language();
+$lang_id = $language->getIdByPrefix($lang);
+
+// check cookie for lang
+if (isset($_COOKIE['lang'])) {
+    $lang = $_COOKIE['lang'];
+}
+
+// check if 'lang' cookie is set
+if (isset($_COOKIE['lang'])) {
+    $site_lang = $_COOKIE['lang'];
+} else {
+    $site_lang = $lang;
+}
+
+$language = new Language();
+$site_lang_id = $language->getIdByPrefix($site_lang);
+?>
+
 <?php require($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . "/components/header.php") ?>
 <main class="container-fluid">
@@ -6,30 +48,21 @@
             <div class="content-area">
                 <section class="feed">
                     <?php
-                    $q = $_GET['q'];
+                    $q = trim($_GET['q']);
                     ?>
-                    <h3 class="caption">Search results for: <?php echo $q; ?></h3>
-                    <form action="/posts/search.php" class="offset-md-2 top-search-form search-form form-small" method="get">
-                        <div class="input-group">
-                            <input type="text" placeholder="Search" name="q" value="<?php echo $q; ?>" class="form-control m-0" />
-                            <input type="submit" value="Submit" class="btn btn-dark" />
-                        </div>
-                    </form>
+                    <h3 class="caption"><?php Translation::translate('Search results for', $site_lang); ?>: <?php echo $q; ?></h3>
 
                     <?php
-                    $total_pages = "SELECT COUNT(*) FROM posts";
-                    $result = mysqli_query($conn, $total_pages);
-                    $total_rows = mysqli_fetch_array($result)[0];
-                    $pages = ceil($total_rows / $per_page);
+                    $post = new Post();
+                    $result = $post->search($q, $site_lang_id);
 
-                    $sql = "SELECT * from posts WHERE title LIKE '%$q%' OR description LIKE '%$q%' OR body LIKE '%$q%' ORDER BY updated_at DESC";
-                    $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_array()) {
-                            require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");
+                            if (isset($row['title']) && $row['title'] != '')
+                                require($_SERVER['DOCUMENT_ROOT'] . "/posts/item.php");
                         }
                     } else {
-                        echo "Nothing found for this term!";
+                        Translation::translate('Nothing found for this term', $site_lang);
                     }
                     ?>
                 </section>
