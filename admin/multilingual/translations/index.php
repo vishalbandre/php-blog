@@ -51,15 +51,6 @@ if (isset($_GET['lang']) && !empty($_GET['lang'])) {
                     if ($results) {
                     ?>
                         <div class="mt-2">
-                            <div class="row mt-3">
-                                <div class="col-md-6">
-                                    <strong>Term</strong>
-                                </div>
-                                <div class="col-md-6">
-                                    <strong>Operations</strong>
-                                </div>
-                                <hr>
-                            </div>
                             <?php
                             foreach ($results as $result) {
                             ?>
@@ -68,9 +59,9 @@ if (isset($_GET['lang']) && !empty($_GET['lang'])) {
                                         <?php echo $result["term"]; ?>
                                     </div>
                                     <div class="col-md-6">
-                                        <a class="btn btn-primary" href="/admin/multilingual/translations/view-term/<?php echo $result["id"]; ?>">Translations</a> |
-                                        <a class="btn btn-primary" href="/admin/multilingual/translations/edit-term/<?php echo $result["id"]; ?>">Edit</a> |
-                                        <a class="btn btn-primary" href="/admin/multilingual/translations/delete-term/<?php echo $result["id"]; ?>">Delete</a>
+                                        <a class="btn btn-success btn-sm" href="/admin/multilingual/translations/view-term/<?php echo $result["id"]; ?>">Translations</a> |
+                                        <a class="btn btn-primary btn-sm" href="/admin/multilingual/translations/edit-term/<?php echo $result["id"]; ?>">Edit</a> |
+                                        <a class="btn btn-danger btn-sm" href="/admin/multilingual/translations/delete-term/<?php echo $result["id"]; ?>">Delete</a>
                                     </div>
                                 </div>
                             <?php

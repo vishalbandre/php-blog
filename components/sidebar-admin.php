@@ -16,7 +16,7 @@ if (isset($_COOKIE['lang'])) {
     <div class="sidebar-inner">
         <div class="sidebar-content">
             <div class="sidebar-header">
-                <h3 class="mt-3">
+                <h3 class="mt-3 text-center">
                     <a href="/admin"><?php Translation::translate('Admin Dashboard', $site_lang); ?></a>
                 </h3>
             </div>
@@ -28,7 +28,7 @@ if (isset($_COOKIE['lang'])) {
                             <?php Translation::translate('Multilingual', $site_lang); ?>
                             </button>
                         </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
                             <div class="accordion-body">
                                 <div class="d-flex align-items-start">
                                     <div class="nav flex-column nav-pills me-3" role="tablist" aria-orientation="vertical">

@@ -95,10 +95,10 @@ if ($caraousel_id != null) {
 ?>
                 <div class="banner-container">
                     <img class="banner" src="/uploads/images/<?php echo $row_image['imgpath']; ?>" alt="<?php echo $row_image['caption']; ?>">
-                    <div class="overlay">
+                    <!-- <div class="overlay">
                         <h1 class="caption"><?php echo $row_image['title']; ?></h1>
                         <p class="description"><?php echo $row_image['caption']; ?></p>
-                    </div>
+                    </div> -->
                 </div>
             <?php
             }

@@ -121,7 +121,7 @@ if (!$_SESSION['logged_in']) {
                         <h3 class="form-caption">New Term</h3>
                         <div class="form-inner">
                             <fieldset>
-                                <label class="form-label">Term: </label><br>
+                                <label class="form-label"><span dir="ltr">Term: </span></label><br>
                                 <input type="text" name="term" class="form-control m-0 <?php if (isset($errors['term'])) : ?>input-error<?php endif; ?>" value="<?php if (isset($errors['term'])) : echo $term;
                                                                                                                                                                 endif; ?>" />
                             </fieldset>

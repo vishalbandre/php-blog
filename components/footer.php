@@ -26,38 +26,35 @@ if (isset($_COOKIE['lang'])) {
 <footer class="container-fluid">
     <div class="row">
         <div class="col-md-4">
-            &copy; <a href="/"><?php Translation::translate('Colors', $site_lang); ?></a>. <?php Translation::translate('copyrights', $lang); ?>.
+            &copy; <a href="/"><?php Translation::translate('Colors', $site_lang); ?></a> <?php Translation::translate('copyrights', $lang); ?>
         </div>
-        <div class="col-md-7">
-            <div class="container" style="display: block;">
-                <div class="row">
-                    <div class="col-md-12">
-                        <strong>Browse this site in: </strong>
-                        <?php
-                        $language = new Language();
-                        $results = $language->getAllLanguages();
+        <div class="col-md-7" dir="ltr">
+            <div class="text-center">
+                <strong>Browse this site in: </strong>
+                <?php
+                $language = new Language();
+                $results = $language->getAllLanguages();
 
-                        if ($results) {
-                            foreach ($results as $result) {
-                        ?><?php if (isset($_COOKIE['lang']) && $_COOKIE['lang'] == $result['prefix']) { ?>
-                        <a class="badge rounded-pill bg-dark" href="/<?php echo $result['prefix']; ?>/set-language">
-                            <?php
-                                    $n = $result["name"];
-                                    echo $n;
-                            ?>
-                        </a>
-                    <?php } else { ?>
-                        <a href="/<?php echo $result['prefix']; ?>/set-language">
-                            <?php
-                                    $n = $result["name"];
-                                    echo $n;
-                            ?>
-                        </a>
-                    <?php } ?>
-            <?php }
-                        } ?>
-                    </div>
-                </div>
+                if ($results) {
+                    foreach ($results as $result) {
+                ?><?php if (isset($_COOKIE['lang']) && $_COOKIE['lang'] == $result['prefix']) { ?>
+                <a class="badge rounded-pill bg-dark" href="/<?php echo $result['prefix']; ?>/set-language">
+                    <?php
+                            $n = $result["name"];
+                            echo $n;
+                    ?>
+                </a>
+            <?php } else { ?>
+                <a href="/<?php echo $result['prefix']; ?>/set-language">
+                    <?php
+                            $n = $result["name"];
+                            echo $n;
+                    ?>
+                </a>
+    <?php }
+                    }
+                } ?>
+
             </div>
         </div>
         <div class="col-md-1">

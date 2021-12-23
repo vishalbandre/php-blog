@@ -54,17 +54,6 @@ $term = $term->fetch_assoc();
 
                                     <h5 class="mt-3 mb-2">Translations for: <?php echo $term['term']; ?></h5>
                                 </div>
-                                <div class="row mt-2">
-                                    <div class="col-md-6">
-                                        <strong>Translation</strong>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <strong>Language</strong>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <strong>Operations</strong>
-                                    </div>
-                                </div>
                                 <hr>
                             </div>
                             <?php
@@ -72,7 +61,7 @@ $term = $term->fetch_assoc();
                                 $language = new Language();
                             ?>
                                 <div class="row mt-3">
-                                    <div class="col-md-6">
+                                    <div class="col-7">
                                         <input type="hidden" value="<?php echo $result['id']; ?>" class="translation_id">
                                         <input type="hidden" value="<?php echo $result['term_id']; ?>" class="term_id">
                                         <div class="p-2 translation">
@@ -85,7 +74,7 @@ $term = $term->fetch_assoc();
                                             ?>
                                         </div>
                                     </div>
-                                    <div class="col-md-2 p-2">
+                                    <div class="col-2 p-2">
                                         <input class="language_id" type="hidden" value="<?php echo $translation_data['language_id']; ?>" class="language_id">
                                         <?php
                                         $lang = $language->getById($result["language_id"]);
@@ -93,9 +82,9 @@ $term = $term->fetch_assoc();
                                         echo $lang_results['name'];
                                         ?>
                                     </div>
-                                    <div class="col-md-4">
-                                        <button class="edit-translation btn btn-primary">Edit</button>
-                                        <button class="cancel-edit btn btn-primary">Cancel</button>
+                                    <div class="col-3">
+                                        <button class="edit-translation btn btn-primary btn-sm">Edit</button>
+                                        <button class="cancel-edit btn btn-primary btn-sm">Cancel</button>
                                     </div>
                                 </div>
                             <?php

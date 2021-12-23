@@ -3,6 +3,16 @@
 .sidebar {
     border-radius: 6px;
     overflow: hidden;
+    .sidebar-inner {
+        .sidebar-content {
+            .sidebar-header {
+                margin-top: 5px;
+                margin-bottom: 5px;
+                padding: 5px;
+                background-color: khaki;
+            }
+        }
+    }
     .sidebar-caption {
         margin: 0;
         padding: 20px;

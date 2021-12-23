@@ -71,8 +71,8 @@ if (isset($_COOKIE['lang'])) {
                                     </ul>
                                 </li>
                                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']) : ?>
-                                    <li class="nav-ite">
-                                        <a class="btn btn-primary" href="/admin/"><?php Translation::translate('Admin Dashboard', $site_lang); ?></a>
+                                    <li class="nav-item">
+                                        <a class="btn btn-primary" href="/admin/"><?php Translation::translate('Admin', $site_lang); ?></a>
                                     </li>
                                 <?php endif; ?>
                             <?php else : ?>
@@ -86,7 +86,7 @@ if (isset($_COOKIE['lang'])) {
                         </ul>
                         <form class="d-flex col-6 top-search-form" action="/<?php echo $site_lang; ?>/posts/search.php">
                             <input class="form-control me-2" type="search" placeholder="<?php Translation::translate('Search', $site_lang); ?>" name="q" value="<?php if (isset($_GET['q'])) echo $_GET['q']; ?>" aria-label="Search">
-                            <button class="btn btn-dark" type="submit"><?php Translation::translate('Search', $site_lang); ?></button>
+                            <button class="btn btn-dark search-btn" type="submit"><?php Translation::translate('Search', $site_lang); ?></button>
                         </form>
                     </div>
                 </div>

@@ -190,19 +190,19 @@ $lang_id = $language->getIdByPrefix($lang);
                         <div class="form-inner">
                             <input name="user" type="hidden" value="<?php echo $_SESSION['user']; ?>" />
                             <fieldset>
-                                <label class="form-label"><?php Translation::translate('Title', $site_lang); ?>: </label><br>
+                                <label class="form-label"><span dir="ltr">Title:</span></label><br>
                                 <input type="text" name="title" class="form-control m-0 <?php if (isset($errors['title'])) : ?>input-error<?php endif; ?>" value="<?php if(isset($title)): echo $title; endif; ?>" />
                             </fieldset>
                             <fieldset>
-                                <label class="form-label"><?php Translation::translate('Description', $site_lang); ?>: </label><br>
+                                <label class="form-label"><span dir="ltr"><?php Translation::translate('Description', $site_lang); ?>:</span> </label><br>
                                 <textarea name="description" class="form-control m-0 <?php if (isset($errors['description'])) : ?>input-error<?php endif; ?>" cols="30" rows="10"><?php if(isset($description)): echo $description; endif; ?></textarea>
                             </fieldset>
                             <fieldset>
-                                <label class="form-label"><?php Translation::translate('Body', $site_lang); ?>: </label><br>
+                                <label class="form-label"><span dir="ltr"><?php Translation::translate('Body', $site_lang); ?>:</span> </label><br>
                                 <textarea name="body" class="form-control m-0 <?php if (isset($errors['body'])) : ?>input-error<?php endif; ?>" cols="30" rows="20"><?php if(isset($body)): echo $body; endif; ?></textarea>
                             </fieldset>
                             <fieldset>
-                                <label class="form-label"><?php Translation::translate('Custom Slug', $site_lang); ?>: (<?php Translation::translate('Optional', $site_lang); ?>) </label><br>
+                                <label class="form-label"><span dir="ltr"><?php Translation::translate('Custom Slug', $site_lang); ?>:</span> (<span dir="ltr"><?php Translation::translate('Optional', $site_lang); ?></span>) </label><br>
                                 <input type="text" name="slug" class="form-control m-0 <?php if (isset($errors['slug'])) : ?>input-error<?php endif; ?>" value="<?php if(isset($slug)): echo $slug; endif; ?>" />
                             </fieldset>
                             <fieldset>
