@@ -57,6 +57,12 @@ if (!$_SESSION['logged_in']) {
                             $name = null;
                         }
 
+                        if (!empty($_POST['rtl'])) {
+                            $rtl = htmlspecialchars($_POST['rtl']);
+                        } else {
+                            $rtl = 0;
+                        }
+
                         if (!empty($_POST['prefix'])) {
                             $prefix = htmlspecialchars($_POST['prefix']);
                         } else {
@@ -91,7 +97,8 @@ if (!$_SESSION['logged_in']) {
 
                             $data = array(
                                 'name' => $name,
-                                'prefix' => $prefix
+                                'prefix' => $prefix,
+                                'rtl' => $rtl
                             );
 
                             // Create language
@@ -134,7 +141,7 @@ if (!$_SESSION['logged_in']) {
                                             'term_id' => $term['id'],
                                             'language_id' => $q
                                         );
-                                        
+
                                         $t = $translation->insert($data_array);
                                     }
                                 }
@@ -162,14 +169,19 @@ if (!$_SESSION['logged_in']) {
                         <div class="form-inner">
                             <input name="user" type="hidden" value="<?php echo $_SESSION['user']; ?>" />
                             <fieldset>
-                                <label class="form-label">Language Name: </label><br>
+                                <label class="form-label"><span dir="ltr">Language Name:</span> </label><br>
                                 <input type="text" name="name" class="form-control m-0 <?php if (isset($errors['name'])) : ?>input-error<?php endif; ?>" value="<?php if (isset($name)) : echo $name;
                                                                                                                                                                 endif; ?>" />
                             </fieldset>
                             <fieldset>
-                                <label class="form-label">Prefix: </label><br>
+                                <label class="form-label"><span dir="ltr">Prefix (Language short code e.g. en for English, hi for Hindi, etc.):</span> </label><br>
                                 <input type="text" name="prefix" class="form-control m-0 <?php if (isset($errors['prefix'])) : ?>input-error<?php endif; ?>" value="<?php if (isset($prefix)) : echo $prefix;
                                                                                                                                                                     endif; ?>" />
+                            </fieldset>
+                            <fieldset>
+                                <label class="form-label"><span dir="ltr">RTL (Right To Left Language for languages like, Urdu, etc.) Support:</span> </label><br>
+                                <input name='rtl' class="form-check-input radio m-0" type='radio' value=1>Yes
+                                <input name='rtl' class="form-check-input radio m-0" type='radio' value=0 checked>No
                             </fieldset>
                             <fieldset>
                                 <button type="submit" name="submit" value="create" class="btn btn-dark">Save Language</button>

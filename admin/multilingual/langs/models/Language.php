@@ -98,6 +98,29 @@ class Language
     }
 
     /**
+     * Check if the provided language is rtl
+     */
+    public function isRTL($lang)
+    {
+        // Get a database connection.
+        $c = new Database\Connection();
+        $conn = $c->connect();
+
+        $sql = "SELECT * FROM languages WHERE prefix='$lang' AND rtl=1";
+
+        // Execute the query
+        $result = $conn->query($sql);
+
+        if($result) {
+            if($result->num_rows > 0) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Return all languages.
      */
     public function getAllLanguages()

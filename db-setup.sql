@@ -80,7 +80,8 @@ create table languages (
     id int not null auto_increment primary key,
     name varchar(100) not null unique,
     prefix varchar(25) not null unique,
-    is_default boolean not null default false
+    is_default boolean not null default false,
+    rtl boolean not null default false
 );
 
 create table terms (
@@ -157,3 +158,7 @@ ALTER TABLE posts ADD FOREIGN KEY (language_id) REFERENCES languages(id) on dele
 -- Posts table altered to allow non unique title and slugs, because we were not able to insert null value, mysql was storing them as empty strings.
 alter table posts drop index title;
 alter table translations drop foreign key translations_ibfk_1;
+
+-- RTL
+-- Altered table to add rtl boolean type field
+ALTER TABLE languages ADD rtl BOOLEAN NOT NULL DEFAULT false;

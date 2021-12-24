@@ -1,12 +1,3 @@
-// header {
-//     .navbar {
-//         position: fixed;
-//         width: 100%;
-//         z-index: 1000000;
-//         top: 0;
-//     }
-// }
-
 /* #Navigation
 ================================================== */
 
@@ -51,7 +42,6 @@
         letter-spacing: 1.5px;
         text-transform: uppercase;
         background-color: $color-yellowish;
-        // background-image: linear-gradient(45deg, $color-yellowish, $color-maroon);
         background: radial-gradient(circle, $color-yellowish 0%, $color-maroon 35%, $transparent 100%);
         background-size: 100%;
         -webkit-background-clip: text;
@@ -106,7 +96,6 @@
                 padding: 5px 0 !important;
                 color: $color-blakish !important;
                 font-family: $font-nav;
-                // font-weight: 500;
                 font-size: 16px;
                 transition: all 200ms linear;
             }
@@ -148,9 +137,6 @@
             border-color: $color-accent;
             border-radius: 25px;
             font-family: $font-nav;
-        }
-        .search-input {
-            padding-left: 25px;
         }
     }
 }

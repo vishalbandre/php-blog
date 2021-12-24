@@ -63,11 +63,21 @@ if (!$_SESSION['logged_in']) {
                             $prefix = null;
                         }
 
+                        if (!empty($_POST['rtl'])) {
+                            $rtl = htmlspecialchars($_POST['rtl']);
+                        } else {
+                            $rtl = 0;
+                        }
+
                         $errors = array();
 
                         // Making sure that a value for language name field exists.
                         if ($name == null) {
                             $errors['name'] = 'Language name is required.';
+                        }
+
+                        if (!isset($rtl)) {
+                            $errors['rtl'] = 'Please select whether the language is RTL or not.';
                         }
 
                         // also check for existing languages
@@ -103,7 +113,7 @@ if (!$_SESSION['logged_in']) {
                             $errors['prefix'] = 'Language prefix is required.';
 
                         $results_temp = $language->get($_prefix);
-                        
+
                         if ($results_temp->num_rows > 0) {
                             while ($row = $results_temp->fetch_assoc()) {
                                 if ($row['prefix'] != $prefix) {
@@ -119,7 +129,8 @@ if (!$_SESSION['logged_in']) {
 
                             $data = array(
                                 'name' => $name,
-                                'prefix' => $prefix
+                                'prefix' => $prefix,
+                                'rtl' => $rtl
                             );
 
                             // Create language
@@ -165,12 +176,37 @@ if (!$_SESSION['logged_in']) {
                                                                                                                                                                         } ?>" />
                                     </fieldset>
                                     <fieldset>
-                                        <label class="form-label">Prefix: </label><br>
+                                    <label class="form-label"><span dir="ltr">Prefix (Language short code e.g. en for English, hi for Hindi, etc.):</span> </label><br>
                                         <input type="text" name="prefix" class="form-control m-0 <?php if (isset($errors['prefix'])) : ?>input-error<?php endif; ?>" value="<?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                                                                                                                                                 echo $prefix;
                                                                                                                                                                             } else {
                                                                                                                                                                                 echo $row['prefix'];
                                                                                                                                                                             } ?>" />
+                                    </fieldset>
+                                    <fieldset>
+                                    <label class="form-label"><span dir="ltr">RTL (Right To Left Language for languages like, Urdu, etc.) Support:</span> </label><br>
+                                        <span dir="rtl">
+                                        <input name='rtl' class="form-check-input radio m-0" type='radio' value=1 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                                                        if (isset($rtl) && $rtl == 1) {
+                                                                                                                            echo 'checked';
+                                                                                                                        };
+                                                                                                                    } else {
+                                                                                                                        if ($row['rtl'] == 1) {
+                                                                                                                            echo 'checked';
+                                                                                                                        };
+                                                                                                                    } ?>>Yes
+                                        </span>
+                                        <span dir="rtl">
+                                        <input name='rtl' class="form-check-input radio m-0" type='radio' value=0 <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                                                                                                        if (isset($rtl) && $rtl == 0) {
+                                                                                                                            echo 'checked';
+                                                                                                                        };
+                                                                                                                    } else {
+                                                                                                                        if ($row['rtl'] == 0) {
+                                                                                                                            echo 'checked';
+                                                                                                                        };
+                                                                                                                    } ?>>No
+                                        </span>
                                     </fieldset>
                                     <fieldset>
                                         <button type="submit" name="submit" value="create" class="btn btn-dark">Save Language</button>

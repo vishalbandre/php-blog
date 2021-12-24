@@ -20,7 +20,7 @@ endif;
         <div class="col-md-9">
             <div class="content-area">
                 <section>
-                    Content section
+                    Select options from left drawer.
                 </section>
             </div>
         </div>

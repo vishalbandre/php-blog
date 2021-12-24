@@ -5,11 +5,15 @@
 .top-search-form {
     width: 25%;
     transition: 0.30s ease all;
-}
-
-.top-search-form {
     &:hover {
         width: 30%;
+    }
+    .search-btn {
+        margin-right: 5px;
+    }
+    .search-input {
+        padding-left: 25px;
+        min-width: 100px;
     }
 }
 
@@ -50,6 +54,11 @@
             padding: 5px;
             width: 90%;
             outline: none;
+        }
+        input.radio {
+            margin-right: 15px;
+            width: 15px;
+            height: 15px;
         }
         .rule {
             color: $color-blakish;

@@ -30,12 +30,12 @@ endif;
                     </li>
                 </ul>
                 <div class="mt-3">
-                <?php
-                if (isset($_SESSION['message'])) {
-                    echo $_SESSION['message'];
-                    unset($_SESSION["message"]);
-                }
-                ?>
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                        echo $_SESSION['message'];
+                        unset($_SESSION["message"]);
+                    }
+                    ?>
                 </div>
                 <section>
                     <?php
@@ -49,17 +49,19 @@ endif;
                             foreach ($results as $result) {
                             ?>
                                 <div class="row mt-3">
-                                    <div class="col-md-8">
-                                        <?php echo $result["name"]; ?><?php if ($result['is_default']) : ?><small><i> (Site Default Language)</i></small><?php endif; ?>
+                                    <div class="col-6">
+                                        <?php echo $result["name"]; ?><?php if ($result['is_default']) : ?><small><i> (Default Language)</i></small><?php endif; ?>
                                     </div>
-                                    <div class="col-md-2">
-                                        <a class="btn btn-primary" href="/admin/multilingual/language/edit/<?php echo $result['prefix']; ?>">Edit</a>
+                                    <div class="col-1">
+                                        <?php if ($result['rtl']) : ?>RTL <?php else : ?> LTR <?php endif; ?>
                                     </div>
-                                    <?php if (!$result['is_default']) : ?>
-                                        <div class="col-md-2">
-                                            <a class="btn btn-danger" href="/admin/multilingual/language/delete/<?php echo $result['prefix']; ?>">Delete</a>
-                                        </div>
-                                    <?php endif; ?>
+                                    <div class="col-5">
+                                        <a class="btn btn-primary btn-sm" href="/admin/multilingual/language/edit/<?php echo $result['prefix']; ?>">Edit</a>
+                                        <?php if (!$result['is_default']) : ?>
+                                            <a class="btn btn-danger btn-sm" href="/admin/multilingual/language/delete/<?php echo $result['prefix']; ?>">Delete</a>
+                                        <?php endif; ?>
+                                    </div>
+
                                 </div>
                             <?php
                             }

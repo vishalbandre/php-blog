@@ -24,6 +24,8 @@ if (!empty($_GET['slug'])) {
 if (isset($_GET['lang'])) {
     $lang = $_GET['lang'];
 }
+
+$is_article_view = true;
 ?>
 
 <?php require_once($_SERVER['DOCUMENT_ROOT'] . "/components/head.php") ?>

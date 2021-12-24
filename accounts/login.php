@@ -93,7 +93,7 @@ use User\Auth\Auth;
                                 <button type="submit" name="submit" value="login" class="btn btn-dark">Login</button>
                             </fieldset>
                             <fieldset>
-                                <a class="btn btn-outline-secondary" href="/accounts/forgot-password.php">Forgot Password?</a>
+                                <a class="btn btn-outline-secondary" href="/accounts/forgot-password.php"><span dir="ltr">Forgot Password?</span></a>
                             </fieldset>
                             <fieldset>
                                 <span class="rule">Don't Have An Account? <a href="/accounts/register.php">Register here</a></span>
